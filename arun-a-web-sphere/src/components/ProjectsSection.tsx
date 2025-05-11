@@ -2,10 +2,18 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
+import {
   FaReact, FaNodeJs, FaGithub, FaExternalLinkAlt
 } from 'react-icons/fa';
-import { SiMongodb, SiFirebase, SiRedux, SiTailwindcss, SiHackerearth, SiExpress } from 'react-icons/si';
+import {
+  SiMongodb, SiFirebase, SiRedux, SiTailwindcss, SiHackerearth, SiExpress
+} from 'react-icons/si';
+
+// Import your project images
+import ticketparkImg from '../assets/cinipop.jpg';
+import pageturnerImg from '../assets/bookmania.jpg';
+import darkcartImg from '../assets/ecommrece.jpg';
+import truthtellImg from '../assets/falo.png'; // optional for hackathon project
 
 const ProjectsSection = () => {
   const mainProjects = [
@@ -13,7 +21,7 @@ const ProjectsSection = () => {
       title: 'TicketPark',
       icon: '🎟️',
       color: '#00BFFF',
-      image: '/placeholder.svg',
+      image: ticketparkImg,
       tech: ['React', 'Tailwind CSS', 'Redux', 'Node.js', 'MongoDB'],
       techIcons: [
         { Icon: FaReact, color: '#61DAFB' },
@@ -30,7 +38,7 @@ const ProjectsSection = () => {
       title: 'PageTurner',
       icon: '📚',
       color: '#FF6B6B',
-      image: '/placeholder.svg',
+      image: pageturnerImg,
       tech: ['React', 'Node.js', 'MongoDB'],
       techIcons: [
         { Icon: FaReact, color: '#61DAFB' },
@@ -45,7 +53,7 @@ const ProjectsSection = () => {
       title: 'DarkCart',
       icon: '🛒',
       color: '#8A2BE2',
-      image: '/placeholder.svg',
+      image: darkcartImg,
       tech: ['React', 'Tailwind CSS', 'Express', 'Node.js', 'MongoDB'],
       techIcons: [
         { Icon: FaReact, color: '#61DAFB' },
@@ -59,13 +67,12 @@ const ProjectsSection = () => {
       githubLink: 'https://github.com/example/darkcart'
     }
   ];
-  
+
   const hackathonProjects = [
     {
       title: 'TruthTell',
-      icon: '🏆',
       color: '#FFA500',
-      image: '/placeholder.svg',
+      image: truthtellImg,
       tech: ['Firebase', 'React'],
       techIcons: [
         { Icon: SiFirebase, color: '#FFCA28' },
@@ -73,7 +80,7 @@ const ProjectsSection = () => {
       ],
       description: 'Placed 12th in HackerEarth Hackathon (April 2025)',
       githubLink: 'https://github.com/example/hackathon'
-    },
+    }
   ];
 
   const CardComponent = ({ project, index, isMain }) => (
@@ -83,9 +90,9 @@ const ProjectsSection = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ 
-        y: -5, 
-        boxShadow: '0 10px 25px -5px rgba(0, 191, 255, 0.2), 0 10px 10px -5px rgba(0, 191, 255, 0.1)' 
+      whileHover={{
+        y: -5,
+        boxShadow: '0 10px 25px -5px rgba(0, 191, 255, 0.2), 0 10px 10px -5px rgba(0, 191, 255, 0.1)'
       }}
       whileTap={{ scale: 0.98 }}
       className="overflow-hidden"
@@ -94,9 +101,9 @@ const ProjectsSection = () => {
     >
       <Card className="h-full bg-zinc-900 border-zinc-800 hover:border-primary transition-all duration-500 flex flex-col">
         <div className="relative w-full h-48 overflow-hidden">
-          <motion.img 
-            src={project.image} 
-            alt={project.title} 
+          <motion.img
+            src={project.image}
+            alt={project.title}
             className="object-cover w-full h-full"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
@@ -105,21 +112,21 @@ const ProjectsSection = () => {
             <span className="text-2xl">{project.icon}</span>
           </div>
         </div>
-        
+
         <CardHeader className="pb-2">
-          <h3 
+          <h3
             className="text-xl font-bold group-hover:text-primary transition-colors"
             style={{ color: project.color }}
           >
             {project.title}
           </h3>
         </CardHeader>
-        
+
         <CardContent className="flex-grow">
           <div className="flex flex-wrap gap-2 mb-4">
             {project.techIcons.map(({ Icon, color }, i) => (
-              <Icon 
-                key={i} 
+              <Icon
+                key={i}
                 className="text-xl"
                 style={{ color }}
               />
@@ -127,11 +134,11 @@ const ProjectsSection = () => {
           </div>
           <p className="text-gray-400">{project.description}</p>
         </CardContent>
-        
+
         <CardFooter className="pt-2 bg-zinc-950 border-t border-zinc-800 flex justify-between items-center gap-2">
           {isMain && (
-            <Button 
-              size="sm" 
+            <Button
+              size="sm"
               className="bg-[#00BFFF] hover:bg-[#1E90FF] text-white flex items-center gap-1"
               onClick={() => window.open(project.liveLink, '_blank')}
             >
@@ -139,8 +146,8 @@ const ProjectsSection = () => {
               <span>Live</span>
             </Button>
           )}
-          <Button 
-            size="sm" 
+          <Button
+            size="sm"
             variant="outline"
             className="border-[#00BFFF] text-[#00BFFF] hover:bg-[#00BFFF]/10 flex items-center gap-1"
             onClick={() => window.open(project.githubLink, '_blank')}
@@ -154,12 +161,15 @@ const ProjectsSection = () => {
   );
 
   return (
-    <section id="projects" className="py-20 bg-zinc-950 relative">
+    <section id="projects" className="py-20 bg-gradient-to-b from-zinc-900 via-zinc-950 to-black relative">
       <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="h-full w-full" style={{
-          backgroundImage: `radial-gradient(#00BFFF 1px, transparent 1px)`,
-          backgroundSize: '30px 30px'
-        }}></div>
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage: `radial-gradient(#00BFFF 1px, transparent 1px)`,
+            backgroundSize: '30px 30px'
+          }}
+        ></div>
       </div>
 
       <div className="container mx-auto px-4">
@@ -184,7 +194,7 @@ const ProjectsSection = () => {
         {/* Hackathon Projects */}
         <div>
           <h3 className="text-2xl font-bold mb-6 text-primary/90 text-center" data-aos="fade-up">
-            <SiHackerearth className="inline-block mr-2" /> 
+            <SiHackerearth className="inline-block mr-2" />
             Hackathon Projects
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

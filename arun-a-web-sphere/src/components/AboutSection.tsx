@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+ import aboutImage from '../assets/aboutimg.jpg';
 
 const AboutSection = () => {
   return (
@@ -73,9 +74,12 @@ const AboutSection = () => {
             data-aos-delay="200"
           >
             <div className="w-full h-80 md:h-96 bg-zinc-900 rounded-lg overflow-hidden relative">
-              {/* Replace with actual image */}
+           
+// ...
+<img src={aboutImage} alt="About Me" className="w-full h-full object-cover" />
+
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-blue-700/30 flex items-center justify-center">
-                <div className="text-7xl">👨‍💻</div>
+                
               </div>
               
               {/* Decorative elements */}

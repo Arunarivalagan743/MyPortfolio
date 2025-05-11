@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
+import myImage from '../assets/me.jpg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -83,7 +84,7 @@ const HeroSection = () => {
             data-aos="zoom-in"
           >
             <Avatar className="w-48 h-48 border-4 border-primary/30 shadow-xl shadow-primary/20">
-              <AvatarImage src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&w=300&h=300" alt="Profile" />
+              <AvatarImage src={myImage} alt="Profile" />
               <AvatarFallback className="bg-primary/10 text-4xl">AA</AvatarFallback>
             </Avatar>
           </motion.div>
