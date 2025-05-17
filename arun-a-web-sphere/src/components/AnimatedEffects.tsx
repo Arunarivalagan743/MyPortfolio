@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 
 const MissileTrail = () => {
   return (
     <motion.div
-      className="fixed h-1 md:h-2 w-20 md:w-32 bg-gradient-to-r from-yellow-500 to-transparent z-10"
+      className="fixed h-1 md:h-2 w-20 md:w-32 bg-gradient-to-r from-cyan-400 to-transparent z-10"
       initial={{ x: "-100%", y: "40%" }}
       animate={{ 
         x: "200vw", 
@@ -18,7 +17,7 @@ const MissileTrail = () => {
         }
       }}
     >
-      <div className="absolute right-0 w-3 h-3 md:w-4 md:h-4 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
+      <div className="absolute right-0 w-3 h-3 md:w-4 md:h-4 rounded-full bg-cyan-400 shadow-lg shadow-cyan-400/50"></div>
     </motion.div>
   );
 };
@@ -41,7 +40,7 @@ const ExplosionEffect = () => {
       style={{ 
         top: '30%', 
         right: '20%',
-        background: 'radial-gradient(circle, rgba(255,177,66,1) 0%, rgba(255,89,0,1) 50%, transparent 70%)'
+        background: 'radial-gradient(circle, rgba(0, 255, 255, 1) 0%, rgba(0, 128, 255, 1) 50%, rgba(200, 230, 255, 0.4) 70%)' 
       }}
     />
   );

@@ -17,7 +17,7 @@ const Footer = () => {
           
           <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-12">
             <div className="flex space-x-6 text-xl">
-              <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
+              <a href="https://github.com/Arunarivalagan743" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
                 <FaGithub />
               </a>
               <a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">

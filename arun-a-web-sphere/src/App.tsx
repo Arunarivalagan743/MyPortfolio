@@ -1,28 +1,26 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from './contexts/ThemeContext';  // Correct path to the ThemeContext
+import { ThemeProvider } from './contexts/ThemeContext';  // Adjust import path as needed
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
-// Create a query client for react-query
+// Create the react-query client
 const queryClient = new QueryClient();
 
-const App = () => (
+const App: React.FC = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider> {/* Wrap the entire app with ThemeProvider */}
-      <TooltipProvider> {/* Tooltip Provider */}
-        <Toaster />  {/* Primary toaster */}
-        <Sonner />  {/* Secondary toaster */}
-
-        {/* Browser Router for routing */}
+    <ThemeProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />  {/* Home Route */}
-            <Route path="*" element={<NotFound />} />  {/* Catch-all Route */}
+            <Route path="/" element={<Index />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

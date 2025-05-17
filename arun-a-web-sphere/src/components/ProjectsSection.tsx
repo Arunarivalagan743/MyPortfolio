@@ -9,13 +9,14 @@ import {
   SiMongodb, SiFirebase, SiRedux, SiTailwindcss, SiHackerearth, SiExpress
 } from 'react-icons/si';
 
-// Import your project images
-import ticketparkImg from '../assets/cinipop.jpg';
-import pageturnerImg from '../assets/bookmania.jpg';
-import darkcartImg from '../assets/ecommrece.jpg';
-import truthtellImg from '../assets/falo.png'; // optional for hackathon project
+ // optional for hackathon project
 
 const ProjectsSection = () => {
+  const ticketparkImg = "/assets/cinipop.jpg";
+const pageturnerImg = "/assets/bookmania.jpg";
+const darkcartImg = "/assets/ecommrece.jpg";
+const truthtellImg = "/assets/falo.png";
+
   const mainProjects = [
     {
       title: 'TicketPark',
@@ -31,8 +32,8 @@ const ProjectsSection = () => {
         { Icon: SiMongodb, color: '#47A248' }
       ],
       description: 'Cinema + parking booking system with JWT & Firebase',
-      liveLink: 'https://example.com/ticketpark',
-      githubLink: 'https://github.com/example/ticketpark'
+      liveLink: 'https://ciniparkmak.netlify.app/',
+      githubLink: 'https://github.com/Arunarivalagan743/Cinematic-popcorn-Theatre-Experience'
     },
     {
       title: 'PageTurner',
@@ -46,7 +47,7 @@ const ProjectsSection = () => {
         { Icon: SiMongodb, color: '#47A248' }
       ],
       description: 'Book-centric MERN platform',
-      liveLink: 'https://example.com/pageturner',
+      liveLink: 'https://bookmakk.netlify.app/',
       githubLink: 'https://github.com/example/pageturner'
     },
     {
@@ -64,7 +65,7 @@ const ProjectsSection = () => {
       ],
       description: 'E-commerce MERN stack app with modern UI',
       liveLink: 'https://example.com/darkcart',
-      githubLink: 'https://github.com/example/darkcart'
+      githubLink: 'https://github.com/gowthamvetri/DarkArt/tree/dev'
     }
   ];
 
@@ -79,7 +80,7 @@ const ProjectsSection = () => {
         { Icon: FaReact, color: '#61DAFB' }
       ],
       description: 'Placed 12th in HackerEarth Hackathon (April 2025)',
-      githubLink: 'https://github.com/example/hackathon'
+      githubLink: 'https://github.com/Arunarivalagan743/misinfo_detection_project'
     }
   ];
 

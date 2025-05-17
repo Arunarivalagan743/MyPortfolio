@@ -1,5 +1,5 @@
-
 import React, { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import AcademicSection from '../components/AcademicSection';
@@ -10,26 +10,45 @@ import ContactSection from '../components/ContactSection';
 import AnimatedEffects from '../components/AnimatedEffects';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Loader from '../components/Loader';  // your loader component
 
-// Import AOS for scroll animations
+// AOS for scroll animations
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-// Import the Framer Motion library for animations
+// Framer Motion for animations
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Index = () => {
-  useEffect(() => {
-    // Update the title
-    document.title = "Arun A | MERN Developer";
+// Define the shape of your fetched data
+interface FetchDataResult {
+  message: string;
+}
 
-    // Initialize AOS
+// Simulated fetch function (replace with your real API call)
+const fetchData = async (): Promise<FetchDataResult> => {
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  return { message: "Hello, this is fetched data!" };
+};
+
+const Index: React.FC = () => {
+  // useQuery with typed data and error
+  const { data, isLoading, error } = useQuery<FetchDataResult, Error>({
+    queryKey: ['fetchData'],
+    queryFn: fetchData,
+  });
+
+  useEffect(() => {
+    document.title = "Arun A | MERN Developer";
     AOS.init({
       duration: 800,
       once: false,
       mirror: true,
     });
   }, []);
+
+  if (isLoading) return <Loader />;
+
+  if (error) return <div>Error loading data: {error.message}</div>;
 
   return (
     <AnimatePresence>
@@ -50,6 +69,8 @@ const Index = () => {
         <SkillsSection />
         <ContactSection />
         <Footer />
+        {/* Example of showing fetched data message */}
+        <div className="p-4 text-center text-green-400">{(data as FetchDataResult | undefined)?.message}</div>
       </motion.div>
     </AnimatePresence>
   );

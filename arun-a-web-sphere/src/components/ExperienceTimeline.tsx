@@ -1,31 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+// adjust path relative to this file
 
-const CertificationTimeline = () => {
-  const certifications = [
+const udemyWebImage = "/assets/udemyWeb.jpg";
+const githubFoundationImage = "/assets/githubFoundationImage.png";
+// adjust path relative to this file
+const certifications = [
+  
+  {
+    title: 'Web Development Bootcamp by Angela Yu',
+    date: 'Nov 2024',
+    description: 'Completed comprehensive full-stack web development course covering HTML, CSS, JavaScript, Node.js, React, MongoDB, etc.',
+    certificateLink: 'https://udemy-certificate.s3.amazonaws.com/image/UC-65fc7142-cfad-4ba7-b1b7-1de0bc064198.jpg',
+    certificateImage: udemyWebImage,
+  },
+
     {
-      title: 'Web Development Bootcamp by Angela Yu',
-      date: 'Nov 2024',
-      description: 'Completed comprehensive full-stack web development course covering HTML, CSS, JavaScript, Node.js, React, MongoDB, etc.',
-      certificateLink: '#',
-      certificateImage: 'https://via.placeholder.com/300',
-    },
-    {
-      title: 'React Native Development Course',
-      date: 'Aug 2024',
-      description: 'Learned to build mobile apps using React Native and Expo, including navigation, APIs, and testing.',
-      certificateLink: '#',
-      certificateImage: 'https://via.placeholder.com/300',
-    },
-    {
-      title: 'JavaScript Algorithms and Data Structures',
-      date: 'Jan 2025',
-      description: 'Completed course on JavaScript algorithms and data structures to enhance coding skills.',
-      certificateLink: '#',
-      certificateImage: 'https://via.placeholder.com/300',
-    }
+    title: 'GitHub Foundation Badge',
+    date: 'May 2025',
+    description: 'Earned GitHub Foundation Badge demonstrating proficiency in GitHub workflows and collaboration tools.',
+    certificateLink: 'https://www.credly.com/badges/ddd1e9be-a341-479e-870c-bc8c47cc721f/public_url', // replace with your actual URL
+    certificateImage: githubFoundationImage,
+  },
+    // {
+    //   title: 'JavaScript Algorithms and Data Structures',
+    //   date: 'Jan 2025',
+    //   description: 'Completed course on JavaScript algorithms and data structures to enhance coding skills.',
+    //   certificateLink: '#',
+    //   certificateImage: 'https://via.placeholder.com/300',
+    // }
   ];
 
+const CertificationTimeline: React.FC = () => {
   return (
     <section className="py-20 bg-black">
       <div className="container mx-auto px-4">

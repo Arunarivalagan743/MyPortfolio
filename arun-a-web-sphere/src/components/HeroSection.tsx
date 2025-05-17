@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
-import { SiLeetcode } from 'react-icons/si';
-import myImage from '../assets/me.jpg';
+import { SiLeetcode, SiLinkedin } from 'react-icons/si';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TypeAnimation } from 'react-type-animation';
+ 
 
+const myImage = "/assets/me.jpg"; // Replace with your image path
 const HeroSection = () => {
   useEffect(() => {
     AOS.init({
@@ -24,6 +26,13 @@ const HeroSection = () => {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  const scrollToNextSection = () => {
+  const nextSection = document.getElementById('about');
+  if (nextSection) {
+    nextSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 
   return (
     <section id="home" className="min-h-screen flex items-center bg-black pt-16 relative overflow-hidden">
@@ -35,7 +44,7 @@ const HeroSection = () => {
 
       {/* Missile animation */}
       <motion.div
-        className="absolute h-1 w-20 bg-gradient-to-r from-yellow-500 to-transparent"
+        className="absolute h-1 w-20 bg-gradient-to-r from-cyan-500 to-transparent"
         initial={{ x: "-100%", y: "100%" }}
         animate={{
           x: "200%",
@@ -49,7 +58,7 @@ const HeroSection = () => {
         }}
         style={{ top: '30%', left: '-10%' }}
       >
-        <div className="absolute right-0 w-3 h-3 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
+        <div className="absolute right-0 w-3 h-3 rounded-full bg-cyan-500 shadow-lg shadow-cyan-500/50"></div>
       </motion.div>
 
       {/* Explosion animation */}
@@ -69,7 +78,8 @@ const HeroSection = () => {
         style={{
           top: '25%',
           right: '25%',
-          background: 'radial-gradient(circle, rgba(255,177,66,1) 0%, rgba(255,89,0,1) 50%, transparent 70%)'
+      background: 'radial-gradient(circle, rgba(0, 255, 255, 1) 0%, rgba(0, 128, 255, 1) 50%, rgba(200, 230, 255, 0.4) 70%)'
+
         }}
       />
 
@@ -146,10 +156,14 @@ const HeroSection = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
               >
-                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                <a href="https://github.com/Arunarivalagan743" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                   <FaGithub />
                 </a>
-                <a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                <a href="www.linkedin.com/in/arun-a-25b6a5289" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  <SiLinkedin />
+                </a>
+               
+                 <a href=" https://leetcode.com/u/Arun_774/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                   <SiLeetcode />
                 </a>
               </motion.div>
@@ -159,21 +173,24 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-primary"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </motion.div>
+     <motion.div
+  className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer"
+  animate={{ y: [0, 10, 0] }}
+  transition={{ duration: 2, repeat: Infinity }}
+  onClick={scrollToNextSection}
+  title="Scroll down"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6 text-primary"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+  </svg>
+</motion.div>
+
     </section>
   );
 };
