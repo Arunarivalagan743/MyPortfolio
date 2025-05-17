@@ -59,14 +59,13 @@ const AboutSection = () => {
             
             {/* Resume Button */}
             <div className="pt-6">
-              <a 
-                href="arun-a-web-sphere/src/assets/714023104011 ( 23CS011 ).pdf"  // Update the path to your actual resume file
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-primary/80 transition duration-300"
-              >
-                View Resume
-              </a>
+            <a 
+  href="/assets/714023104011 ( 23CS011 ).pdf"  // Use a public URL or relative path to your resume file in public folder
+  download  // This attribute triggers download
+  className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-primary/80 transition duration-300"
+>
+  view Resume
+</a>
             </div>
           </motion.div>
           
