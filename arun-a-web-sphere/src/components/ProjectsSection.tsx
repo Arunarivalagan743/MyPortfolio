@@ -49,7 +49,7 @@ const mainProjects = [
       { Icon: SiMongodb, color: '#47A248' }
     ],
     description: 'Cinema + parking booking system with JWT & Firebase',
-    liveLink: 'https://ciniparkmak.netlify.app/',
+    liveLink: 'https://cinematic-popcorn-theatre-experience.vercel.app/',
     githubLink: 'https://github.com/Arunarivalagan743/Cinematic-popcorn-Theatre-Experience'
   },
   {
