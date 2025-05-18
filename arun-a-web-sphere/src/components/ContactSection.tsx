@@ -29,11 +29,12 @@ const ContactSection = () => {
     setFormRotate((prev) => prev + 360);
 
     try {
-      const response = await fetch("http://localhost:8080/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch("https://myportfolio-2-kry9.onrender.com/api/contact", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(formData),
+});
+
 
       if (!response.ok) throw new Error("Failed to send message");
 

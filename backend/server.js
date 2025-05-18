@@ -9,7 +9,16 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://www.404arunfound.me",
+    "https://arunofficxal.vercel.app",
+    "https://my-portfolio-h5gc.vercel.app"
+  ],
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Routes
