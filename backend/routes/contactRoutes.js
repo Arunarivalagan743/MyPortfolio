@@ -14,6 +14,6 @@ router.post(
   submitContactForm
 );
 
-router.get('/contacts', getAllContacts);
+router.get('/contact', getAllContacts);
 
 export default router;
