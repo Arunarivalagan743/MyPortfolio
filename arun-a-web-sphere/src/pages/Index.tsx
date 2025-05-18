@@ -27,7 +27,7 @@ interface FetchDataResult {
 // Simulated fetch function (replace with your real API call)
 const fetchData = async (): Promise<FetchDataResult> => {
   await new Promise(resolve => setTimeout(resolve, 2000));
-  return { message: "Hello, this is fetched data!" };
+  return { message: "Hello, This is my PortFolio!" };
 };
 
 const Index: React.FC = () => {
