@@ -30,12 +30,12 @@ const Navbar = () => {
         }
       }
 
-      setActiveSection(currentSection);  // Update active section directly here
+      setActiveSection(currentSection);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);  // Removed activeSection as a dependency to avoid unnecessary re-renders
+  }, []);
 
   const menuItems = [
     { name: 'Home', href: '#home' },
@@ -47,19 +47,15 @@ const Navbar = () => {
   ];
 
   const handleNavClick = (e, href) => {
-    e.preventDefault();  // Prevent the default anchor tag behavior
-
-    // Close mobile menu after a click
+    e.preventDefault();
     setIsMobileMenuOpen(false);
 
-    const targetId = href.substring(1);  // Get the section ID from href
-    const element = document.getElementById(targetId);  // Find the target element
+    const targetId = href.substring(1);
+    const element = document.getElementById(targetId);
 
     if (element) {
-      // Update active section immediately to prevent the jump
       setActiveSection(targetId);
-
-      element.scrollIntoView({ behavior: 'smooth' });  // Ensure smooth scrolling
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -86,8 +82,10 @@ const Navbar = () => {
   return (
     <motion.nav 
       className={cn(
-        'fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3',
-        isScrolled ? 'bg-black/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        'fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3 border-b border-white/20',
+        isScrolled 
+          ? 'bg-white/10 backdrop-blur-lg shadow-md' 
+          : 'bg-transparent'
       )}
       initial="hidden"
       animate="visible"
@@ -105,7 +103,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
-          {menuItems.map((item, index) => (
+          {menuItems.map((item) => (
             <motion.a 
               key={item.name}
               href={item.href}
@@ -138,6 +136,7 @@ const Navbar = () => {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          aria-label="Toggle mobile menu"
         >
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -158,7 +157,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <motion.div 
-          className="md:hidden bg-zinc-900/95 shadow-lg backdrop-blur-md"
+          className="md:hidden bg-white/10 backdrop-blur-lg border-t border-white/20 shadow-md"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}

@@ -42,58 +42,35 @@ const HeroSection = () => {
       </div>
 
       {/* Missile Animation */}
-      <motion.div
-        className="absolute h-1 w-20 bg-gradient-to-r from-cyan-500 to-transparent"
-        initial={{ x: "-100%", y: "100%" }}
-        animate={{
-          x: "200%",
-          y: "0%",
-          transition: {
-            duration: 1,
-            delay: 5,
-            repeat: Infinity,
-            repeatDelay: 12,
-          },
-        }}
-        style={{ top: "30%", left: "-10%" }}
-      >
-        <div className="absolute right-0 w-3 h-3 rounded-full bg-cyan-500 shadow-lg shadow-cyan-500/50"></div>
-      </motion.div>
+  
 
-      {/* Explosion Effect */}
-      <motion.div
-        className="absolute w-40 h-40 rounded-full"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{
-          scale: [0, 2, 2.5],
-          opacity: [0, 0.8, 0],
-          transition: {
-            duration: 2,
-            delay: 6,
-            repeat: Infinity,
-            repeatDelay: 12,
-          },
-        }}
-        style={{
-          top: "25%",
-          right: "25%",
-          background:
-            "radial-gradient(circle, rgba(0, 255, 255, 1) 0%, rgba(0, 128, 255, 1) 50%, rgba(200, 230, 255, 0.4) 70%)",
-        }}
-      />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           
-          {/* Profile Image */}
+          {/* Profile Image with Glassmorphism */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
             className="mb-8 md:mb-0"
           >
-            <div className="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-primary/30 shadow-xl shadow-primary/20">
+            <div
+              className="
+                w-72 h-72 md:w-96 md:h-96 
+                rounded-full 
+                overflow-hidden 
+                border border-white/30 
+                bg-white/10 
+                backdrop-blur-lg 
+                shadow-lg shadow-cyan-500/30 
+                hover:scale-[1.05] 
+                transition-transform duration-500 ease-in-out
+                cursor-pointer
+              "
+              style={{ boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}
+            >
               <img
                 src={myImage}
                 alt="Profile"

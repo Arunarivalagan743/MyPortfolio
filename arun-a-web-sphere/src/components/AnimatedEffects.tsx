@@ -81,9 +81,7 @@ const AnimatedBackground = () => {
 const AnimatedEffects = () => {
   return (
     <>
-      <MissileTrail />
-      <ExplosionEffect />
-      <AnimatedBackground />
+     
     </>
   );
 };
