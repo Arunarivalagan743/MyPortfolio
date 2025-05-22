@@ -11,23 +11,25 @@ const app = express();
 // ✅ Middleware
 app.use(express.json());
 
-// ✅ Allow all CORS preflights
-app.options('*', cors());
+// ✅ Use simple CORS configuration to avoid issues
+app.use(cors());
 
-// ✅ CORS Configuration
-app.use(cors({
-  origin: [
-    'http://localhost:8081',
-    'https://arunofficxal.vercel.app',
-    'https://www.404arunfound.me',
-    'https://my-portfolio-h5gc.vercel.app',
-  ],
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true,
-}));
+// Add manual CORS headers to ensure they're properly set
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  
+  // Handle preflight
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  
+  next();
+});
 
 // ✅ Routes
+// Make sure we're using the correct route path format
 app.use('/api', contactRoutes);
 
 // ✅ Test route
