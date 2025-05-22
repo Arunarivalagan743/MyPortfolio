@@ -6,7 +6,7 @@ const AcademicSection = () => {
   const academicData = [
     {
       degree: 'BE - Computer Science Engineering',
-      institution: 'Sri Ramakrishna Institute of Technology',
+      institution: 'Sri Shakthi Institute of Engineering and Technology',
       details: 'CGPA: 8.14',
       year: '2027',
       icon: <HiAcademicCap className="w-7 h-7" />,
@@ -14,7 +14,7 @@ const AcademicSection = () => {
     },
     {
       degree: 'HSC – State Board',
-      institution: 'PPAG Higher Secondary School',
+      institution: 'Gandhi Vidhyalaya Matric Higher Secondary School',
       details: 'Percentage: 89.5%',
       year: '2023',
       icon: <HiBookOpen className="w-7 h-7" />,
@@ -22,7 +22,7 @@ const AcademicSection = () => {
     },
     {
       degree: 'SSLC - Matriculation',
-      institution: 'PPAG Matriculation School',
+      institution: 'Gandhi Vidhyalaya Matric Higher Secondary School',
       details: 'ALL PASS',
       year: '2021',
       icon: <HiDocumentText className="w-7 h-7" />,

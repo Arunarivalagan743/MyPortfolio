@@ -434,12 +434,12 @@ const AnimatedEffects = ({
 
 // Export individual components for flexibility
 export { 
-  // SwimmingFish,
-  // Bubbles,
-  // WaterCurrents,
-  // Seaweed,
-  // Jellyfish,
-  // WaterSurface
+  SwimmingFish,
+  Bubbles,
+  WaterCurrents,
+  Seaweed,
+  Jellyfish,
+  WaterSurface
 };
 
 export default AnimatedEffects;
