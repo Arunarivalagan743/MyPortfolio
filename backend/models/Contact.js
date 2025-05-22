@@ -14,6 +14,10 @@ const contactSchema = new mongoose.Schema({
     enum: ['Work', 'Collaboration', 'Hiring', 'Other'],
     default: 'Work',
   },
+  userMessage: {  // Changed from message to userMessage
+    type: String,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

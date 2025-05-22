@@ -10,6 +10,7 @@ router.post(
     body('fullName').notEmpty().withMessage('Name is required'),
     body('email').isEmail().withMessage('Valid email is required'),
     body('reason').notEmpty().withMessage('Reason is required'),
+    body('message').notEmpty().withMessage('Message is required'), // Add message validation
   ],
   submitContactForm
 );
