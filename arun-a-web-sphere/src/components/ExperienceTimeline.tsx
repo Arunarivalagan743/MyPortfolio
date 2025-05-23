@@ -37,7 +37,7 @@ const CertificationTimeline: React.FC = () => {
   };
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section id= "skills" className="py-20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <div className="absolute -top-48 -right-48 w-96 h-96 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full blur-3xl"></div>
@@ -54,9 +54,12 @@ const CertificationTimeline: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white flex items-center gap-3">
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Professional</span> Certifications
-          </h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white flex items-center gap-3">
+            <span>
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Certifi</span>
+              <span className="text-white">cations</span>
+            </span> 
+            </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
           <p className="text-gray-400 mt-6 text-center max-w-2xl">
             Credentials that validate my expertise and commitment to continuous learning in the technology field.

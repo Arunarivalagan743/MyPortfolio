@@ -78,7 +78,7 @@ const Loader = () => {
   return (
     <motion.div 
       ref={containerRef}
-      className="fixed inset-0 bg-black/80 backdrop-blur-lg z-50 flex flex-col items-center justify-center overflow-hidden"
+      className="fixed inset-0  backdrop-blur-lg z-50 flex flex-col items-center justify-center overflow-hidden"
       animate={loading ? { opacity: 1 } : { opacity: 0, pointerEvents: "none" }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
     >
@@ -94,15 +94,7 @@ const Loader = () => {
         }}
       />
       
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" 
-          style={{
-            backgroundImage: "linear-gradient(to right, #06b6d4 1px, transparent 1px), linear-gradient(to bottom, #06b6d4 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
+   
       
       <div className="relative w-full max-w-4xl px-4">
         {/* Top animated lines with interactive hover */}

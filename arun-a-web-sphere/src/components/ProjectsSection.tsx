@@ -5,7 +5,7 @@ import { motion, AnimatePresence, useInView, useAnimation } from 'framer-motion'
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { SiHackerearth, SiTailwindcss, SiRedux, SiMongodb, SiExpress, SiFirebase } from 'react-icons/si';
+import { SiHackerearth, SiTailwindcss, SiRedux, SiMongodb, SiExpress, SiFirebase, SiFlutter, SiPython } from 'react-icons/si';
 
 // Types remain the same
 type TechIcon = {
@@ -94,21 +94,7 @@ const mainProjects = [
     liveLink: 'https://cinematic-popcorn-theatre-experience.vercel.app/',
     githubLink: 'https://github.com/Arunarivalagan743/Cinematic-popcorn-Theatre-Experience'
   },
-  {
-    title: 'PageTurner',
-    icon: '📚',
-    color: '#FF6B6B', // Coral
-    image: pageturnerImg,
-    tech: ['React', 'Node.js', 'MongoDB'],
-    techIcons: [
-      { Icon: FaReact, color: '#61DAFB', name: 'React', proficiency: 88 },
-      { Icon: FaNodeJs, color: '#339933', name: 'Node.js', proficiency: 82 },
-      { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 75 }
-    ],
-    description: 'Book-centric MERN platform',
-    liveLink: 'https://bookmakk.netlify.app/',
-    githubLink: 'https://github.com/Arunarivalagan743/BooksMania'
-  },
+
   {
     title: 'DarkCart',
     icon: '🛒',
@@ -134,10 +120,17 @@ const hackathonProjects = [
     icon: '🔍',
     color: '#FFA500', // Orange
     image: truthtellImg,
-    tech: ['Firebase', 'React'],
+    tech: ['Flutter', 'Python', 'MongoDB', 'NLP', 'RAG'],
     techIcons: [
-      { Icon: SiFirebase, color: '#FFCA28', name: 'Firebase', proficiency: 80 },
-      { Icon: FaReact, color: '#61DAFB', name: 'React', proficiency: 85 }
+      { Icon: SiFlutter, color: '#02569B', name: 'Flutter', proficiency: 80 },
+      { Icon: SiPython, color: '#3776AB', name: 'Python', proficiency: 75 },
+      { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 75 },
+      { Icon: ({ className, style }) => (
+        <span className={className} style={style} role="img" aria-label="NLP">🧠</span>
+      ), color: '#FF6B6B', name: 'NLP', proficiency: 70 },
+      { Icon: ({ className, style }) => (
+        <span className={className} style={style} role="img" aria-label="RAG">📄</span>
+      ), color: '#4ECDC4', name: 'RAG', proficiency: 65 }
     ],
     description: 'Placed 12th in HackerEarth Hackathon (April 2025)',
     githubLink: 'https://github.com/Arunarivalagan743/misinfo_detection_project'
