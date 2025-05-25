@@ -89,75 +89,88 @@ const ContactSection = () => {
   // ...other existing code...
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  e.preventDefault();
+  setIsSubmitting(true);
+  setSubmitProgress(0);
+  
+  // Create a visual progress indicator that advances even without server response
+  const progressInterval = setInterval(() => {
+    setSubmitProgress(prev => Math.min(prev + 5, 90));
+  }, 300);
+
+  let timeoutId: NodeJS.Timeout; // Declare timeoutId in the outer scope
+
+  try {
+    // Log to help with debugging
+    console.log("Attempting to send form data:", formData);
+    
+    // Use a more reliable fetch with appropriate timeout handling
+    const controller = new AbortController();
+    timeoutId = setTimeout(() => controller.abort(), 30000); // 30 seconds timeout
+    
+    const response = await fetch("https://myportfolio-2-kry9.onrender.com/api/contact", {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+        "Origin": window.location.origin 
+      },
+      mode: 'cors',
+      body: JSON.stringify(formData),
+      signal: controller.signal // Connect abort controller
+    });
+
+    clearTimeout(timeoutId);
+    clearInterval(progressInterval);
+    setSubmitProgress(100);
+
+    // Log response for debugging
+    console.log("Server response status:", response.status);
+    
+    if (!response.ok) {
+      const errorData = await response.text();
+      console.error("Server error response:", errorData);
+      throw new Error(`Server returned ${response.status}: ${errorData || 'Failed to send message'}`);
+    }
+
+    await MySwal.fire({
+      icon: "success",
+      title: "Message sent successfully!",
+      text: "Thank you for reaching out. I'll get back to you soon.",
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      background: "#0f0f1e",
+      color: "#ffffff",
+      iconColor: "#00BFFF"
+    });
+
+    setFormData({ fullName: "", email: "", reason: "Work", message: "" });
+  } catch (error: any) {
+    clearTimeout(timeoutId);
+    clearInterval(progressInterval);
     setSubmitProgress(0);
     
-    // Create a visual progress indicator that advances even without server response
-    const progressInterval = setInterval(() => {
-      setSubmitProgress(prev => Math.min(prev + 5, 90));
-    }, 300);
-
-    // Create an abort controller for timeout
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 20000); // 20 seconds timeout
+    // Handle different types of errors more specifically
+    const errorMessage = error.name === 'AbortError' 
+      ? "Request timed out. The server might be busy. Please try again later."
+      : error.message || "Something went wrong";
     
-    try {
-      const response = await fetch("https://myportfolio-2-kry9.onrender.com/api/contact", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-          "Origin": window.location.origin 
-        },
-        mode: 'cors',
-        body: JSON.stringify(formData),
-        signal: controller.signal // Add abort signal
-      });
+    console.error("Form submission error:", error);
+    
+    await MySwal.fire({
+      icon: "error",
+      title: "Submission failed",
+      text: errorMessage,
+      confirmButtonText: "Try Again",
+      background: "#0f0f1e",
+      color: "#ffffff",
+      confirmButtonColor: "#00BFFF"
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
-      clearTimeout(timeoutId);
-      clearInterval(progressInterval);
-      setSubmitProgress(100);
-
-      if (!response.ok) throw new Error("Failed to send message");
-
-      await MySwal.fire({
-        icon: "success",
-        title: "Message sent successfully!",
-        text: "Thank you for reaching out. I'll get back to you soon.",
-        timer: 3000,
-        timerProgressBar: true,
-        showConfirmButton: false,
-        background: "#0f0f1e",
-        color: "#ffffff",
-        iconColor: "#00BFFF"
-      });
-
-      setFormData({ fullName: "", email: "", reason: "Work", message: "" });
-    } catch (error: any) {
-      clearTimeout(timeoutId);
-      clearInterval(progressInterval);
-      setSubmitProgress(0);
-      
-      // Specific error for timeout
-      const errorMessage = error.name === 'AbortError' 
-        ? "Request timed out. The server might be busy. Please try again later."
-        : error.message || "Something went wrong";
-      
-      console.error("Form submission error:", error);
-      
-      await MySwal.fire({
-        icon: "error",
-        title: "Submission failed",
-        text: errorMessage,
-        confirmButtonText: "Try Again",
-        background: "#0f0f1e",
-        color: "#ffffff",
-        confirmButtonColor: "#00BFFF"
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
   console.log("Sending form data:", formData);
 
   // ...rest of component...
