@@ -2432,7 +2432,7 @@ const AboutSection = () => {
           >
             {/* Tab Navigation */}
             <div className="flex space-x-1 mb-6 bg-zinc-900/60 backdrop-blur-sm p-1 rounded-lg">
-              {['about', 'education', 'interests', 'development'].map((tab) => (
+              {['about', 'education', 'interests', 'achievements'].map((tab) => (
                 <motion.button
                   key={tab}
                   className={`px-4 py-2 rounded-md text-sm font-medium capitalize relative ${
