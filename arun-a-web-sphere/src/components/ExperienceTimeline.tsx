@@ -330,7 +330,7 @@ const CertificatesSection = () => {
   };
 
   return (
-    <section id="skills" className="py-20">
+    <section id="certificates" className="py-20">
       <div className="container mx-auto px-4">
         {/* Section Header with Animated Underline */}
         <div className="flex flex-col items-center mb-12">

@@ -1756,7 +1756,7 @@ const SHUFFLE_TIME = 50;
 const CHARS = "!@#$%^&*():{};|,.<>/?";
 
 // Binary/encryption characters for the border animation
-const ENCRYPTION_CHARS = "01";
+// const ENCRYPTION_CHARS = "01";
 const MATRIX_CHARS = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン";
 
 // API Configuration
@@ -1998,9 +1998,9 @@ const AboutSection = () => {
     const length = isMobile ? 50 : 100;
     let result = "";
     
-    for (let i = 0; i < length; i++) {
-      result += ENCRYPTION_CHARS.charAt(Math.floor(Math.random() * ENCRYPTION_CHARS.length));
-    }
+    // for (let i = 0; i < length; i++) {
+    //   result += ENCRYPTION_CHARS.charAt(Math.floor(Math.random() * ENCRYPTION_CHARS.length));
+    // }
     
     setEncryptedBorder(result);
   };
@@ -2009,9 +2009,9 @@ const AboutSection = () => {
     const length = isMobile ? 30 : 60;
     let result = "";
     
-    for (let i = 0; i < length; i++) {
-      result += ENCRYPTION_CHARS.charAt(Math.floor(Math.random() * ENCRYPTION_CHARS.length));
-    }
+    // for (let i = 0; i < length; i++) {
+    //   result += ENCRYPTION_CHARS.charAt(Math.floor(Math.random() * ENCRYPTION_CHARS.length));
+    // }
     
     setButtonEncrypted(result);
   };

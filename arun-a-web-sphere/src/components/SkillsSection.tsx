@@ -127,7 +127,7 @@ const SkillsSection = () => {
   };
 
   return (
-    <section id="skills" className="py-20relative">
+    <section id="skills" className="py-20 relative">
       <div className="absolute inset-0 opacity-5">
         {/* Background code pattern */}
         <div 
