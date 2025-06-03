@@ -1,55 +1,18 @@
-import { useEffect, useState, useRef } from "react";
-import { motion, useAnimation, useMotionValue } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, useMotionValue } from "framer-motion";
 
 const Loader = () => {
   const [loading, setLoading] = useState(true);
-  const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 });
-  const containerRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-  const nameControls = useAnimation();
   const progressValue = useMotionValue(0);
   
-  // Track mouse/touch position
+  // Loading animation with simpler timing
   useEffect(() => {
-    const handlePointerMove = (e: MouseEvent | TouchEvent) => {
-      if (!containerRef.current) return;
-      
-      const rect = containerRef.current.getBoundingClientRect();
-      const event = 'touches' in e ? e.touches[0] : e;
-      const x = ((event.clientX - rect.left) / rect.width) - 0.5;
-      const y = ((event.clientY - rect.top) / rect.height) - 0.5;
-      
-      setPointerPosition({ x, y });
-      
-      // Move glow effect
-      if (glowRef.current) {
-        glowRef.current.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-      }
-    };
-    
-    window.addEventListener('mousemove', handlePointerMove);
-    window.addEventListener('touchmove', handlePointerMove);
-    
-    return () => {
-      window.removeEventListener('mousemove', handlePointerMove);
-      window.removeEventListener('touchmove', handlePointerMove);
-    };
-  }, []);
-  
-  // Loading animation
-  useEffect(() => {
-    // Simulate content loading with interactive animations
     const timer = setTimeout(() => {
-      nameControls.start({
-        scale: [1, 1.1, 1],
-        transition: { duration: 1.5 }
-      }).then(() => {
-        setLoading(false);
-      });
+      setLoading(false);
     }, 3000);
     
     return () => clearTimeout(timer);
-  }, [nameControls]);
+  }, []);
   
   // Update progress in real-time
   useEffect(() => {
@@ -77,270 +40,80 @@ const Loader = () => {
   
   return (
     <motion.div 
-      ref={containerRef}
-      className="fixed inset-0  backdrop-blur-lg z-50 flex flex-col items-center justify-center overflow-hidden"
+      className="fixed inset-0 bg-zinc-900 bg-opacity-95 backdrop-blur-md z-50 flex flex-col items-center justify-center"
       animate={loading ? { opacity: 1 } : { opacity: 0, pointerEvents: "none" }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
     >
-      {/* Interactive glow effect that follows cursor */}
-      <div 
-        ref={glowRef}
-        className="fixed w-[200px] h-[200px] rounded-full pointer-events-none opacity-20"
-        style={{
-          background: "radial-gradient(circle, rgba(6, 182, 212, 0.7) 0%, rgba(251, 191, 36, 0.3) 50%, transparent 70%)",
-          transform: "translate(-50%, -50%)",
-          filter: "blur(40px)",
-          mixBlendMode: "screen",
-        }}
-      />
-      
-   
-      
-      <div className="relative w-full max-w-4xl px-4">
-        {/* Top animated lines with interactive hover */}
-        <div className="flex justify-center mb-16">
-          <motion.div 
-            className="h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent w-[200px] md:w-[450px]"
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-            style={{
-              transformOrigin: "center",
-              rotate: pointerPosition.y * 5, // subtle rotation based on mouse y position
-            }}
-          />
-        </div>
-        
-        {/* Main loader element - responds to mouse movement */}
-        <motion.div 
-          className="flex flex-col items-center"
-          style={{
-            x: pointerPosition.x * 15, // subtle movement based on mouse position
-            y: pointerPosition.y * 15,
-          }}
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 100 }}
+      <div className="w-full max-w-md px-6 flex flex-col items-center">
+        {/* Professional logo */}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          {/* Interactive animated rings */}
-          <div className="relative h-[200px] w-[200px] flex items-center justify-center group">
-            {/* Outer ring */}
-            <motion.div 
-              className="absolute rounded-full border-2 border-cyan-500/30 h-full w-full group-hover:border-cyan-400/50"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              style={{
-                rotateX: pointerPosition.y * 20,
-                rotateY: -pointerPosition.x * 20,
-              }}
-            />
-            
-            {/* Middle rotating ring */}
-            <motion.div 
-              className="absolute h-3/4 w-3/4 rounded-full border border-cyan-400/50 group-hover:border-cyan-300/70"
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 8, ease: "linear", repeat: Infinity }}
-              style={{
-                rotateX: pointerPosition.y * 10,
-                rotateY: -pointerPosition.x * 10,
-              }}
-            >
-              {/* Accent dots - multiple for more visual interest */}
-              <motion.div 
-                className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-cyan-400"
-                initial={{ scale: 0.5 }}
-                animate={{ scale: 1.2 }}
-                transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
-              />
-              <motion.div 
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-amber-400"
-                initial={{ scale: 0.7 }}
-                animate={{ scale: 1.3 }}
-                transition={{ duration: 1.3, repeat: Infinity, repeatType: "reverse", delay: 0.2 }}
-              />
-            </motion.div>
-            
-            {/* Inner pulse ring */}
-            <motion.div 
-              className="absolute h-1/2 w-1/2 rounded-full border border-amber-400"
-              initial={{ scale: 1, opacity: 0.3 }}
-              animate={{ scale: 1.4, opacity: 0 }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            
-            {/* Core element - interactive on hover */}
-            <motion.div 
-              className="h-1/3 w-1/3 rounded-full bg-gradient-to-br from-cyan-300 to-amber-400 opacity-80 hover:opacity-100 cursor-pointer"
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              whileHover={{ scale: 1.2 }}
-              transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-              style={{
-                boxShadow: "0 0 30px rgba(6, 182, 212, 0.5)",
-                filter: "brightness(1.1)",
-              }}
-              onClick={() => {
-                // Small interactive feature - clicking core speeds up the loading
-                const remaining = Math.max(0, 3000 - (Date.now() - performance.now()));
-                if (remaining > 500) {
-                  setLoading(false);
-                }
-              }}
-            />
-            
-            {/* Particles that orbit around */}
-            {[...Array(8)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 rounded-full bg-cyan-300"
-                initial={{
-                  x: 0,
-                  y: 0,
-                  scale: 0,
-                }}
-                animate={{
-                  x: [0, Math.cos(i * Math.PI / 4) * 100, 0],
-                  y: [0, Math.sin(i * Math.PI / 4) * 100, 0],
-                  scale: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 3 + i * 0.2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
-          </div>
+          <h1 className="text-4xl font-bold text-white tracking-tight">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+              ARUN
+            </span>
+            <span className="text-gray-300 ml-1">DEVS</span>
+          </h1>
+        </motion.div>
+        
+        {/* Clean loading indicator - spinner and progress */}
+        <div className="flex flex-col items-center">
+          {/* Simple spinner */}
+          <motion.div 
+            className="w-16 h-16 rounded-full border-t-2 border-r-2 border-cyan-500"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1.5, ease: "linear", repeat: Infinity }}
+          />
           
-          {/* Text carousel with 3D perspective */}
-          <div className="perspective-[800px]">
-            <motion.div 
-              className="mt-8 relative overflow-hidden h-14 transform-style-3d" 
-              initial={{ opacity: 0, rotateX: 30 }}
-              animate={{ opacity: 1, rotateX: 0 }}
-              transition={{ delay: 0.5, duration: 1 }}
-              style={{
-                transformStyle: "preserve-3d",
-              }}
-            >
-              <motion.div
-                initial={{ y: 0 }}
-                animate={{ y: [-56, 0, 56, 0] }}
-                transition={{ 
-                  duration: 6, 
-                  repeat: Infinity,
-                  times: [0, 0.3, 0.7, 1],
-                  ease: "easeInOut"
-                }}
-              >
-                <div className="h-14 flex items-center justify-center font-light text-xl">
-                  <span className="bg-gradient-to-r from-cyan-400 to-amber-400 text-transparent bg-clip-text">
-                    Designing experiences
-                  </span>
-                </div>
-                <div className="h-14 flex items-center justify-center font-light text-xl">
-                  <span className="bg-gradient-to-r from-cyan-400 to-amber-400 text-transparent bg-clip-text">
-                    Creating solutions
-                  </span>
-                </div>
-                <div className="h-14 flex items-center justify-center font-light text-xl">
-                  <span className="bg-gradient-to-r from-cyan-400 to-amber-400 text-transparent bg-clip-text">
-                    Building the future
-                  </span>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
+          {/* Loading text */}
+          <motion.p
+            className="mt-6 text-gray-400 font-medium text-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            Preparing Experience
+          </motion.p>
           
-          {/* Interactive progress bar */}
-          <div className="mt-16 w-[280px] md:w-[360px]">
-            <div className="h-px bg-zinc-800 w-full relative overflow-hidden">
+          {/* Clean progress bar */}
+          <div className="mt-8 w-64 sm:w-80">
+            <div className="h-1 bg-zinc-800 w-full rounded-full overflow-hidden">
               <motion.div 
-                className="h-full bg-gradient-to-r from-cyan-500 to-amber-400 relative"
+                className="h-full bg-gradient-to-r from-cyan-500 to-blue-500"
                 initial={{ width: "0%" }}
                 style={{ width: progressValue }}
               />
-              
-              {/* Animated glow effect on progress bar */}
-              <motion.div 
-                className="absolute top-0 h-full w-10 bg-gradient-to-r from-transparent via-white to-transparent opacity-30"
-                animate={{ 
-                  x: [-40, 400],
-                  opacity: [0, 0.8, 0]
-                }}
-                transition={{ 
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  times: [0, 0.5, 1]
-                }}
-              />
             </div>
-            <div className="mt-2 flex justify-between items-center text-xs text-zinc-400 font-mono">
+            <div className="mt-3 flex justify-between items-center text-xs text-zinc-500">
+              <span>Loading assets</span>
               <motion.span
-                animate={{ color: ["#94a3b8", "#06b6d4"] }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-              >
-                Initializing
-              </motion.span>
-              <motion.span
+                className="tabular-nums"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                animate={{ opacity: 1 }}
               >
-                <motion.span 
-                  animate={{ 
-                    color: ["#94a3b8", "#fbbf24"]
-                  }} 
-                  transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                >
-                  Please wait
+                <motion.span style={{ x: progressValue }}>
+                  {Math.round(progressValue.get())}%
                 </motion.span>
               </motion.span>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
       
-      {/* Enhanced 3D cutout text effect with hover interaction */}
+      {/* Footer text */}
       <motion.div 
-        className="absolute bottom-12 w-full text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-8 text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.7 }}
+        transition={{ delay: 1, duration: 0.8 }}
       >
-        <motion.div
-          className="bg-clip-text text-transparent pointer-events-none font-black text-center px-4 cursor-pointer"
-          style={{
-            backgroundImage: "linear-gradient(135deg, #06b6d4, #fbbf24, #06b6d4)",
-            backgroundSize: "200% 200%",
-            fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
-            animation: "gradient-shift 3s ease infinite",
-            textShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
-            letterSpacing: "2px",
-          }}
-          animate={nameControls}
-          whileHover={{ scale: 1.05, letterSpacing: "4px" }}
-        >
-          ARUN DEVS
-        </motion.div>
-        
-        {/* Decorative elements that enhance the logo */}
-        <motion.div 
-          className="h-px w-[180px] md:w-[220px] mx-auto mt-4 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 1.5, duration: 1.5 }}
-        />
-        
-        <style >{`
-          @keyframes gradient-shift {
-            0% { background-position: 0% 50% }
-            50% { background-position: 100% 50% }
-            100% { background-position: 0% 50% }
-          }
-        `}</style>
+        <p className="text-xs text-zinc-500">
+          © {new Date().getFullYear()} Arun Devs • Web Developer
+        </p>
       </motion.div>
     </motion.div>
   );

@@ -431,50 +431,10 @@ const PublicationsSection = () => {
           viewport={{ once: true, margin: "-100px" }}
         >
           {/* Gradient border */}
-          <div className="absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-b from-cyan-500/30 via-blue-500/20 to-transparent -z-10"></div>
+
           
-          <div className="bg-zinc-900/60 p-8">
-            <div className="flex flex-col md:flex-row gap-8 justify-between items-center">
-              <div className="flex items-center gap-5">
-                <div className="p-5 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl border border-blue-500/20 shadow-lg shadow-blue-500/5">
-                  <FaUniversity className="text-4xl text-blue-400" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white">Academic Impact</h3>
-                  <p className="text-zinc-400">Contributing to scientific knowledge and innovation</p>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-3 gap-4 w-full md:w-auto">
-                <motion.div 
-                  className="bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 text-center border border-zinc-700/30"
-                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 191, 255, 0.1)" }}
-                >
-                  <p className="text-zinc-400 text-xs mb-1">Publications</p>
-                  <p className="text-2xl font-bold text-white">{publications.length}</p>
-                  <div className="h-1 w-12 mx-auto mt-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
-                </motion.div>
-                <motion.div 
-                  className="bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 text-center border border-zinc-700/30"
-                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 191, 255, 0.1)" }}
-                >
-                  <p className="text-zinc-400 text-xs mb-1">Total Citations</p>
-                  <p className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                    {publications.reduce((sum, pub) => sum + pub.citationCount, 0)}
-                  </p>
-                  <div className="h-1 w-12 mx-auto mt-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
-                </motion.div>
-                <motion.div 
-                  className="bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 text-center border border-zinc-700/30"
-                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 191, 255, 0.1)" }}
-                >
-                  <p className="text-zinc-400 text-xs mb-1">Impact Factor</p>
-                  <p className="text-2xl font-bold text-cyan-400">{publications[0]?.impact || "-"}</p>
-                  <div className="h-1 w-12 mx-auto mt-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
+
+           
         </motion.div>
       </div>
       

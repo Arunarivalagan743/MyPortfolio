@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { 
@@ -69,57 +68,69 @@ const SkillsSection = () => {
     }
   ];
 
-  // Modern box-shaped progress bar component
-  const BoxProgressBar = ({ skill }) => {
+  // Circular progress skill display component
+  const SkillDisplay = ({ skill }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-50px" });
-    
-    // Calculate number of filled boxes based on proficiency
-    const totalBoxes = 10;
-    const filledBoxes = Math.round(skill.proficiency / 10);
     
     return (
       <motion.div 
         ref={ref}
-        className="flex flex-col items-center p-4  rounded-lg backdrop-blur-sm border border-zinc-700/50 transition-all"
+        className="flex flex-col items-center p-4 rounded-2xl backdrop-blur-sm bg-zinc-800/40 border border-zinc-700/30 transition-all shadow-lg"
         whileHover={{ 
-          backgroundColor: `rgba(30, 30, 36, 0.8)`,
-          borderColor: `${skill.color}50`,
           y: -5,
+          boxShadow: `0 15px 30px -10px rgba(0,0,0,0.3), 0 0 0 1px ${skill.color}30`,
+          backgroundColor: `rgba(40, 40, 45, 0.7)`,
           transition: { duration: 0.2 }
         }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={isInView ? { opacity: 1, scale: 1, transition: { duration: 0.4 } } : {}}
       >
-        {/* Icon section - larger and more visible */}
-        <div className="mb-3 p-3 rounded-lg bg-zinc-900/80" style={{ 
-          boxShadow: `0 0 15px ${skill.color}20`
-        }}>
-          <skill.icon className="text-5xl" style={{ color: skill.color }} />
-        </div>
-        
-        {/* Skill name */}
-        <h4 className="text-md font-medium text-white mb-2">{skill.name}</h4>
-        
-        {/* Box-shaped progress indicator */}
-        <div className="grid grid-cols-10 gap-1 w-full mt-2">
-          {[...Array(totalBoxes)].map((_, index) => (
-            <motion.div
-              key={index}
-              className="h-2 rounded-sm"
-              initial={{ opacity: 0.3, backgroundColor: "#3f3f46" }}
-              animate={isInView ? {
-                opacity: index < filledBoxes ? 1 : 0.3,
-                backgroundColor: index < filledBoxes ? skill.color : "#3f3f46",
-                transition: { 
-                  delay: index * 0.05,
-                  duration: 0.3
-                }
+        {/* Circular progress indicator - Apple Watch style */}
+        <div className="relative mb-4">
+          <svg className="w-20 h-20" viewBox="0 0 100 100">
+            {/* Background circle */}
+            <circle 
+              cx="50" cy="50" r="42" 
+              fill="none" 
+              stroke="rgba(255,255,255,0.1)" 
+              strokeWidth="8"
+            />
+            
+            {/* Progress circle */}
+            <motion.circle 
+              cx="50" cy="50" r="42" 
+              fill="none" 
+              stroke={skill.color} 
+              strokeWidth="8"
+              strokeLinecap="round"
+              strokeDasharray="264"
+              strokeDashoffset="264"
+              initial={{ strokeDashoffset: 264 }}
+              animate={isInView ? { 
+                strokeDashoffset: 264 - (264 * skill.proficiency / 100),
+                transition: { duration: 1.5, delay: 0.2, ease: "easeOut" }
               } : {}}
             />
-          ))}
+            
+            {/* Inner circle with icon */}
+            <circle cx="50" cy="50" r="34" fill="rgba(30, 30, 35, 0.8)" />
+            
+            {/* Icon in center */}
+            <foreignObject x="25" y="25" width="50" height="50">
+              <div className="flex items-center justify-center w-full h-full">
+                <skill.icon className="text-2xl" style={{ color: skill.color }} />
+              </div>
+            </foreignObject>
+          </svg>
         </div>
         
-        {/* Proficiency percentage */}
-        <div className="mt-2 text-xs font-semibold" style={{ color: skill.color }}>
+        {/* Skill name and percentage */}
+        <h4 className="text-sm font-medium text-white mb-1">{skill.name}</h4>
+        <div 
+          className="text-xs font-bold px-3 py-1 rounded-full bg-zinc-700/50"
+          style={{ color: skill.color }}
+        >
           {skill.proficiency}%
         </div>
       </motion.div>
@@ -129,18 +140,20 @@ const SkillsSection = () => {
   return (
     <section id="skills" className="py-20 relative">
       <div className="absolute inset-0 opacity-5">
-        {/* Background code pattern */}
-        <div 
-          className="h-full w-full opacity-20"
-          style={{
-            backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2300BFFF' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
-          }}
+        <div className="h-full w-full opacity-20"
+          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2300BFFF' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }}
         ></div>
       </div>
       
       <div className="container mx-auto px-4 z-10 relative">
-        {/* Section heading with modern styling */}
-        <div className="text-center mb-16">
+        {/* Section heading with Apple-inspired styling */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           <h2 className="text-3xl md:text-5xl font-bold mb-3 text-white">
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Skills</span> & Technologies
           </h2>
@@ -148,14 +161,14 @@ const SkillsSection = () => {
           <p className="text-center text-gray-400 max-w-2xl mx-auto">
             My technical toolkit includes these technologies that I've mastered through hands-on experience in various projects.
           </p>
-        </div>
+        </motion.div>
         
-        {/* Skill categories */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* Skill categories with Apple-like rounded cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {skillCategories.map((category, idx) => (
             <motion.div
               key={category.title}
-              className="p-6 rounded-xl border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm"
+              className="p-6 rounded-3xl border border-zinc-700/30 bg-zinc-900/50 backdrop-blur-lg shadow-xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -163,15 +176,15 @@ const SkillsSection = () => {
             >
               {/* Category heading with colored accent */}
               <div className="flex items-center mb-6">
-                <div className="w-1.5 h-6 rounded-full mr-3" style={{ backgroundColor: category.color }}></div>
-                <h3 className="text-xl font-bold text-white">{category.title}</h3>
-                <div className="h-px grow ml-4 bg-gradient-to-r from-zinc-800 to-transparent"></div>
+                <div className="w-2 h-6 rounded-full mr-3" style={{ backgroundColor: category.color }}></div>
+                <h3 className="text-lg font-bold text-white">{category.title}</h3>
+                <div className="h-px grow ml-4 bg-gradient-to-r from-zinc-700/80 to-transparent"></div>
               </div>
               
-              {/* Skills grid with box progress bars */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Skills grid with circular progress displays only */}
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4">
                 {category.skills.map((skill) => (
-                  <BoxProgressBar key={skill.name} skill={skill} />
+                  <SkillDisplay key={skill.name} skill={skill} />
                 ))}
               </div>
             </motion.div>
