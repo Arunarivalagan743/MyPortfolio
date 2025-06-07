@@ -127,9 +127,9 @@ const HeroSection: React.FC = () => {
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.5 }}
 >
-  <span className="font-light">MR</span>
+
   <span className="text-cyan-400">-</span>
-  <span>AR</span>
+  <span>ARUN</span>
 </motion.a>
 
             {/* Desktop Navigation Links */}
