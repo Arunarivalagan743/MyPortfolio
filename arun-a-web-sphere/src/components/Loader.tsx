@@ -5,7 +5,7 @@ const Loader = () => {
   const [loading, setLoading] = useState(true);
   const progressValue = useMotionValue(0);
   
-  // Loading animation with simpler timing
+ 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -14,10 +14,10 @@ const Loader = () => {
     return () => clearTimeout(timer);
   }, []);
   
-  // Update progress in real-time
+
   useEffect(() => {
     let startTime = Date.now();
-    const duration = 3000; // 3 seconds
+    const duration = 3000;
     
     const updateProgress = () => {
       if (!loading) return;
@@ -45,7 +45,7 @@ const Loader = () => {
       transition={{ duration: 0.6, ease: "easeInOut" }}
     >
       <div className="w-full max-w-md px-6 flex flex-col items-center">
-        {/* Professional logo */}
+  
         <motion.div
           className="mb-12"
           initial={{ opacity: 0, y: -10 }}
@@ -59,17 +59,16 @@ const Loader = () => {
             <span className="text-gray-300 ml-1">DEVS</span>
           </h1>
         </motion.div>
-        
-        {/* Clean loading indicator - spinner and progress */}
+
         <div className="flex flex-col items-center">
-          {/* Simple spinner */}
+      
           <motion.div 
             className="w-16 h-16 rounded-full border-t-2 border-r-2 border-cyan-500"
             animate={{ rotate: 360 }}
             transition={{ duration: 1.5, ease: "linear", repeat: Infinity }}
           />
           
-          {/* Loading text */}
+      
           <motion.p
             className="mt-6 text-gray-400 font-medium text-sm"
             initial={{ opacity: 0 }}
@@ -79,7 +78,7 @@ const Loader = () => {
             Preparing Experience
           </motion.p>
           
-          {/* Clean progress bar */}
+    
           <div className="mt-8 w-64 sm:w-80">
             <div className="h-1 bg-zinc-800 w-full rounded-full overflow-hidden">
               <motion.div 
@@ -104,7 +103,7 @@ const Loader = () => {
         </div>
       </div>
       
-      {/* Footer text */}
+    
       <motion.div 
         className="absolute bottom-8 text-center"
         initial={{ opacity: 0 }}

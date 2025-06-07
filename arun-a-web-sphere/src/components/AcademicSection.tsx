@@ -20,14 +20,7 @@ const AcademicSection = () => {
       icon: <HiBookOpen className="w-7 h-7" />,
       color: 'from-cyan-500 to-cyan-300',
     },
-    {
-      degree: 'SSLC - Matriculation',
-      institution: 'Gandhi Vidhyalaya Matric Higher Secondary School',
-      details: 'ALL PASS',
-      year: '2021',
-      icon: <HiDocumentText className="w-7 h-7" />,
-      color: 'from-indigo-600 to-indigo-400',
-    }
+  
   ];
 
   return (
