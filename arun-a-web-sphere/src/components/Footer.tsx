@@ -68,12 +68,8 @@ const Footer = () => {
   const iconSize = isMobile ? '14px' : '18px';
 
   return (
-    <footer className="relative py-16 bg-zinc-950">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -right-24 -top-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute -left-24 -bottom-24 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-      </div>
+    <footer className="relative py-16 ">
+  
       
       {/* Scroll to top button - aligned with hamburger position */}
       <motion.button

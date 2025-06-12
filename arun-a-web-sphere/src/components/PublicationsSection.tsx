@@ -70,14 +70,7 @@ const PublicationsSection = () => {
   
   return (
     <section id="publications" className="py-20 relative overflow-hidden">
-      {/* Decorative backgrounds with updated design */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-40 right-20 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-40 left-20 w-80 h-80 bg-blue-600/5 rounded-full blur-3xl animate-pulse-slow" style={{animationDelay: "2s"}}></div>
-        
-        {/* Modern circuit board pattern overlay */}
-        <div className="absolute inset-0 bg-[url('/assets/circuit-pattern.png')] bg-repeat opacity-5"></div>
-      </div>
+     
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header with a more academic/research aesthetic */}

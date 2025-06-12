@@ -128,7 +128,7 @@ const HeroSection: React.FC = () => {
   transition={{ duration: 0.5 }}
 >
 
-  <span className="text-cyan-400">-</span>
+  <span className="text-cyan-400"></span>
   <span>ARUN</span>
 </motion.a>
 

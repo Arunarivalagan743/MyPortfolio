@@ -192,14 +192,9 @@ const handleSubmit = async (e: React.FormEvent) => {
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] bg-[length:50px_50px] pointer-events-none"></div>
+      <div className="absolute inset-0 opacity-[0.03] bg-[length:50px_50px] pointer-events-none"></div>
       
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute top-0 right-0 w-2/5 h-2/5 bg-cyan-500/30 rounded-full filter blur-[100px]"></div>
-        <div className="absolute bottom-0 left-0 w-2/5 h-2/5 bg-cyan-400/20 rounded-full filter blur-[100px]"></div>
-        <div className="absolute top-1/3 left-1/4 w-1/3 h-1/3 bg-cyan-300/15 rounded-full filter blur-[120px]"></div>
-      </div>
-      
+    
       {/* Animated particles */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(12)].map((_, index) => (
