@@ -678,7 +678,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <div className="aspect-[0.77] w-full bg-white rounded-lg overflow-hidden shadow-xl">
                   {/* Resume preview */}
                   <iframe 
-                    src="/assets/714023104011 ( 23CS011 ).pdf" 
+                    src="/assets/Arun_Resume@25.pdf" 
                     className="w-full h-full"
                     title="Resume Preview"
                   >
