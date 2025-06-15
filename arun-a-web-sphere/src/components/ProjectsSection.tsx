@@ -627,7 +627,7 @@ const hackathonProjects = [
       ), color: '#4ECDC4', name: 'RAG', proficiency: 65 }
     ],
     description: 'Placed 12th in HackerEarth Hackathon (April 2025)',
-    githubLink: 'https://github.com/Arunarivalagan743/misinfo_detection_project'
+    githubLink: 'https://github.com/Arunarivalagan743/Falo-app'
   }
 ];
 
