@@ -102,9 +102,9 @@ const ContactSection: React.FC = () => {
     <section id="contact" className="py-20 bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-green-500 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-blue-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-500 rounded-full blur-2xl animate-bounce"></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-cyan-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-indigo-500 rounded-full blur-2xl animate-bounce"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -115,7 +115,7 @@ const ContactSection: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-cyan-500 to-blue-600 bg-clip-text text-transparent">
             Let's Connect
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -134,7 +134,7 @@ const ContactSection: React.FC = () => {
             className="space-y-8"
           >
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 shadow-2xl">
-              <h3 className="text-2xl font-bold mb-6 text-green-400">Get in Touch</h3>
+              <h3 className="text-2xl font-bold mb-6 text-blue-400">Get in Touch</h3>
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
                   <motion.a
@@ -144,11 +144,11 @@ const ContactSection: React.FC = () => {
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                     className="flex items-center space-x-4 p-4 rounded-xl bg-gray-700/30 hover:bg-gray-600/30 transition-all duration-300 group cursor-pointer"
                   >
-                    <div className="text-green-400 group-hover:text-green-300 transition-colors">
+                    <div className="text-blue-400 group-hover:text-blue-300 transition-colors">
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-white group-hover:text-green-300 transition-colors">
+                      <h4 className="font-semibold text-white group-hover:text-blue-300 transition-colors">
                         {item.title}
                       </h4>
                       <p className="text-gray-300">{item.info}</p>
@@ -160,7 +160,7 @@ const ContactSection: React.FC = () => {
 
             {/* Social Links */}
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 shadow-2xl">
-              <h3 className="text-2xl font-bold mb-6 text-blue-400">Follow Me</h3>
+              <h3 className="text-2xl font-bold mb-6 text-cyan-400">Follow Me</h3>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -187,17 +187,17 @@ const ContactSection: React.FC = () => {
             viewport={{ once: true }}
             className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 shadow-2xl"
           >
-            <h3 className="text-2xl font-bold mb-6 text-purple-400">Send Message</h3>
+            <h3 className="text-2xl font-bold mb-6 text-indigo-400">Send Message</h3>
             
             {/* Status Messages */}
             {submitStatus === 'success' && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 rounded-lg bg-green-500/20 border border-green-500/50 flex items-center space-x-2"
+                className="mb-6 p-4 rounded-lg bg-blue-500/20 border border-blue-500/50 flex items-center space-x-2"
               >
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                <span className="text-green-300">Message sent successfully! I'll get back to you soon.</span>
+                <CheckCircle className="w-5 h-5 text-blue-400" />
+                <span className="text-blue-300">Message sent successfully! I'll get back to you soon.</span>
               </motion.div>
             )}
             
@@ -225,7 +225,7 @@ const ContactSection: React.FC = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all duration-300 text-white placeholder-gray-400"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 text-white placeholder-gray-400"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -240,7 +240,7 @@ const ContactSection: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 text-white placeholder-gray-400"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 text-white placeholder-gray-400"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -257,7 +257,7 @@ const ContactSection: React.FC = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-all duration-300 text-white placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20 transition-all duration-300 text-white placeholder-gray-400"
                   placeholder="What's this about?"
                 />
               </div>
@@ -273,7 +273,7 @@ const ContactSection: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all duration-300 text-white placeholder-gray-400 resize-none"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 text-white placeholder-gray-400 resize-none"
                   placeholder="Tell me about your project or just say hi!"
                 />
               </div>
@@ -283,7 +283,7 @@ const ContactSection: React.FC = () => {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
