@@ -7,20 +7,21 @@ const AcademicSection = () => {
     {
       degree: 'BE - Computer Science Engineering',
       institution: 'Sri Shakthi Institute of Engineering and Technology',
-      details: 'CGPA: 8.14',
+      details: 'CGPA: 8.34',
       year: '2027',
       icon: <HiAcademicCap className="w-7 h-7" />,
       color: 'from-blue-600 to-blue-400',
+         location: 'Coimbatore, India'
     },
     {
-      degree: 'HSC – State Board',
-      institution: 'Gandhi Vidhyalaya Matric Higher Secondary School',
+      degree: 'Higher Secondary (Computer Science)',
+      institution: 'TNSS Gandhiji Vidhyalaya Higher Secondary School',
       details: 'Percentage: 89.5%',
       year: '2023',
       icon: <HiBookOpen className="w-7 h-7" />,
-      color: 'from-cyan-500 to-cyan-300',
+      color: 'from-green-600 to-green-400',
+      location: 'Tirupur, India'
     },
-  
   ];
 
   return (
@@ -89,6 +90,7 @@ const AcademicSection = () => {
                     {item.degree}
                   </h3>
                   <p className="text-gray-400 text-sm">{item.institution}</p>
+                  {item.location && <p className="text-gray-500 text-xs">{item.location}</p>}
                   <div className="pt-2 mt-2 border-t border-zinc-800/50">
                     <p className="flex items-center text-cyan-400 font-medium">
                       {item.details}

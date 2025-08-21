@@ -548,12 +548,13 @@ const carouselVariants = {
 const ticketparkImg = "/assets/cinipop.jpg";
 const darkcartImg = "/assets/ecommrece.jpg";
 const truthtellImg = "/assets/falo.png";
-const travellaImg = "/assets/travella.png"; // New project image
+const travellaImg = "/assets/travella.png"; 
+const healqImg = "/assets/placeholder.svg"; // Will need to be updated with actual image
 
 // Main projects data
 const mainProjects = [
   {
-    title: 'Travella',
+    title: 'AI Travella',
     icon: '✈️',
     color: '#4285F4', // Google blue color
     image: travellaImg,
@@ -567,14 +568,14 @@ const mainProjects = [
         <span className={className} style={style} role="img" aria-label="Gemini AI">🤖</span>
       ), color: '#8E44AD', name: 'Gemini AI', proficiency: 75 }
     ],
-    description: 'AI-powered trip planning application with personalized itineraries',
-    liveLink: 'https://www.travella.tech',
+    description: 'AI-powered trip planning platform with personalized itineraries',
+    liveLink: 'https://travellai.me/',
     githubLink: 'https://github.com/Arunarivalagan743/AI_Travella_'
   },
   {
-    title: 'TicketPark',
-    icon: '🎟',
-    color: '#00BFFF',
+    title: 'Cinematic Popcorn',
+    icon: '�',
+    color: '#FF69B4',
     image: ticketparkImg,
     tech: ['React', 'Tailwind CSS', 'Redux', 'Node.js', 'MongoDB'],
     techIcons: [
@@ -584,27 +585,26 @@ const mainProjects = [
       { Icon: FaNodeJs, color: '#339933', name: 'Node.js', proficiency: 80 },
       { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 70 }
     ],
-    description: 'Cinema + parking booking system with JWT & Firebase',
-    liveLink: 'https://cinematic-popcorn-theatre-experience.vercel.app/',
+    description: 'Cinema theatre booking platform with real-time seat selection',
+    liveLink: 'https://www.cinexp.app',
     githubLink: 'https://github.com/Arunarivalagan743/Cinematic-popcorn-Theatre-Experience'
   },
   {
-    title: 'DarkCart',
-    icon: '🛒',
-    color: '#8A2BE2',
-    image: darkcartImg,
-    tech: ['React', 'Tailwind CSS', 'Express', 'Node.js', 'MongoDB'],
+    title: 'HealQ',
+    icon: '🏥',
+    color: '#00C853',
+    image: healqImg, // Replace with actual image when available
+    tech: ['React Native', 'Node.js', 'MongoDB', 'Firebase', 'Express'],
     techIcons: [
-      { Icon: FaReact, color: '#61DAFB', name: 'React', proficiency: 90 },
-      { Icon: SiTailwindcss, color: '#06B6D4', name: 'Tailwind CSS', proficiency: 85 },
-      { Icon: SiExpress, color: '#ffffff', name: 'Express', proficiency: 78 },
+      { Icon: FaReact, color: '#61DAFB', name: 'React Native', proficiency: 88 },
       { Icon: FaNodeJs, color: '#339933', name: 'Node.js', proficiency: 80 },
-      { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 75 }
+      { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 75 },
+      { Icon: SiFirebase, color: '#FFCA28', name: 'Firebase', proficiency: 82 },
+      { Icon: SiExpress, color: '#ffffff', name: 'Express', proficiency: 78 }
     ],
-    description: 'E-commerce MERN stack app with modern UI',
-    liveLink: 'https://example.com/darkcart',
-    githubLink: 'https://github.com/gowthamvetri/DarkArt/tree/dev'
-  }
+    description: 'Mobile clinic management system with appointment scheduling',
+    githubLink: 'https://github.com/Arunarivalagan743/HealQ'
+  },
 ];
 
 // Hackathon projects data

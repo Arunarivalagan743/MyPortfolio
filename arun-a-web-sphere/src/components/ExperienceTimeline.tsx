@@ -8,13 +8,64 @@ import {
   FaExternalLinkAlt,
   FaChevronLeft,
   FaGithub, 
-  FaChevronRight
+  FaChevronRight,
+  FaBriefcase,
+  FaBuilding, 
+  FaCalendarAlt, 
+  FaMapMarkerAlt, 
+  FaTools, 
+  FaLightbulb,
+  FaTshirt,
+  FaHotel
 } from 'react-icons/fa';
 import { SiCoursera, SiUdemy, SiFreecodecamp, SiGoogle} from 'react-icons/si';
 
 import { SiNvidia } from 'react-icons/si'; // Using SiNvidia as a replacement for NPTEL
 
-// Replace the existing certifications array with this one
+// Work experience data
+const workExperiences = [
+  {
+    id: 1,
+    role: "Frontend Engineer",
+    company: "Luxor Holiday Homestays",
+    logo: "/assets/luxor-logo.png", // Replace with actual logo path if available
+    period: "Aug 2025 - Present",
+    location: "Chennai, India",
+    type: "Full-time",
+    website: "https://www.luxorholidayhomestays.com/",
+    description: "Leading the digital transformation of Luxor Holiday Homestays, an exclusive chain of premium vacation properties across Tamil Nadu's most scenic destinations.",
+    achievements: [
+      "Developed and launched a responsive booking platform that increased direct bookings and reduced dependency on third-party platforms",
+      "Implemented an integrated property management system that streamlined operations across multiple properties",
+      "Designed an interactive virtual tour feature that increased website engagement",
+      "Created a customer loyalty program that resulted in repeat bookings"
+    ],
+    skills: ["React", "Node.js", "MongoDB", "AWS", "UI/UX Design", "Payment Gateway Integration"],
+    color: "#1E40AF" // Blue color theme
+  },
+  {
+    id: 2,
+    role: "Full Stack Engineer",
+    company: "Casual Clothings",
+    logo: "/assets/casual-logo.png", // Replace with actual logo path if available
+    period: "May 2025 - Jul 2025",
+    location: "Tirupur, India",
+    type: "Full-time",
+    website: "https://www.casualclothings.shop/",
+    description: "Spearheaded the digital presence for Casual Clothings, a premium casual wear brand known for its exceptional quality and contemporary designs.",
+    achievements: [
+      "Launched a fully responsive e-commerce platform with integrated inventory management system",
+      "Implemented personalized recommendation engine that increased average order value",
+      "Developed a virtual try-on feature using AR technology that reduced return rates",
+      "Optimized checkout process resulting in reduction in cart abandonment"
+    ],
+    skills: ["React", "Node.js", "MongoDB", "AWS", "UI/UX Design", "Payment Gateway Integration"],
+    color: "#0D9488" // Teal color theme
+  },
+
+];
+
+// Certifications data
 const certifications = [
   {
     id: 1,
@@ -67,6 +118,189 @@ const categories = [
   { id: "data-science", name: "Data Science" }
 ];
 
+// Component for Work Experience Timeline
+const WorkExperienceSection = () => {
+  return (
+    <section id="experience" className="py-20 relative">
+      {/* Background decorative elements */}
+      <div className="absolute top-0 left-0 right-0 h-px "></div>
+      <div className="absolute bottom-0 left-0 right-0 h-px "></div>
+      
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 "></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 "></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center mb-16"
+        >
+          <div className="relative inline-block mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight flex items-center gap-3">
+              <FaBriefcase className="text-blue-400" />
+              <span>Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">Experience</span></span>
+            </h2>
+            <motion.div 
+              className="absolute -bottom-3 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-teal-400 rounded-full"
+              initial={{ width: 0, left: "50%" }}
+              whileInView={{ width: "100%", left: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            />
+          </div>
+          <p className="text-zinc-400 text-center max-w-2xl">
+            My professional journey working with premium brands and delivering exceptional digital experiences.
+          </p>
+        </motion.div>
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500/30 via-teal-500/30 to-blue-500/30 transform md:translate-x-px"></div>
+          
+          {/* Experience cards */}
+          <div className="space-y-12 relative">
+            {workExperiences.map((exp, index) => (
+              <motion.div
+                key={exp.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className={`relative md:w-1/2 ${
+                  index % 2 === 0 ? 'md:pr-12 md:ml-0' : 'md:pl-12 md:ml-auto'
+                }`}
+              >
+                {/* Timeline dot */}
+                <div 
+                  className="absolute top-0 hidden md:block w-5 h-5 rounded-full border-4 border-gray-900 z-10"
+                  style={{ backgroundColor: exp.color, right: index % 2 === 0 ? '-2.5px' : 'auto', left: index % 2 === 1 ? '-2.5px' : 'auto' }}
+                ></div>
+                
+                {/* Card */}
+                <div className="bg-gray-800 bg-opacity-60 backdrop-blur-sm p-6 rounded-2xl border border-gray-700 hover:border-opacity-80 shadow-xl hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300">
+                  <div className="flex flex-col md:flex-row md:items-start gap-4 mb-4">
+                    {/* Company logo/icon */}
+                    <div 
+                      className="w-14 h-14 flex items-center justify-center rounded-xl flex-shrink-0"
+                      style={{ backgroundColor: `${exp.color}25` }}
+                    >
+                      {exp.company === "Luxor Holiday Homestays" ? (
+                        <FaHotel className="text-2xl" style={{ color: exp.color }} />
+                      ) : exp.company === "Casual Clothings" ? (
+                        <FaTshirt className="text-2xl" style={{ color: exp.color }} />
+                      ) : (
+                        <FaCode className="text-2xl" style={{ color: exp.color }} />
+                      )}
+                    </div>
+                    
+                    {/* Role and company */}
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white">{exp.role}</h3>
+                      <div className="text-lg font-medium flex items-center gap-2" style={{ color: exp.color }}>
+                        {exp.company}
+                        {exp.website && (
+                          <a 
+                            href={exp.website} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="ml-2 inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-md bg-opacity-20 hover:bg-opacity-30 transition-all"
+                            style={{ backgroundColor: `${exp.color}20`, color: exp.color }}
+                            aria-label={`Visit ${exp.company} website`}
+                          >
+                            <span>Visit</span> <FaExternalLinkAlt />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Details */}
+                  <div className="flex flex-wrap gap-3 mb-4 text-sm">
+                    <div className="flex items-center gap-1.5 bg-gray-700/50 px-3 py-1.5 rounded-full">
+                      <FaCalendarAlt className="text-blue-400" />
+                      <span className="text-gray-300">{exp.period}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 bg-gray-700/50 px-3 py-1.5 rounded-full">
+                      <FaMapMarkerAlt className="text-teal-400" />
+                      <span className="text-gray-300">{exp.location}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 bg-gray-700/50 px-3 py-1.5 rounded-full">
+                      <FaBuilding className="text-purple-400" />
+                      <span className="text-gray-300">{exp.type}</span>
+                    </div>
+                    {exp.website && (
+                      <a 
+                        href={exp.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 bg-gray-700/50 hover:bg-gray-600/50 px-3 py-1.5 rounded-full transition-colors"
+                      >
+                        <FaExternalLinkAlt className="text-cyan-400" />
+                        <span className="text-gray-300">Website</span>
+                      </a>
+                    )}
+                  </div>
+                  
+                  {/* Description */}
+                  <p className="text-gray-300 mb-4">
+                    {exp.description}
+                  </p>
+                  
+                  {/* Key achievements */}
+                  <div className="mb-6">
+                    <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
+                      <FaLightbulb className="text-yellow-500" />
+                      Key Achievements
+                    </h4>
+                    <ul className="space-y-2">
+                      {exp.achievements.map((achievement, idx) => (
+                        <li key={idx} className="flex gap-2 text-gray-300">
+                          <span className="text-blue-400 mt-1">•</span>
+                          <span>{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  {/* Skills */}
+                  <div>
+                    <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
+                      <FaTools className="text-teal-400" />
+                      Technologies & Skills
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.skills.map((skill, idx) => (
+                        <span 
+                          key={idx} 
+                          className="text-xs px-2.5 py-1 rounded-md"
+                          style={{ 
+                            backgroundColor: `${exp.color}20`, 
+                            color: exp.color,
+                            border: `1px solid ${exp.color}40`
+                          }}
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Certificates Section Component 
 const CertificatesSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedCertificate, setSelectedCertificate] = useState(null);
@@ -420,4 +654,14 @@ const CertificatesSection = () => {
   );
 };
 
-export default CertificatesSection;
+// Combined component that exports both sections
+const ExperienceTimeline = () => {
+  return (
+    <>
+      <WorkExperienceSection />
+      <CertificatesSection />
+    </>
+  );
+};
+
+export default ExperienceTimeline;
