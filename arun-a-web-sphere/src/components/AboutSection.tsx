@@ -440,7 +440,7 @@ const AboutSection = () => {
                 </div>
 
                 <a
-                  href="/assets/ArunA_Resume-1.pdf"
+                  href="/assets/Arun_25.pdf"
                   download
                   onClick={isMobile ? handleMobileTap : undefined}
                   onMouseEnter={() => {
