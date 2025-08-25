@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { SiHackerearth, SiTailwindcss, SiRedux, SiMongodb, SiExpress, SiFlutter, SiPython, SiFirebase, SiGooglecloud, SiFastapi } from 'react-icons/si';
 import { TbBrandGoogleBigQuery } from 'react-icons/tb';
+import { useIsMobile } from '../hooks/use-mobile';
 
 // Types
 type TechIcon = {
@@ -86,7 +87,7 @@ const mainProjects = [
         <span className={className} style={style} role="img" aria-label="Gemini AI">🤖</span>
       ), color: '#8E44AD', name: 'Gemini AI', proficiency: 75 }
     ],
-    description: 'Advanced AI-powered travel platform that creates personalized itineraries using Google Gemini AI. Features comprehensive trip planning, social sharing, interactive chat assistant, and community features.',
+    description: 'AI-powered travel platform generating personalized itineraries with Google Gemini AI. Includes trip planning, social sharing, and an interactive travel assistant.',
     liveLink: 'https://travellai.me/',
     githubLink: 'https://github.com/Arunarivalagan743/AI_Travella_',
     features: [
@@ -146,7 +147,7 @@ const mainProjects = [
       { Icon: FaNodeJs, color: '#339933', name: 'Node.js', proficiency: 80 },
       { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 70 }
     ],
-    description: 'Comprehensive movie theatre booking platform with real-time seat selection, parking reservation, and secure payment processing. Features include user authentication, admin dashboard, and responsive design.',
+    description: 'Movie theatre booking platform with real-time seat selection, parking reservation, and secure payments. Includes admin dashboard and responsive design.',
     liveLink: 'https://www.cinexp.app',
     githubLink: 'https://github.com/Arunarivalagan743/Cinematic-popcorn-Theatre-Experience',
     features: [
@@ -206,7 +207,7 @@ const mainProjects = [
       { Icon: SiFirebase, color: '#FFCA28', name: 'Firebase', proficiency: 82 },
       { Icon: SiExpress, color: '#ffffff', name: 'Express', proficiency: 78 }
     ],
-    description: 'Comprehensive healthcare platform connecting patients with doctors through a token-based appointment system with secure medical record management and role-based access control.',
+    description: 'Healthcare platform connecting patients and doctors via a token-based appointment system with secure medical records and role-based access.',
     githubLink: 'https://github.com/Arunarivalagan743/HealQ',
     features: [
       'Real-time queue status & wait time tracking',
@@ -262,7 +263,7 @@ const hackathonProjects = [
         <span className={className} style={style} role="img" aria-label="NLP">�</span>
       ), color: '#4ECDC4', name: 'NLP', proficiency: 72 }
     ],
-    description: 'Your intelligent guardian against misinformation in the digital wilderness. Awarded 12th place in HackerEarth Hackathon (April 2025).',
+    description: 'AI-powered misinformation detection tool. Awarded 12th place in HackerEarth Hackathon (April 2025).',
     githubLink: 'https://github.com/GokulanV7/Falo-app',
     features: [
       'AI-powered misinformation detection with 95%+ accuracy',
@@ -443,10 +444,17 @@ const ProjectsSection = () => {
     );
   };
 
-  // Project carousel item component - removed icon from project box
+  // Project carousel item component - more concise for better mobile experience
   const ProjectCarouselItem = ({ project }: { project: Project }) => {
+    const isMobile = useIsMobile();
+    
+    // Show fewer features on mobile
+    const featuresCount = isMobile ? 3 : 6;
+    // Show fewer tech specs on mobile
+    const showTechSpecs = !isMobile;
+    
     return (
-      <div className="flex flex-col md:flex-row gap-6 items-center">
+      <div className="flex flex-col md:flex-row gap-5 items-center">
         {/* Project Image */}
         <div className="w-full md:w-1/2">
           <div 
@@ -459,7 +467,7 @@ const ProjectsSection = () => {
               src={project.image} 
               alt={project.title} 
               className="w-full h-full object-cover"
-              style={{ maxHeight: "360px" }}
+              style={{ maxHeight: isMobile ? "240px" : "360px" }}
             />
           </div>
         </div>
@@ -467,21 +475,21 @@ const ProjectsSection = () => {
         {/* Project Details */}
         <div className="w-full md:w-1/2">
           <div 
-            className="bg-zinc-900/70 backdrop-blur-md rounded-xl border p-5 shadow-lg"
+            className="bg-zinc-900/70 backdrop-blur-md rounded-xl border p-4 shadow-lg"
             style={{ borderColor: project.color }}
           >
-            <h3 className="text-2xl font-bold mb-2" style={{ color: project.color }}>
+            <h3 className="text-xl md:text-2xl font-bold mb-2" style={{ color: project.color }}>
               {project.title}
             </h3>
-            <p className="text-gray-300 mb-4">{project.description}</p>
+            <p className="text-gray-300 mb-3 text-sm md:text-base">{project.description}</p>
             
             {project.features && project.features.length > 0 && (
-              <div className="mb-4">
-                <h4 className="text-sm text-gray-400 uppercase mb-2 font-medium">Key Features</h4>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1 mb-3">
-                  {project.features.map((feature, i) => (
-                    <li key={i} className="text-gray-300 text-sm flex items-start gap-2">
-                      <span style={{ color: project.color }} className="text-xs mt-1">■</span>
+              <div className="mb-3">
+                <h4 className="text-xs md:text-sm text-gray-400 uppercase mb-1 font-medium">Key Features</h4>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1 mb-2">
+                  {project.features.slice(0, featuresCount).map((feature, i) => (
+                    <li key={i} className="text-gray-300 text-xs md:text-sm flex items-start gap-1.5">
+                      <span style={{ color: project.color }} className="text-xs mt-0.5">■</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -489,22 +497,18 @@ const ProjectsSection = () => {
               </div>
             )}
             
-            {project.techSpecs && project.techSpecs.length > 0 && (
-              <div className="mb-4">
-                <h4 className="text-sm text-gray-400 uppercase mb-2 font-medium">Technical Specifications</h4>
-                <div className="space-y-3">
+            {showTechSpecs && project.techSpecs && project.techSpecs.length > 0 && (
+              <div className="mb-3 hidden md:block">
+                <h4 className="text-xs md:text-sm text-gray-400 uppercase mb-1 font-medium">Tech Specs</h4>
+                <div className="grid grid-cols-3 gap-2">
                   {project.techSpecs.map((spec, i) => (
-                    <div key={i} className="mb-2">
-                      <h5 className="text-xs font-medium mb-1" style={{ color: project.color }}>
+                    <div key={i} className="mb-1">
+                      <h5 className="text-xs font-medium" style={{ color: project.color }}>
                         {spec.category}
                       </h5>
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1">
-                        {spec.items.map((item, j) => (
-                          <li key={j} className="text-gray-300 text-xs flex items-start gap-1.5">
-                            <span style={{ color: project.color }} className="text-xxs mt-1">▪</span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
+                      <ul className="text-xs text-gray-400">
+                        <li>{spec.items[0]}</li>
+                        {!isMobile && <li>{spec.items[1]}</li>}
                       </ul>
                     </div>
                   ))}
@@ -512,32 +516,32 @@ const ProjectsSection = () => {
               </div>
             )}
             
-            <div className="mb-5">
-              <h4 className="text-sm text-gray-400 uppercase mb-2 font-medium">Tech Stack</h4>
-              <div className="flex flex-wrap gap-2 mb-3">
+            <div className="mb-3">
+              <h4 className="text-xs md:text-sm text-gray-400 uppercase mb-1 font-medium">Tech Stack</h4>
+              <div className="flex flex-wrap gap-1.5 mb-3">
                 {project.techIcons.map((tech, i) => (
                   <span 
                     key={i}
-                    className="inline-flex items-center gap-1 bg-zinc-800 px-2 py-1 rounded-full text-xs"
+                    className="inline-flex items-center gap-1 bg-zinc-800 px-1.5 py-0.5 rounded-full text-xs"
                     style={{ color: tech.color }}
                   >
-                    <tech.Icon />
+                    <tech.Icon className="text-xs" />
                     {tech.name}
                   </span>
                 ))}
               </div>
             </div>
             
-            <div className="flex flex-wrap gap-3 justify-start">
+            <div className="flex flex-wrap gap-2 justify-start">
               {project.liveLink && (
                 <a 
                   href={project.liveLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white px-4 py-2 rounded-lg flex items-center hover:opacity-90 transition-opacity"
+                  className="text-white px-3 py-1.5 rounded-lg flex items-center hover:opacity-90 transition-opacity text-sm"
                   style={{ backgroundColor: project.color }}
                 >
-                  <FaExternalLinkAlt className="mr-2" size={14} />
+                  <FaExternalLinkAlt className="mr-1.5" size={12} />
                   Live Demo
                 </a>
               )}
@@ -545,9 +549,9 @@ const ProjectsSection = () => {
                 href={project.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-lg flex items-center transition-colors"
+                className="bg-zinc-800 hover:bg-zinc-700 text-white px-3 py-1.5 rounded-lg flex items-center transition-colors text-sm"
               >
-                <FaGithub className="mr-2" size={16} />
+                <FaGithub className="mr-1.5" size={14} />
                 View Code
               </a>
             </div>
@@ -559,34 +563,36 @@ const ProjectsSection = () => {
 
   const visibleIndex = activeProjectIndex % mainProjects.length;
 
+  const isMobile = useIsMobile();
+  
   return (
     <section 
       id="projects" 
-      className="py-16 md:py-24 text-white relative overflow-hidden"
+      className="py-12 md:py-20 text-white relative overflow-hidden"
     >
       {/* Background elements - enhanced for depth */}
-      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
-      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
+      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-72 h-72 md:w-96 md:h-96 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
+      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 md:w-96 md:h-96 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section header */}
-        <div className="flex flex-col items-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-2 text-white">
+        <div className="flex flex-col items-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-4xl font-bold mb-2 text-white">
             <span className="bg-clip-text text-transparent" 
               style={{ backgroundImage: `linear-gradient(90deg, ${currentColor}, #66e0ff)` }}>
               Featured
             </span> Projects
           </h2>
-          <div className="w-24 h-1 rounded-full mt-4"
+          <div className="w-20 h-1 rounded-full mt-3"
             style={{ background: `linear-gradient(90deg, ${currentColor}, #66e0ff)` }} />
-          <p className="text-gray-400 mt-6 text-center max-w-2xl">
-            A collection of my latest work showcasing my skills and experience in web development.
+          <p className="text-gray-400 mt-4 text-center max-w-2xl text-sm md:text-base">
+            {isMobile ? "My latest projects showcasing key skills." : "A collection of my latest work showcasing my skills and experience in web development."}
           </p>
         </div>
 
         {/* Project Carousel - enhanced mobile experience */}
         <div 
-          className="mb-20 relative" 
+          className="mb-12 md:mb-16 relative" 
           ref={carouselRef}
           onMouseEnter={() => handleCarouselHover(true)}
           onMouseLeave={() => handleCarouselHover(false)}
@@ -620,14 +626,14 @@ const ProjectsSection = () => {
           </div>
 
           {/* Improved navigation controls */}
-          <div className="flex items-center justify-between mt-10">
-            <div className="flex items-center space-x-3 mx-auto">
+          <div className="flex items-center justify-between mt-6 md:mt-8">
+            <div className="flex items-center space-x-2 md:space-x-3 mx-auto">
               {mainProjects.map((project, index) => (
                 <button
                   key={index}
                   onClick={() => handleDotClick(index)}
-                  className={`h-3 rounded-full transition-all duration-300 ${
-                    index === visibleIndex ? 'w-12' : 'w-3 opacity-60 hover:opacity-100'
+                  className={`h-2 md:h-3 rounded-full transition-all duration-300 ${
+                    index === visibleIndex ? 'w-8 md:w-10' : 'w-2 md:w-3 opacity-60 hover:opacity-100'
                   }`}
                   style={{ 
                     backgroundColor: index === visibleIndex ? project.color : '#4b5563'
@@ -639,19 +645,19 @@ const ProjectsSection = () => {
           </div>
 
           {/* Improved navigation arrows with better positioning */}
-          <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none flex justify-between px-2 md:px-6">
+          <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none flex justify-between px-1 md:px-6">
             {/* Left Arrow - Fixed position */}
             <motion.button
               onClick={handlePrev}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="backdrop-blur-sm rounded-full text-white p-2.5 md:p-3.5 pointer-events-auto shadow-lg"
+              className="backdrop-blur-sm rounded-full text-white p-1.5 md:p-3 pointer-events-auto shadow-lg"
               style={{ 
                 backgroundColor: `${currentColor}90`,
               }}
               aria-label="Previous project"
             >
-              <FaChevronLeft />
+              <FaChevronLeft size={isMobile ? 12 : 16} />
             </motion.button>
             
             {/* Right Arrow - Fixed position */}
@@ -659,24 +665,24 @@ const ProjectsSection = () => {
               onClick={handleNext}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="backdrop-blur-sm rounded-full text-white p-2.5 md:p-3.5 pointer-events-auto shadow-lg"
+              className="backdrop-blur-sm rounded-full text-white p-1.5 md:p-3 pointer-events-auto shadow-lg"
               style={{ 
                 backgroundColor: `${currentColor}90`,
               }}
               aria-label="Next project"
             >
-              <FaChevronRight />
+              <FaChevronRight size={isMobile ? 12 : 16} />
             </motion.button>
           </div>
         </div>
 
         {/* Hackathon section */}
-        <div className="mt-20">
-          <div className="flex items-center justify-center gap-2 mb-10">
+        <div className="mt-12 md:mt-16">
+          <div className="flex items-center justify-center gap-2 mb-6 md:mb-8">
             <div className="h-px grow"
               style={{ background: `linear-gradient(to right, transparent, #4a6cf750, transparent)` }} />
-            <h3 className="text-3xl font-bold text-center text-white flex items-center gap-3 px-4">
-              <span style={{ color: "#4a6cf7" }} className="text-4xl">
+            <h3 className="text-xl md:text-2xl font-bold text-center text-white flex items-center gap-2 px-3">
+              <span style={{ color: "#4a6cf7" }} className="text-2xl md:text-3xl">
                 <SiHackerearth />
               </span>
               <span>Hackathon Projects</span>
@@ -685,107 +691,116 @@ const ProjectsSection = () => {
               style={{ background: `linear-gradient(to right, transparent, #4a6cf750, transparent)` }} />
           </div>
 
-          <div className="grid grid-cols-1 gap-10 max-w-7xl mx-auto">
-            {hackathonProjects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="bg-zinc-900/70 backdrop-blur-md rounded-xl border border-zinc-800 overflow-hidden hover:border-blue-500/50 transition-colors duration-300 shadow-xl"
-              >
-                <div className="flex flex-col lg:flex-row">
-                  <div className="relative lg:w-2/5">
-                    <img 
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover min-h-[300px]"
-                    />
-                    <div className="absolute top-4 right-4" style={{ backgroundColor: `${project.color}CC` }}>
-                      <div className="text-white px-4 py-2 rounded-full font-medium flex items-center">
-                        <span className="mr-2 text-xl">{project.icon}</span> Hackathon Project
+          <div className="grid grid-cols-1 gap-6 max-w-7xl mx-auto">
+            {hackathonProjects.map((project, index) => {
+              const isMobile = useIsMobile();
+              // Show fewer features on mobile
+              const featuresCount = isMobile ? 3 : 5;
+              // Don't show tech specs on mobile
+              const showTechSpecs = !isMobile;
+              
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="bg-zinc-900/70 backdrop-blur-md rounded-xl border border-zinc-800 overflow-hidden hover:border-blue-500/50 transition-colors duration-300 shadow-xl"
+                >
+                  <div className="flex flex-col lg:flex-row">
+                    <div className="relative lg:w-2/5">
+                      <img 
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full object-cover"
+                        style={{ maxHeight: isMobile ? "200px" : "300px" }}
+                      />
+                      <div className="absolute top-3 right-3" style={{ backgroundColor: `${project.color}CC` }}>
+                        <div className="text-white px-3 py-1 rounded-full font-medium flex items-center text-sm">
+                          <span className="mr-1.5 text-base">{project.icon}</span> Hackathon
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  <div className="p-8 lg:w-3/5">
-                    <h3 className="text-2xl font-bold mb-3 flex items-center" style={{ color: project.color }}>
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-300 mb-6 text-lg">{project.description}</p>
-                  
-                    {project.features && (
-                      <div className="mb-6">
-                        <h4 className="text-sm text-gray-300 uppercase mb-3 font-medium flex items-center">
-                          <span style={{ color: project.color }} className="mr-2">✨</span> Key Features
-                        </h4>
-                        <ul className="list-disc list-inside space-y-1 text-gray-400">
-                          {project.features.map((feature, i) => (
-                            <li key={i} className="text-sm">{feature}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
                     
-                    {project.techSpecs && (
-                      <div className="mb-6">
-                        <h4 className="text-sm text-gray-300 uppercase mb-3 font-medium flex items-center">
-                          <span style={{ color: project.color }} className="mr-2">⚙️</span> Technical Specs
+                    <div className="p-4 lg:p-6 lg:w-3/5">
+                      <h3 className="text-xl font-bold mb-2 flex items-center" style={{ color: project.color }}>
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-300 mb-3 text-sm">{project.description}</p>
+                    
+                      {project.features && (
+                        <div className="mb-4">
+                          <h4 className="text-xs text-gray-300 uppercase mb-2 font-medium flex items-center">
+                            <span style={{ color: project.color }} className="mr-1.5">✨</span> Key Features
+                          </h4>
+                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1">
+                            {project.features.slice(0, featuresCount).map((feature, i) => (
+                              <li key={i} className="text-gray-400 text-xs flex items-start">
+                                <span style={{ color: project.color }} className="mr-1">•</span>
+                                <span>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      
+                      {showTechSpecs && project.techSpecs && (
+                        <div className="mb-4 hidden md:block">
+                          <h4 className="text-xs text-gray-300 uppercase mb-2 font-medium flex items-center">
+                            <span style={{ color: project.color }} className="mr-1.5">⚙️</span> Tech Specs
+                          </h4>
+                          <div className="grid grid-cols-3 gap-2">
+                            {project.techSpecs.map((category, i) => (
+                              <div key={i}>
+                                <h5 className="text-xs font-medium" style={{ color: project.color }}>
+                                  {category.category}
+                                </h5>
+                                <ul className="text-gray-400 text-xs">
+                                  <li>{category.items[0]}</li>
+                                  <li>{category.items[1]}</li>
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      <div className="mb-4">
+                        <h4 className="text-xs text-gray-300 uppercase mb-2 font-medium flex items-center">
+                          <span style={{ color: project.color }} className="mr-1.5">🔧</span> Tech Stack
                         </h4>
-                        <div className="space-y-4">
-                          {project.techSpecs.map((category, i) => (
-                            <div key={i} className="mb-3">
-                              <h5 className="text-sm font-medium mb-1" style={{ color: project.color }}>
-                                {category.category}
-                              </h5>
-                              <ul className="list-disc list-inside space-y-1 text-gray-400 pl-3">
-                                {category.items.map((item, j) => (
-                                  <li key={j} className="text-sm">{item}</li>
-                                ))}
-                              </ul>
-                            </div>
+                        <div className="flex flex-wrap gap-1.5 mb-2">
+                          {project.techIcons.map((tech, i) => (
+                            <span 
+                              key={i}
+                              className="inline-flex items-center gap-1 bg-zinc-800 px-2 py-1 rounded-full text-xs"
+                              style={{ color: tech.color }}
+                            >
+                              <tech.Icon className="text-xs" style={{ color: tech.color }} />
+                              {tech.name}
+                            </span>
                           ))}
                         </div>
                       </div>
-                    )}
-                    
-                    <div className="mb-6">
-                      <h4 className="text-sm text-gray-300 uppercase mb-3 font-medium flex items-center">
-                        <span style={{ color: project.color }} className="mr-2">🔧</span> Tech Stack
-                      </h4>
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {project.techIcons.map((tech, i) => (
-                          <span 
-                            key={i}
-                            className="inline-flex items-center gap-1 bg-zinc-800 px-3 py-1.5 rounded-full text-sm"
-                            style={{ color: tech.color }}
-                          >
-                            <tech.Icon className="mr-1" style={{ color: tech.color }} />
-                            {tech.name}
-                          </span>
-                        ))}
+                      
+                      <div className="flex justify-end">
+                        <a 
+                          href={project.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white px-3 py-1.5 rounded-lg flex items-center transition-colors text-xs"
+                          style={{ backgroundColor: project.color }}
+                        >
+                          <FaGithub className="mr-1.5" size={12} />
+                          View on GitHub
+                        </a>
                       </div>
                     </div>
-                    
-                    <div className="flex justify-end mt-6">
-                      <motion.a 
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        href={project.githubLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white px-4 py-2 rounded-lg flex items-center transition-colors duration-200"
-                        style={{ backgroundColor: project.color }}
-                      >
-                        <FaGithub className="mr-2" />
-                        View on GitHub
-                      </motion.a>
-                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>

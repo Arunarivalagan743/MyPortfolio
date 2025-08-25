@@ -49,17 +49,18 @@ const AcademicSection = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
-          {academicData.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative"
-            >
-              {/* Education card */}
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-4xl">
+            {academicData.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative"
+              >
+                {/* Education card */}
               <motion.div
                 className="group relative bg-zinc-900/80 backdrop-blur-lg rounded-xl p-6 border border-zinc-800 shadow-lg h-full overflow-hidden"
                 whileHover={{ 
@@ -110,6 +111,7 @@ const AcademicSection = () => {
               </div>
             </motion.div>
           ))}
+          </div>
         </div>
       </div>
       
