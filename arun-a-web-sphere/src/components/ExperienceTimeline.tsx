@@ -44,6 +44,27 @@ const workExperiences = [
     color: "#1E40AF" // Blue color theme
   },
   {
+    id: 3,
+    role: "Frontend Developer – User Module Consultant",
+    company: "La Patisserie, Coimbatore (Remote – Freelance)",
+    logo: "/assets/falo.png", // Placeholder logo, update if available
+    period: "Sep 2025 – Present",
+    location: "Remote",
+    type: "Freelance",
+    website: "https://la-patisserie-nine.vercel.app",
+    description: "Developed a modern, responsive online bakery platform enabling seamless browsing and ordering of 30+ products. Implemented advanced cart, favorites, and recently viewed features with React Context and optimized state management. Integrated secure user authentication, payment gateways, and real-time order tracking. Enhanced frontend performance and accessibility, reducing page load times and improving mobile usability.",
+    achievements: [
+      "Built a bakery e-commerce platform with React.js and Tailwind CSS",
+      "Advanced cart, favorites, and recently viewed features using Context API",
+      "Integrated secure authentication and payment gateways",
+      "Enabled real-time order tracking for users",
+      "Improved accessibility and mobile performance",
+      "Live at: la-patisserie-nine.vercel.app"
+    ],
+    skills: ["React.js", "Tailwind CSS", "Context API", "Payment Integration", "Accessibility", "Performance Optimization"],
+    color: "#F59E42" // Orange color theme
+  },
+  {
     id: 2,
     role: "Full Stack Engineer",
     company: "Casual Clothings",
