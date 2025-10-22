@@ -51,7 +51,7 @@ const workExperiences = [
     period: "Sep 2025 – Present",
     location: "Remote",
     type: "Freelance",
-    website: "https://la-patisserie-nine.vercel.app",
+    website: "https://lapatisserie.shop",
     description: "Developed a modern, responsive online bakery platform enabling seamless browsing and ordering of 30+ products. Implemented advanced cart, favorites, and recently viewed features with React Context and optimized state management. Integrated secure user authentication, payment gateways, and real-time order tracking. Enhanced frontend performance and accessibility, reducing page load times and improving mobile usability.",
     achievements: [
       "Built a bakery e-commerce platform with React.js and Tailwind CSS",
