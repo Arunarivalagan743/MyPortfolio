@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const { connectDB } = require('./config/database');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
@@ -53,11 +54,10 @@ app.use(cors({
 }));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
-  dbName: process.env.MONGODB_DB
-})
-.then(() => console.log('✅ MongoDB Connected Successfully'))
-.catch((err) => console.error('❌ MongoDB Connection Error:', err));
+// Initiate (or reuse) connection early but allow cold start retry
+connectDB().catch(err => {
+  console.error('❌ Initial MongoDB connect attempt failed:', err.message);
+});
 
 // Routes
 app.use('/api/contact', contactRoutes);
@@ -81,11 +81,16 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start server
+// In traditional hosting we listen; in Vercel serverless we just export the app.
+const isServerless = !!process.env.VERCEL; // Vercel sets VERCEL=1
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`📧 Email notifications enabled for ${process.env.ADMIN_EMAIL}`);
-});
+if (!isServerless) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
+    console.log(`📧 Email notifications enabled for ${process.env.ADMIN_EMAIL}`);
+  });
+} else {
+  console.log('🌀 Running in serverless (Vercel) mode – no explicit listen.');
+}
 
 module.exports = app;

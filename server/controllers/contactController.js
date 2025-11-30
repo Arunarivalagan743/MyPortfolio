@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Contact = require('../models/Contact');
 const { sendAdminNotification, sendUserConfirmation } = require('../services/emailService');
+const { connectDB } = require('../config/database');
 
 /**
  * Submit a new contact form
@@ -24,12 +25,14 @@ const submitContact = async (req, res) => {
     const ipAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress || null;
     const userAgent = req.headers['user-agent'] || null;
 
-    // Check database connection readiness BEFORE attempting write
-    if (mongoose.connection.readyState !== 1) {
-      console.error('❌ Database not ready. readyState:', mongoose.connection.readyState);
+    // Ensure (or reuse) DB connection
+    try {
+      await connectDB();
+    } catch (connErr) {
+      console.error('❌ Failed to establish DB connection:', connErr.message);
       return res.status(503).json({
         success: false,
-        message: 'Service temporarily unavailable. Please try again shortly.'
+        message: 'Database unavailable. Please try again later.'
       });
     }
 
