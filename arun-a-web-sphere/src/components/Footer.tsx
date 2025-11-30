@@ -207,7 +207,7 @@ const Footer = () => {
                 <span className="text-xs text-gray-400 mt-2 group-hover:text-gray-200">LinkedIn</span>
               </a>
               <a 
-                href="https://twitter.com/" 
+                href="https://twitter.com/arunarivalagan743" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="flex flex-col items-center justify-center p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-colors duration-200 group"
@@ -215,24 +215,8 @@ const Footer = () => {
                 <FaTwitter className="text-xl text-[#1da1f2] group-hover:text-[#4db5f5] transition-colors duration-200" />
                 <span className="text-xs text-gray-400 mt-2 group-hover:text-gray-200">Twitter</span>
               </a>
-              <a 
-                href="https://dev.to/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex flex-col items-center justify-center p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-colors duration-200 group"
-              >
-                <SiDevdotto className="text-xl text-white group-hover:text-gray-200 transition-colors duration-200" />
-                <span className="text-xs text-gray-400 mt-2 group-hover:text-gray-200">Dev.to</span>
-              </a>
-              <a 
-                href="https://hashnode.com/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex flex-col items-center justify-center p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-colors duration-200 group"
-              >
-                <SiHashnode className="text-xl text-[#2962ff] group-hover:text-[#5985ff] transition-colors duration-200" />
-                <span className="text-xs text-gray-400 mt-2 group-hover:text-gray-200">Hashnode</span>
-              </a>
+            
+             
             </div>
           </motion.div>
         </motion.div>
@@ -243,11 +227,8 @@ const Footer = () => {
             <p className="text-gray-500 text-sm">
               © {currentYear} Arun A. All rights reserved.
             </p>
-            <div className="mt-4 md:mt-0 flex flex-wrap items-center justify-center md:justify-end gap-4 md:gap-6 text-sm text-gray-500">
-              <a href="#" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">Terms of Service</a>
-              <p className="flex items-center">Made with <span className="text-red-500 mx-1">❤️</span> in India</p>
-            </div>
+ 
+         
           </div>
         </div>
       </div>

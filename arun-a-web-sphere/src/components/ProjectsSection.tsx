@@ -458,17 +458,30 @@ const ProjectsSection = () => {
         {/* Project Image */}
         <div className="w-full md:w-1/2">
           <div 
-            className="relative overflow-hidden rounded-xl shadow-lg aspect-video mx-auto"
+            className="relative overflow-hidden rounded-xl shadow-lg aspect-video mx-auto group cursor-pointer"
             style={{ 
               boxShadow: `0 10px 25px -5px ${project.color}30, 0 8px 10px -6px ${project.color}20`
+            }}
+            onClick={() => {
+              if (project.liveLink) {
+                window.open(project.liveLink, '_blank', 'noopener,noreferrer');
+              }
             }}
           >
             <img 
               src={project.image} 
               alt={project.title} 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               style={{ maxHeight: isMobile ? "240px" : "360px" }}
             />
+            {project.liveLink && (
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="text-center">
+                  <FaExternalLinkAlt className="text-white text-3xl md:text-4xl mb-2 mx-auto" />
+                  <p className="text-white font-semibold text-sm md:text-base">Visit Live Demo</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -709,16 +722,40 @@ const ProjectsSection = () => {
                   className="bg-zinc-900/70 backdrop-blur-md rounded-xl border border-zinc-800 overflow-hidden hover:border-blue-500/50 transition-colors duration-300 shadow-xl"
                 >
                   <div className="flex flex-col lg:flex-row">
-                    <div className="relative lg:w-2/5">
+                    <div 
+                      className="relative lg:w-2/5 cursor-pointer group"
+                      onClick={() => {
+                        if (project.liveLink) {
+                          window.open(project.liveLink, '_blank', 'noopener,noreferrer');
+                        } else {
+                          window.open(project.githubLink, '_blank', 'noopener,noreferrer');
+                        }
+                      }}
+                    >
                       <img 
                         src={project.image}
                         alt={project.title}
-                        className="w-full object-cover"
+                        className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         style={{ maxHeight: isMobile ? "200px" : "300px" }}
                       />
                       <div className="absolute top-3 right-3" style={{ backgroundColor: `${project.color}CC` }}>
                         <div className="text-white px-3 py-1 rounded-full font-medium flex items-center text-sm">
                           <span className="mr-1.5 text-base">{project.icon}</span> Hackathon
+                        </div>
+                      </div>
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="text-center">
+                          {project.liveLink ? (
+                            <>
+                              <FaExternalLinkAlt className="text-white text-3xl md:text-4xl mb-2 mx-auto" />
+                              <p className="text-white font-semibold text-sm md:text-base">Visit Live Demo</p>
+                            </>
+                          ) : (
+                            <>
+                              <FaGithub className="text-white text-3xl md:text-4xl mb-2 mx-auto" />
+                              <p className="text-white font-semibold text-sm md:text-base">View on GitHub</p>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>

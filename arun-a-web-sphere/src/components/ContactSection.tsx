@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser';
+import { submitContact } from '../services/EmailService';
 import toast, { Toaster } from 'react-hot-toast';
 import { Send, Mail, Phone, MapPin, Github, Linkedin, Twitter, CheckCircle, AlertCircle } from 'lucide-react';
 
@@ -32,24 +32,21 @@ const ContactSection: React.FC = () => {
     setSubmitStatus('idle');
 
     try {
-      const result = await emailjs.sendForm(
-        "service_3r27hij",          // Your Service ID
-        "template_rt557bg",         // Your Template ID
-        form.current,
-        "MXZ_zWBT8AEVEJIbr"         // Your Public Key
-      );
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message
+      };
 
-      console.log('SUCCESS!', result.text);
+      const result = await submitContact(payload);
+      console.log('SUCCESS!', result);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      // Reset success message after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000);
-    } catch (error) {
+    } catch (error: any) {
       console.log('FAILED...', error);
       setSubmitStatus('error');
-      
-      // Reset error message after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000);
     } finally {
       setIsSubmitting(false);
@@ -66,8 +63,8 @@ const ContactSection: React.FC = () => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Phone",
-      info: "+91 9944886743",
-      link: "tel:+919944886743"
+      info: "+91 9500643892",
+      link: "tel:+919500643892"
     },
     {
       icon: <MapPin className="w-6 h-6" />,
