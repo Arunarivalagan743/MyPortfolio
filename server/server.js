@@ -20,18 +20,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS Configuration
-const allowedOrigins = process.env.FRONTEND_ORIGIN.split(',').map(origin => origin.trim());
+const allowedOrigins = process.env.FRONTEND_ORIGIN.split(',').map(origin => origin.trim().replace(/\/$/, ''));
+
+console.log('Allowed CORS origins:', allowedOrigins);
+
 app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
+    
+    // Remove trailing slash from origin for comparison
+    const normalizedOrigin = origin.replace(/\/$/, '');
+    
+    if (allowedOrigins.indexOf(normalizedOrigin) === -1) {
+      console.log('CORS blocked origin:', origin);
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
       return callback(new Error(msg), false);
     }
+    
+    console.log('CORS allowed origin:', origin);
     return callback(null, true);
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // MongoDB Connection
