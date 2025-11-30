@@ -20,25 +20,31 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS Configuration
-const allowedOrigins = process.env.FRONTEND_ORIGIN.split(',').map(origin => origin.trim().replace(/\/$/, ''));
+const frontendOriginEnv = process.env.FRONTEND_ORIGIN || 'http://localhost:5173,http://localhost:8080,https://arunoff774.vercel.app';
+const allowedOrigins = frontendOriginEnv.split(',').map(origin => origin.trim().replace(/\/$/, ''));
 
-console.log('Allowed CORS origins:', allowedOrigins);
+console.log('🌐 Allowed CORS origins:', allowedOrigins);
+console.log('🔑 Environment:', process.env.NODE_ENV);
 
 app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
+    if (!origin) {
+      console.log('✅ CORS: No origin header (mobile/curl)');
+      return callback(null, true);
+    }
     
     // Remove trailing slash from origin for comparison
     const normalizedOrigin = origin.replace(/\/$/, '');
     
     if (allowedOrigins.indexOf(normalizedOrigin) === -1) {
-      console.log('CORS blocked origin:', origin);
+      console.log('❌ CORS blocked origin:', origin);
+      console.log('📋 Allowed origins:', allowedOrigins);
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
       return callback(new Error(msg), false);
     }
     
-    console.log('CORS allowed origin:', origin);
+    console.log('✅ CORS allowed origin:', origin);
     return callback(null, true);
   },
   credentials: true,
