@@ -9,6 +9,8 @@ const submitContact = async (req, res) => {
   try {
     const { name, email, subject, message } = req.body;
 
+    console.log('Received contact form submission:', { name, email, subject });
+
     // Validation
     if (!name || !email || !subject || !message) {
       return res.status(400).json({
@@ -22,6 +24,7 @@ const submitContact = async (req, res) => {
     const userAgent = req.headers['user-agent'] || null;
 
     // Create contact record in database
+    console.log('Creating contact record in database...');
     const contact = await Contact.create({
       name,
       email,
@@ -30,29 +33,9 @@ const submitContact = async (req, res) => {
       ipAddress,
       userAgent
     });
+    console.log('Contact record created:', contact._id);
 
-    // Send emails in parallel
-    const emailPromises = [
-      sendAdminNotification({ name, email, subject, message }),
-      sendUserConfirmation({ name, email, subject, message })
-    ];
-
-    const [adminResult, userResult] = await Promise.allSettled(emailPromises);
-
-    // Determine overall success
-    const emailStatus = {
-      adminNotification: adminResult.status === 'fulfilled',
-      userConfirmation: userResult.status === 'fulfilled'
-    };
-
-    // Log email failures
-    if (adminResult.status === 'rejected') {
-      console.error('Admin notification failed:', adminResult.reason);
-    }
-    if (userResult.status === 'rejected') {
-      console.error('User confirmation failed:', userResult.reason);
-    }
-
+    // Send success response immediately
     res.status(201).json({
       success: true,
       message: 'Thank you for contacting me! Your message has been received and I will get back to you soon.',
@@ -62,12 +45,33 @@ const submitContact = async (req, res) => {
         email: contact.email,
         subject: contact.subject,
         createdAt: contact.createdAt
-      },
-      emailStatus
+      }
+    });
+
+    // Send emails asynchronously (non-blocking)
+    // This happens in the background after response is sent
+    console.log('Sending email notifications...');
+    Promise.allSettled([
+      sendAdminNotification({ name, email, subject, message }),
+      sendUserConfirmation({ name, email, subject, message })
+    ]).then(([adminResult, userResult]) => {
+      if (adminResult.status === 'fulfilled') {
+        console.log('✅ Admin notification sent');
+      } else {
+        console.error('❌ Admin notification failed:', adminResult.reason);
+      }
+      if (userResult.status === 'fulfilled') {
+        console.log('✅ User confirmation sent');
+      } else {
+        console.error('❌ User confirmation failed:', userResult.reason);
+      }
+    }).catch(err => {
+      console.error('❌ Email sending error:', err);
     });
 
   } catch (error) {
-    console.error('Error submitting contact form:', error);
+    console.error('❌ Error submitting contact form:', error);
+    console.error('Error stack:', error.stack);
     
     // Handle validation errors
     if (error.name === 'ValidationError') {
@@ -76,6 +80,14 @@ const submitContact = async (req, res) => {
         success: false,
         message: 'Validation error',
         errors: messages
+      });
+    }
+
+    // Handle MongoDB connection errors
+    if (error.name === 'MongoError' || error.name === 'MongoServerError') {
+      return res.status(503).json({
+        success: false,
+        message: 'Database connection error. Please try again later.'
       });
     }
 
