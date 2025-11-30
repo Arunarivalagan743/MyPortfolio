@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Contact = require('../models/Contact');
 const { sendAdminNotification, sendUserConfirmation } = require('../services/emailService');
 
@@ -22,6 +23,15 @@ const submitContact = async (req, res) => {
     // Get client info
     const ipAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress || null;
     const userAgent = req.headers['user-agent'] || null;
+
+    // Check database connection readiness BEFORE attempting write
+    if (mongoose.connection.readyState !== 1) {
+      console.error('❌ Database not ready. readyState:', mongoose.connection.readyState);
+      return res.status(503).json({
+        success: false,
+        message: 'Service temporarily unavailable. Please try again shortly.'
+      });
+    }
 
     // Create contact record in database
     console.log('Creating contact record in database...');
@@ -83,11 +93,17 @@ const submitContact = async (req, res) => {
       });
     }
 
-    // Handle MongoDB connection errors
-    if (error.name === 'MongoError' || error.name === 'MongoServerError') {
+    // Handle MongoDB / Mongoose connectivity errors
+    if (
+      error.name === 'MongoError' ||
+      error.name === 'MongoServerError' ||
+      error.name === 'MongooseServerSelectionError' ||
+      /failed to connect/i.test(error.message) ||
+      /ECONNREFUSED/.test(error.message)
+    ) {
       return res.status(503).json({
         success: false,
-        message: 'Database connection error. Please try again later.'
+        message: 'Database unavailable. Please try again later.'
       });
     }
 
