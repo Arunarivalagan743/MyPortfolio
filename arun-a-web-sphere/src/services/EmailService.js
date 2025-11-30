@@ -1,10 +1,15 @@
 // Frontend service to call backend contact API
 
-const DEFAULT_BACKEND = 'http://localhost:4000';
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || DEFAULT_BACKEND;
+const PRODUCTION_BACKEND = 'https://arun-backend-six.vercel.app';
+const DEVELOPMENT_BACKEND = 'http://localhost:4000';
+
+// Use production backend by default, fallback to development for local testing
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 
+                    (window.location.hostname === 'localhost' ? DEVELOPMENT_BACKEND : PRODUCTION_BACKEND);
 
 export async function submitContact(data) {
   try {
+    console.log('Submitting to:', BACKEND_URL);
     const res = await fetch(`${BACKEND_URL}/api/contact`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
