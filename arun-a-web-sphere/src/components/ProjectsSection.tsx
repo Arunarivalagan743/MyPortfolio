@@ -613,6 +613,15 @@ const ProjectsSection = () => {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
+          {/* Swipe indicator - Only on mobile */}
+          <div className="md:hidden mb-4 text-center">
+            <p className="text-xs text-gray-400 flex items-center justify-center gap-1.5">
+              <span className="opacity-60">←</span>
+              <span>Swipe to explore</span>
+              <span className="opacity-60">→</span>
+            </p>
+          </div>
+          
           <div className="overflow-hidden">
             <motion.div
               drag="x"
@@ -639,8 +648,18 @@ const ProjectsSection = () => {
           </div>
 
           {/* Improved navigation controls */}
-          <div className="flex items-center justify-between mt-6 md:mt-8">
-            <div className="flex items-center space-x-2 md:space-x-3 mx-auto">
+          <div className="flex flex-col items-center mt-6 md:mt-8">
+            {/* Swipe indicator - Only on mobile */}
+            <div className="md:hidden mb-3 text-center">
+              <p className="text-xs text-gray-400 flex items-center gap-1.5">
+                <span className="opacity-60">←</span>
+                <span>Swipe to explore</span>
+                <span className="opacity-60">→</span>
+              </p>
+            </div>
+            
+            {/* Dot indicators */}
+            <div className="flex items-center space-x-2 md:space-x-3">
               {mainProjects.map((project, index) => (
                 <button
                   key={index}
@@ -657,34 +676,34 @@ const ProjectsSection = () => {
             </div>
           </div>
 
-          {/* Improved navigation arrows with better positioning */}
-          <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none flex justify-between px-1 md:px-6">
-            {/* Left Arrow - Fixed position */}
+          {/* Navigation arrows - Hidden on mobile, visible on desktop */}
+          <div className="hidden md:flex absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none justify-between px-6">
+            {/* Left Arrow */}
             <motion.button
               onClick={handlePrev}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="backdrop-blur-sm rounded-full text-white p-1.5 md:p-3 pointer-events-auto shadow-lg"
+              className="backdrop-blur-sm rounded-full text-white p-3 pointer-events-auto shadow-lg"
               style={{ 
                 backgroundColor: `${currentColor}90`,
               }}
               aria-label="Previous project"
             >
-              <FaChevronLeft size={isMobile ? 12 : 16} />
+              <FaChevronLeft size={16} />
             </motion.button>
             
-            {/* Right Arrow - Fixed position */}
+            {/* Right Arrow */}
             <motion.button
               onClick={handleNext}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="backdrop-blur-sm rounded-full text-white p-1.5 md:p-3 pointer-events-auto shadow-lg"
+              className="backdrop-blur-sm rounded-full text-white p-3 pointer-events-auto shadow-lg"
               style={{ 
                 backgroundColor: `${currentColor}90`,
               }}
               aria-label="Next project"
             >
-              <FaChevronRight size={isMobile ? 12 : 16} />
+              <FaChevronRight size={16} />
             </motion.button>
           </div>
         </div>
