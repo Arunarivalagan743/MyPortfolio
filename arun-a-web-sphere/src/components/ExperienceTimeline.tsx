@@ -143,17 +143,17 @@ const categories = [
 // Component for Work Experience Timeline
 const WorkExperienceSection = () => {
   return (
-    <section id="experience" className="py-20 relative">
+    <section id="experience" className="py-12 sm:py-16 md:py-20 relative">
       {/* Background decorative elements */}
       <div className="absolute top-0 left-0 right-0 h-px "></div>
       <div className="absolute bottom-0 left-0 right-0 h-px "></div>
       
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 "></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 "></div>
+        <div className="absolute -top-32 sm:-top-40 -right-32 sm:-right-40 w-64 h-64 sm:w-80 sm:h-80 "></div>
+        <div className="absolute -bottom-32 sm:-bottom-40 -left-32 sm:-left-40 w-64 h-64 sm:w-80 sm:h-80 "></div>
       </div>
       
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -407,8 +407,8 @@ const CertificatesSection = () => {
   };
 
   return (
-    <section id="certificates" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="certificates" className="py-12 sm:py-16 md:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Section Header with Animated Underline */}
         <div className="flex flex-col items-center mb-8 sm:mb-10 md:mb-12">
           <motion.div

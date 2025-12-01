@@ -454,11 +454,11 @@ const ProjectsSection = () => {
     const showTechSpecs = !isMobile;
     
     return (
-      <div className="flex flex-col md:flex-row gap-5 items-center">
+      <div className="flex flex-col md:flex-row gap-4 sm:gap-5 items-center">
         {/* Project Image */}
         <div className="w-full md:w-1/2">
           <div 
-            className="relative overflow-hidden rounded-xl shadow-lg aspect-video mx-auto group cursor-pointer"
+            className="relative overflow-hidden rounded-lg sm:rounded-xl shadow-lg aspect-video mx-auto group cursor-pointer"
             style={{ 
               boxShadow: `0 10px 25px -5px ${project.color}30, 0 8px 10px -6px ${project.color}20`
             }}
@@ -472,13 +472,13 @@ const ProjectsSection = () => {
               src={project.image} 
               alt={project.title} 
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              style={{ maxHeight: isMobile ? "240px" : "360px" }}
+              style={{ maxHeight: isMobile ? "200px" : "360px" }}
             />
             {project.liveLink && (
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <div className="text-center">
-                  <FaExternalLinkAlt className="text-white text-3xl md:text-4xl mb-2 mx-auto" />
-                  <p className="text-white font-semibold text-sm md:text-base">Visit Live Demo</p>
+                  <FaExternalLinkAlt className="text-white text-2xl sm:text-3xl md:text-4xl mb-1 sm:mb-2 mx-auto" />
+                  <p className="text-white font-semibold text-xs sm:text-sm md:text-base">Visit Live Demo</p>
                 </div>
               </div>
             )}
@@ -488,22 +488,22 @@ const ProjectsSection = () => {
         {/* Project Details */}
         <div className="w-full md:w-1/2">
           <div 
-            className="bg-zinc-900/70 backdrop-blur-md rounded-xl border p-4 shadow-lg"
+            className="bg-zinc-900/70 backdrop-blur-md rounded-lg sm:rounded-xl border p-3 sm:p-4 shadow-lg"
             style={{ borderColor: project.color }}
           >
-            <h3 className="text-xl md:text-2xl font-bold mb-2" style={{ color: project.color }}>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2" style={{ color: project.color }}>
               {project.title}
             </h3>
-            <p className="text-gray-300 mb-3 text-sm md:text-base">{project.description}</p>
+            <p className="text-gray-300 mb-2 sm:mb-3 text-xs sm:text-sm md:text-base leading-relaxed">{project.description}</p>
             
             {project.features && project.features.length > 0 && (
-              <div className="mb-3">
-                <h4 className="text-xs md:text-sm text-gray-400 uppercase mb-1 font-medium">Key Features</h4>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1 mb-2">
+              <div className="mb-2 sm:mb-3">
+                <h4 className="text-xs sm:text-sm text-gray-400 uppercase mb-1 sm:mb-1.5 font-medium">Key Features</h4>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-0.5 sm:gap-y-1 mb-2">
                   {project.features.slice(0, featuresCount).map((feature, i) => (
-                    <li key={i} className="text-gray-300 text-xs md:text-sm flex items-start gap-1.5">
+                    <li key={i} className="text-gray-300 text-xs sm:text-sm flex items-start gap-1 sm:gap-1.5">
                       <span style={{ color: project.color }} className="text-xs mt-0.5">■</span>
-                      <span>{feature}</span>
+                      <span className="leading-snug">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -511,9 +511,9 @@ const ProjectsSection = () => {
             )}
             
             {showTechSpecs && project.techSpecs && project.techSpecs.length > 0 && (
-              <div className="mb-3 hidden md:block">
-                <h4 className="text-xs md:text-sm text-gray-400 uppercase mb-1 font-medium">Tech Specs</h4>
-                <div className="grid grid-cols-3 gap-2">
+              <div className="mb-2 sm:mb-3 hidden md:block">
+                <h4 className="text-xs md:text-sm text-gray-400 uppercase mb-1 sm:mb-1.5 font-medium">Tech Specs</h4>
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
                   {project.techSpecs.map((spec, i) => (
                     <div key={i} className="mb-1">
                       <h5 className="text-xs font-medium" style={{ color: project.color }}>
@@ -529,17 +529,17 @@ const ProjectsSection = () => {
               </div>
             )}
             
-            <div className="mb-3">
-              <h4 className="text-xs md:text-sm text-gray-400 uppercase mb-1 font-medium">Tech Stack</h4>
-              <div className="flex flex-wrap gap-1.5 mb-3">
+            <div className="mb-2 sm:mb-3">
+              <h4 className="text-xs sm:text-sm text-gray-400 uppercase mb-1 sm:mb-1.5 font-medium">Tech Stack</h4>
+              <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3">
                 {project.techIcons.map((tech, i) => (
                   <span 
                     key={i}
-                    className="inline-flex items-center gap-1 bg-zinc-800 px-1.5 py-0.5 rounded-full text-xs"
+                    className="inline-flex items-center gap-0.5 sm:gap-1 bg-zinc-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs"
                     style={{ color: tech.color }}
                   >
-                    <tech.Icon className="text-xs" />
-                    {tech.name}
+                    <tech.Icon className="text-xs sm:text-sm" />
+                    <span className="hidden sm:inline">{tech.name}</span>
                   </span>
                 ))}
               </div>
@@ -551,21 +551,21 @@ const ProjectsSection = () => {
                   href={project.liveLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white px-3 py-1.5 rounded-lg flex items-center hover:opacity-90 transition-opacity text-sm"
+                  className="text-white px-2.5 sm:px-3 py-1.5 rounded-lg flex items-center hover:opacity-90 transition-opacity text-xs sm:text-sm font-medium"
                   style={{ backgroundColor: project.color }}
                 >
-                  <FaExternalLinkAlt className="mr-1.5" size={12} />
-                  Live Demo
+                  <FaExternalLinkAlt className="mr-1 sm:mr-1.5" size={10} />
+                  <span>Live Demo</span>
                 </a>
               )}
               <a 
                 href={project.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-zinc-800 hover:bg-zinc-700 text-white px-3 py-1.5 rounded-lg flex items-center transition-colors text-sm"
+                className="bg-zinc-800 hover:bg-zinc-700 text-white px-2.5 sm:px-3 py-1.5 rounded-lg flex items-center transition-colors text-xs sm:text-sm font-medium"
               >
-                <FaGithub className="mr-1.5" size={14} />
-                View Code
+                <FaGithub className="mr-1 sm:mr-1.5" size={11} />
+                <span>View Code</span>
               </a>
             </div>
           </div>
@@ -581,31 +581,31 @@ const ProjectsSection = () => {
   return (
     <section 
       id="projects" 
-      className="py-12 md:py-20 text-white relative overflow-hidden"
+      className="py-12 sm:py-16 md:py-20 text-white relative overflow-hidden"
     >
       {/* Background elements - enhanced for depth */}
-      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-72 h-72 md:w-96 md:h-96 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
-      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 md:w-96 md:h-96 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
+      <div className="absolute top-0 right-0 -mr-16 sm:-mr-20 -mt-16 sm:-mt-20 w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
+      <div className="absolute bottom-0 left-0 -ml-16 sm:-ml-20 -mb-16 sm:-mb-20 w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
       
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Section header */}
-        <div className="flex flex-col items-center mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-4xl font-bold mb-2 text-white">
+        <div className="flex flex-col items-center mb-8 sm:mb-10 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-white px-4 text-center">
             <span className="bg-clip-text text-transparent" 
               style={{ backgroundImage: `linear-gradient(90deg, ${currentColor}, #66e0ff)` }}>
               Featured
             </span> Projects
           </h2>
-          <div className="w-20 h-1 rounded-full mt-3"
+          <div className="w-16 sm:w-20 md:w-24 h-0.5 sm:h-1 rounded-full mt-2 sm:mt-3"
             style={{ background: `linear-gradient(90deg, ${currentColor}, #66e0ff)` }} />
-          <p className="text-gray-400 mt-4 text-center max-w-2xl text-sm md:text-base">
+          <p className="text-gray-400 mt-3 sm:mt-4 text-center max-w-2xl text-xs sm:text-sm md:text-base px-4">
             {isMobile ? "My latest projects showcasing key skills." : "A collection of my latest work showcasing my skills and experience in web development."}
           </p>
         </div>
 
         {/* Project Carousel - enhanced mobile experience */}
         <div 
-          className="mb-12 md:mb-16 relative" 
+          className="mb-8 sm:mb-12 md:mb-16 relative" 
           ref={carouselRef}
           onMouseEnter={() => handleCarouselHover(true)}
           onMouseLeave={() => handleCarouselHover(false)}
@@ -614,7 +614,7 @@ const ProjectsSection = () => {
           onTouchEnd={handleTouchEnd}
         >
           {/* Swipe indicator - Only on mobile */}
-          <div className="md:hidden mb-4 text-center">
+          <div className="md:hidden mb-3 sm:mb-4 text-center">
             <p className="text-xs text-gray-400 flex items-center justify-center gap-1.5">
               <span className="opacity-60">←</span>
               <span>Swipe to explore</span>

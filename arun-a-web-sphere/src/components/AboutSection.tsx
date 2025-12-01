@@ -160,10 +160,10 @@ const AboutSection = () => {
   };
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-b">
-      <div className="container mx-auto px-4">
+    <section id="about" className="py-12 sm:py-16 md:py-20 bg-gradient-to-b">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Section Header with Animated Underline */}
-        <div className="flex flex-col items-center mb-16">
+        <div className="flex flex-col items-center mb-8 sm:mb-12 md:mb-16">
           <motion.div
             className="relative inline-block"
             initial={{ opacity: 0, y: -20 }}
@@ -171,26 +171,26 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight px-4">
               About <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Me</span>
             </h2>
             <motion.div 
-              className="absolute -bottom-3 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
+              className="absolute -bottom-2 sm:-bottom-3 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
               initial={{ width: 0, left: "50%" }}
               whileInView={{ width: "100%", left: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             />
           </motion.div>
-          <p className="text-zinc-400 mt-6 text-center max-w-2xl">
+          <p className="text-zinc-400 mt-4 sm:mt-5 md:mt-6 text-center max-w-2xl text-sm sm:text-base px-4">
             Developer, innovator, and creative problem-solver. My journey in building the web.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8 items-start">
           {/* Left Column: Image and Coding Profiles */}
           <motion.div
-            className="md:col-span-2 space-y-8"
+            className="md:col-span-2 space-y-4 sm:space-y-6 md:space-y-8"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -253,9 +253,9 @@ const AboutSection = () => {
               <div className="absolute -bottom-6 -right-6 text-primary text-5xl font-mono opacity-20">{`}`}</div>
             </motion.div>
 
-            {/* Codolio Profile Link */}
+            {/* Coding Profiles */}
             <motion.div
-              className="bg-zinc-900/60 backdrop-blur-md rounded-xl p-6 border border-zinc-800"
+              className="bg-zinc-900/60 backdrop-blur-md rounded-xl p-4 sm:p-5 md:p-6 border border-zinc-800"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -301,14 +301,14 @@ const AboutSection = () => {
           
           {/* Right Column: About Content */}
           <motion.div
-            className="md:col-span-3 space-y-8"
+            className="md:col-span-3 space-y-4 sm:space-y-6 md:space-y-8"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {/* Tab Navigation */}
-            <div className="flex space-x-1 mb-6 bg-zinc-900/60 backdrop-blur-sm p-1 rounded-lg">
+            {/* Tabs Navigation */}
+            <div className="flex space-x-1 mb-4 sm:mb-5 md:mb-6 bg-zinc-900/60 backdrop-blur-sm p-1 rounded-lg">
               {['about', 'interests'].map((tab) => (
                 <motion.button
                   key={tab}
