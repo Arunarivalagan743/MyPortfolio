@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config/database');
 const contactRoutes = require('./routes/contact');
 const adminRoutes = require('./routes/admin');
+const visitorRoutes = require('./routes/visitor');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -59,6 +60,7 @@ app.get('/api', (req, res) => {
 // Routes
 app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/visitor', visitorRoutes);
 
 // 404 handler
 app.use((req, res) => {

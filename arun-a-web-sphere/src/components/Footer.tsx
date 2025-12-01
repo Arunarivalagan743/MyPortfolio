@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedinIn, FaTwitter, FaEnvelope, FaChevronUp } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn, FaTwitter, FaEnvelope, FaChevronUp, FaEye } from 'react-icons/fa';
 import { SiLeetcode, SiHashnode, SiDevdotto } from 'react-icons/si';
 
 // Animation variants
@@ -26,6 +26,34 @@ const Footer = () => {
   const [currentYear] = useState(new Date().getFullYear());
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+  const [visitorStats, setVisitorStats] = useState({ uniqueVisitors: 0, totalViews: 0 });
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Track visitor on mount
+  useEffect(() => {
+    const trackVisitor = async () => {
+      try {
+        const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
+        const response = await fetch(`${BACKEND_URL}/api/visitor/track`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success) {
+            setVisitorStats(data.data);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to track visitor:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    trackVisitor();
+  }, []);
   
   // Update window width and handle scroll position
   useEffect(() => {
@@ -194,11 +222,11 @@ const Footer = () => {
                 rel="noopener noreferrer" 
                 className="flex flex-col items-center justify-center p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-colors duration-200 group"
               >
-                <SiLeetcode className="text-xl text-[#f89f1b] group-hover:text-[#ffb84d] transition-colors duration-200" />
+                <SiLeetcode className="text-xl text-[#FFA116] group-hover:text-[#FFB84D] transition-colors duration-200" />
                 <span className="text-xs text-gray-400 mt-2 group-hover:text-gray-200">LeetCode</span>
               </a>
               <a 
-                href="https://www.linkedin.com/in/arun-a-25b6a5289/" 
+                href="https://www.linkedin.com/in/arunarivalagan/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="flex flex-col items-center justify-center p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-colors duration-200 group"
@@ -223,12 +251,41 @@ const Footer = () => {
         
         {/* Footer bottom */}
         <div className="border-t border-zinc-900/70 pt-8 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-500 text-sm">
               © {currentYear} Arun A. All rights reserved.
             </p>
- 
-         
+            
+            {/* Profile Views Counter */}
+            <motion.div 
+              className="flex items-center gap-2 px-4 py-2 bg-zinc-900/50 rounded-lg border border-zinc-800"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <FaEye className="text-cyan-400 text-sm" />
+              <div className="flex items-center gap-1 text-sm">
+                <span className="text-gray-400">Profile Views:</span>
+                {isLoading ? (
+                  <span className="text-cyan-400 font-semibold animate-pulse">...</span>
+                ) : (
+                  <span className="text-cyan-400 font-semibold">
+                    {visitorStats.totalViews.toLocaleString()}
+                  </span>
+                )}
+              </div>
+              <span className="text-gray-600 text-xs">|</span>
+              <div className="flex items-center gap-1 text-sm">
+                <span className="text-gray-400">Visitors:</span>
+                {isLoading ? (
+                  <span className="text-blue-400 font-semibold animate-pulse">...</span>
+                ) : (
+                  <span className="text-blue-400 font-semibold">
+                    {visitorStats.uniqueVisitors.toLocaleString()}
+                  </span>
+                )}
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
