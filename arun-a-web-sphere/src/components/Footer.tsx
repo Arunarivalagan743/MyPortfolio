@@ -256,36 +256,7 @@ const Footer = () => {
               © {currentYear} Arun A. All rights reserved.
             </p>
             
-            {/* Profile Views Counter */}
-            <motion.div 
-              className="flex items-center gap-2 px-4 py-2 bg-zinc-900/50 rounded-lg border border-zinc-800"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <FaEye className="text-cyan-400 text-sm" />
-              <div className="flex items-center gap-1 text-sm">
-                <span className="text-gray-400">Profile Views:</span>
-                {isLoading ? (
-                  <span className="text-cyan-400 font-semibold animate-pulse">...</span>
-                ) : (
-                  <span className="text-cyan-400 font-semibold">
-                    {visitorStats.totalViews.toLocaleString()}
-                  </span>
-                )}
-              </div>
-              <span className="text-gray-600 text-xs">|</span>
-              <div className="flex items-center gap-1 text-sm">
-                <span className="text-gray-400">Visitors:</span>
-                {isLoading ? (
-                  <span className="text-blue-400 font-semibold animate-pulse">...</span>
-                ) : (
-                  <span className="text-blue-400 font-semibold">
-                    {visitorStats.uniqueVisitors.toLocaleString()}
-                  </span>
-                )}
-              </div>
-            </motion.div>
+         
           </div>
         </div>
       </div>
