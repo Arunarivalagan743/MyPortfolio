@@ -69,21 +69,21 @@ const PublicationsSection = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   
   return (
-    <section id="publications" className="py-20 relative overflow-hidden">
+    <section id="publications" className="py-12 sm:py-16 md:py-20 relative overflow-hidden">
      
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Section Header with a more academic/research aesthetic */}
-        <div className="flex flex-col items-center mb-16">
+        <div className="flex flex-col items-center mb-8 sm:mb-12 md:mb-16">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex items-center justify-center mb-3"
+            className="flex items-center justify-center mb-2 sm:mb-3"
           >
-            <div className="h-[1px] w-10 bg-gradient-to-r from-transparent to-cyan-500/50"></div>
-            <span className="mx-2 text-cyan-400 text-sm font-medium tracking-wider uppercase">Academic Contributions</span>
-            <div className="h-[1px] w-10 bg-gradient-to-l from-transparent to-cyan-500/50"></div>
+            <div className="h-[1px] w-6 sm:w-8 md:w-10 bg-gradient-to-r from-transparent to-cyan-500/50"></div>
+            <span className="mx-2 text-cyan-400 text-xs sm:text-sm font-medium tracking-wider uppercase">Academic Contributions</span>
+            <div className="h-[1px] w-6 sm:w-8 md:w-10 bg-gradient-to-l from-transparent to-cyan-500/50"></div>
           </motion.div>
           
           <motion.div
@@ -93,25 +93,25 @@ const PublicationsSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight flex items-center gap-3">
-              <HiOutlineAcademicCap className="text-cyan-400" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4">
+              <HiOutlineAcademicCap className="text-cyan-400 text-3xl sm:text-4xl md:text-5xl" />
               <span>Research <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Publications</span></span>
             </h2>
             <motion.div 
-              className="absolute -bottom-3 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
+              className="absolute -bottom-2 sm:-bottom-3 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
               initial={{ width: 0, left: "50%" }}
               whileInView={{ width: "100%", left: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             />
           </motion.div>
-          <p className="text-zinc-400 mt-6 text-center max-w-2xl">
+          <p className="text-zinc-400 mt-4 sm:mt-5 md:mt-6 text-center max-w-2xl text-sm sm:text-base px-4">
             Peer-reviewed publications contributing to the advancement of technology and computer science
           </p>
         </div>
         
         {/* Search and Filter Controls with updated design */}
-        <div className="mb-12 flex flex-col md:flex-row gap-6 items-center justify-between">
+        <div className="mb-8 sm:mb-10 md:mb-12 flex flex-col md:flex-row gap-4 sm:gap-5 md:gap-6 items-center justify-between">
           <div className="relative w-full md:w-80">
             <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500/20 to-cyan-500/20 blur-md -z-10"></div>
             <input
@@ -119,22 +119,22 @@ const PublicationsSection = () => {
               placeholder="Search by title, keyword, author..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-zinc-900/80 border border-zinc-800 focus:border-cyan-500/50 rounded-lg py-3 pl-11 pr-4 text-white placeholder:text-zinc-500 focus:ring-1 focus:ring-cyan-500/30 focus:outline-none transition-all"
+              className="w-full bg-zinc-900/80 border border-zinc-800 focus:border-cyan-500/50 rounded-lg py-2.5 sm:py-3 pl-9 sm:pl-11 pr-3 sm:pr-4 text-sm sm:text-base text-white placeholder:text-zinc-500 focus:ring-1 focus:ring-cyan-500/30 focus:outline-none transition-all"
             />
-            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400/70" />
+            <FaSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-cyan-400/70 text-sm sm:text-base" />
           </div>
           
           <div className="flex flex-wrap justify-center gap-2">
             {categories.map(category => (
               <motion.button
                 key={category.id}
-                className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 relative ${
+                className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 relative ${
                   selectedCategory === category.id 
                     ? 'text-white' 
                     : 'text-gray-400 hover:text-white'
                 }`}
                 onClick={() => setSelectedCategory(category.id)}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
                 {selectedCategory === category.id && (

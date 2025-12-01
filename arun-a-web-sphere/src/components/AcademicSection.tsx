@@ -25,32 +25,32 @@ const AcademicSection = () => {
   ];
 
   return (
-    <section id="academic" className="py-20 relative overflow-hidden">
+    <section id="academic" className="py-12 sm:py-16 md:py-20 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute w-96 h-96 -top-48 -right-48 rounded-full bg-blue-500/5 blur-3xl"></div>
-      <div className="absolute w-96 h-96 -bottom-48 -left-48 rounded-full bg-indigo-500/5 blur-3xl"></div>
+      <div className="absolute w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 -top-32 sm:-top-40 md:-top-48 -right-32 sm:-right-40 md:-right-48 rounded-full bg-blue-500/5 blur-3xl"></div>
+      <div className="absolute w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 -bottom-32 sm:-bottom-40 md:-bottom-48 -left-32 sm:-left-40 md:-left-48 rounded-full bg-indigo-500/5 blur-3xl"></div>
       
       {/* Decorative grid pattern */}
       {/* <div className="absolute inset-0 opacity-5">
         <div className="h-full w-full bg-[linear-gradient(#00BFFF_1px,transparent_1px),linear-gradient(to_right,#00BFFF_1px,transparent_1px)]" style={{ backgroundSize: '40px 40px' }}></div>
       </div> */}
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         <motion.div 
-          className="flex flex-col items-center mb-16"
+          className="flex flex-col items-center mb-8 sm:mb-12 md:mb-16"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white flex items-center gap-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-white flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4">
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Academic</span> Qualifications
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
+          <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
         </motion.div>
 
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-4xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-5xl w-full">
             {academicData.map((item, index) => (
               <motion.div
                 key={index}
@@ -62,38 +62,38 @@ const AcademicSection = () => {
               >
                 {/* Education card */}
               <motion.div
-                className="group relative bg-zinc-900/80 backdrop-blur-lg rounded-xl p-6 border border-zinc-800 shadow-lg h-full overflow-hidden"
+                className="group relative bg-zinc-900/80 backdrop-blur-lg rounded-xl p-4 sm:p-5 md:p-6 border border-zinc-800 shadow-lg h-full overflow-hidden"
                 whileHover={{ 
-                  y: -5,
+                  y: -3,
                   boxShadow: '0 15px 30px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 191, 255, 0.1)',
                   borderColor: 'rgba(0, 191, 255, 0.3)',
                 }}
                 transition={{ duration: 0.3 }}
               >
                 {/* Background accent */}
-                <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-gradient-to-br opacity-10"></div>
+                <div className="absolute -top-10 -left-10 w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br opacity-10"></div>
                 
                 {/* Icon container */}
-                <div className={`inline-flex items-center justify-center p-3 rounded-xl mb-5 bg-gradient-to-r ${item.color} bg-opacity-10`}>
-                  <div className="text-white">
+                <div className={`inline-flex items-center justify-center p-2 sm:p-2.5 md:p-3 rounded-lg sm:rounded-xl mb-4 sm:mb-5 bg-gradient-to-r ${item.color} bg-opacity-10`}>
+                  <div className="text-white text-xl sm:text-2xl">
                     {item.icon}
                   </div>
                 </div>
                 
                 {/* Year marker */}
-                <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium text-cyan-300">
+                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-md px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs font-medium text-cyan-300">
                   {item.year}
                 </div>
                 
                 {/* Content */}
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                <div className="space-y-1.5 sm:space-y-2">
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
                     {item.degree}
                   </h3>
-                  <p className="text-gray-400 text-sm">{item.institution}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">{item.institution}</p>
                   {item.location && <p className="text-gray-500 text-xs">{item.location}</p>}
                   <div className="pt-2 mt-2 border-t border-zinc-800/50">
-                    <p className="flex items-center text-cyan-400 font-medium">
+                    <p className="flex items-center text-cyan-400 font-medium text-xs sm:text-sm md:text-base">
                       {item.details}
                     </p>
                   </div>
@@ -106,7 +106,7 @@ const AcademicSection = () => {
               </motion.div>
               
               {/* Sequential numbering */}
-              <div className="absolute -top-4 -left-2 md:-left-4 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20 border-2 border-zinc-900">
+              <div className="absolute -top-3 sm:-top-4 -left-2 md:-left-4 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg shadow-blue-500/20 border-2 border-zinc-900">
                 {index + 1}
               </div>
             </motion.div>

@@ -76,9 +76,9 @@ const SkillsSection = () => {
     return (
       <motion.div 
         ref={ref}
-        className="flex flex-col items-center p-4 rounded-2xl backdrop-blur-sm bg-zinc-800/40 border border-zinc-700/30 transition-all shadow-lg"
+        className="flex flex-col items-center p-3 sm:p-4 rounded-xl sm:rounded-2xl backdrop-blur-sm bg-zinc-800/40 border border-zinc-700/30 transition-all shadow-lg"
         whileHover={{ 
-          y: -5,
+          y: -3,
           boxShadow: `0 15px 30px -10px rgba(0,0,0,0.3), 0 0 0 1px ${skill.color}30`,
           backgroundColor: `rgba(40, 40, 45, 0.7)`,
           transition: { duration: 0.2 }
@@ -87,8 +87,8 @@ const SkillsSection = () => {
         animate={isInView ? { opacity: 1, scale: 1, transition: { duration: 0.4 } } : {}}
       >
         {/* Circular progress indicator - Apple Watch style */}
-        <div className="relative mb-4">
-          <svg className="w-20 h-20" viewBox="0 0 100 100">
+        <div className="relative mb-3 sm:mb-4">
+          <svg className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20" viewBox="0 0 100 100">
             {/* Background circle */}
             <circle 
               cx="50" cy="50" r="42" 
@@ -126,9 +126,9 @@ const SkillsSection = () => {
         </div>
         
         {/* Skill name and percentage */}
-        <h4 className="text-sm font-medium text-white mb-1">{skill.name}</h4>
+        <h4 className="text-xs sm:text-sm font-medium text-white mb-1 text-center">{skill.name}</h4>
         <div 
-          className="text-xs font-bold px-3 py-1 rounded-full bg-zinc-700/50"
+          className="text-xs font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-zinc-700/50"
           style={{ color: skill.color }}
         >
           {skill.proficiency}%
@@ -138,51 +138,51 @@ const SkillsSection = () => {
   };
 
   return (
-    <section id="skills" className="py-20 relative">
+    <section id="skills" className="py-12 sm:py-16 md:py-20 relative">
       <div className="absolute inset-0 opacity-5">
         <div className="h-full w-full opacity-20"
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2300BFFF' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }}
         ></div>
       </div>
       
-      <div className="container mx-auto px-4 z-10 relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 relative max-w-7xl">
         {/* Section heading with Apple-inspired styling */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-3 text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 text-white px-4">
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Skills</span> & Technologies
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mb-6 mx-auto"></div>
-          <p className="text-center text-gray-400 max-w-2xl mx-auto">
+          <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mb-4 sm:mb-5 md:mb-6 mx-auto"></div>
+          <p className="text-center text-gray-400 max-w-2xl mx-auto text-sm sm:text-base px-4">
             My technical toolkit includes these technologies that I've mastered through hands-on experience in various projects.
           </p>
         </motion.div>
         
         {/* Skill categories with Apple-like rounded cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {skillCategories.map((category, idx) => (
             <motion.div
               key={category.title}
-              className="p-6 rounded-3xl border border-zinc-700/30 bg-zinc-900/50 backdrop-blur-lg shadow-xl"
+              className="p-4 sm:p-5 md:p-6 rounded-2xl sm:rounded-3xl border border-zinc-700/30 bg-zinc-900/50 backdrop-blur-lg shadow-xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
               {/* Category heading with colored accent */}
-              <div className="flex items-center mb-6">
-                <div className="w-2 h-6 rounded-full mr-3" style={{ backgroundColor: category.color }}></div>
-                <h3 className="text-lg font-bold text-white">{category.title}</h3>
-                <div className="h-px grow ml-4 bg-gradient-to-r from-zinc-700/80 to-transparent"></div>
+              <div className="flex items-center mb-4 sm:mb-5 md:mb-6">
+                <div className="w-1.5 sm:w-2 h-5 sm:h-6 rounded-full mr-2 sm:mr-3" style={{ backgroundColor: category.color }}></div>
+                <h3 className="text-base sm:text-lg font-bold text-white">{category.title}</h3>
+                <div className="h-px grow ml-3 sm:ml-4 bg-gradient-to-r from-zinc-700/80 to-transparent"></div>
               </div>
               
               {/* Skills grid with circular progress displays only */}
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
                 {category.skills.map((skill) => (
                   <SkillDisplay key={skill.name} skill={skill} />
                 ))}
