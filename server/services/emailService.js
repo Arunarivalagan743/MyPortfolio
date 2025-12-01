@@ -1,50 +1,16 @@
 const nodemailer = require('nodemailer');
 
-// Normalize and validate credentials from env
-const EMAIL_USER = (process.env.EMAIL_USER || '').trim();
-// Gmail App Password should be 16 chars, no spaces; strip spaces just in case
-const EMAIL_PASS_RAW = (process.env.EMAIL_PASS || '').trim();
-const EMAIL_PASS = EMAIL_PASS_RAW.replace(/\s+/g, '');
-
-function validateEmailConfig() {
-  if (!EMAIL_USER || !EMAIL_PASS) {
-    throw new Error('Missing EMAIL_USER or EMAIL_PASS. Set valid Gmail App Password (16 chars, no spaces).');
-  }
-  if (EMAIL_PASS.length !== 16) {
-    throw new Error(`Invalid EMAIL_PASS length ${EMAIL_PASS.length}. Gmail App Password must be 16 characters.`);
-  }
-}
-
-validateEmailConfig();
-
-// Create reusable transporter
+// Create transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
   auth: {
-    user: EMAIL_USER,
-    pass: EMAIL_PASS
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
-
-// Verify transporter configuration
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log('❌ Email configuration error:', error);
-    console.log('📧 EMAIL_USER:', EMAIL_USER);
-    console.log('📧 EMAIL_PASS length (sanitized):', EMAIL_PASS.length);
-  } else {
-    console.log('✅ Email service is ready to send messages');
-  }
 });
 
 /**
- * Send email notification to admin when someone contacts
+ * Send notification email to admin
  */
 const sendAdminNotification = async (contactData) => {
   const { name, email, subject, message } = contactData;
@@ -59,8 +25,8 @@ const sendAdminNotification = async (contactData) => {
       <head>
         <style>
           body { margin:0; padding:0; color:#e5e7eb; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,'Noto Sans',sans-serif; line-height:1.6; }
-          .wrap { width:100%;  padding:24px 0; }
-          .container { width:100%; max-width:600px; margin:0 auto; background:#0b1220; border:1px solid #1f2937; }
+          .wrap { width:100%;  padding:24px 0; background:#030712; }
+          .container { width:100%; max-width:600px; margin:0 auto; background:#0b1220; border:1px solid #1f2937; border-radius:8px; }
           .header { padding:16px 20px; border-bottom:1px solid #1f2937; background:#0b1220; display:flex; align-items:center; gap:12px; }
           .logo { width:32px; height:32px; }
           .title { margin:0; font-size:16px; letter-spacing:0.02em; color:#e5e7eb; font-weight:600; text-transform:uppercase; }
@@ -68,8 +34,8 @@ const sendAdminNotification = async (contactData) => {
           .meta { display:block; font-size:12px; color:#9ca3af; margin-bottom:8px; }
           .row { margin:0 0 14px 0; }
           .label { font-size:12px; color:#9ca3af; margin:0 0 4px 0; }
-          .value { font-size:14px; color:#e5e7eb; padding:10px 12px; border:1px solid #1f2937; }
-          .message { font-size:14px; color:#e5e7eb; padding:12px; border:1px solid #1f2937; white-space:pre-wrap; }
+          .value { font-size:14px; color:#e5e7eb; padding:10px 12px; border:1px solid #1f2937; border-radius:4px; background:#111827; }
+          .message { font-size:14px; color:#e5e7eb; padding:12px; border:1px solid #1f2937; border-radius:4px; background:#111827; white-space:pre-wrap; }
           a { color:#60a5fa; text-decoration:none; }
           .footer { padding:14px 20px; border-top:1px solid #1f2937; font-size:12px; color:#9ca3af; }
         </style>
@@ -100,8 +66,7 @@ const sendAdminNotification = async (contactData) => {
               </div>
             </div>
             <div class="footer">
-              <span class="meta">${process.env.APP_NAME}</span>
-              <span class="meta">Received: ${new Date().toLocaleString()}</span>
+              <span class="meta">${process.env.APP_NAME} • Received: ${new Date().toLocaleString()}</span>
             </div>
           </div>
         </div>
@@ -117,29 +82,21 @@ Subject: ${subject}
 Message:
 ${message}
 
-${process.env.APP_NAME}
 Received: ${new Date().toLocaleString()}
-    `
+    `,
   };
 
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Admin notification sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
-  } catch (error) {
-    console.error('❌ Error sending admin notification:', error);
-    throw error;
-  }
+  return transporter.sendMail(mailOptions);
 };
 
 /**
- * Send confirmation email to the person who contacted
+ * Send confirmation email to the user
  */
 const sendUserConfirmation = async (contactData) => {
   const { name, email, subject } = contactData;
 
   const mailOptions = {
-    from: `"${process.env.APP_NAME}" <${EMAIL_USER}>`,
+    from: `"${process.env.APP_NAME}" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: `We received your message - ${process.env.APP_NAME}`,
     html: `
@@ -148,15 +105,15 @@ const sendUserConfirmation = async (contactData) => {
       <head>
         <style>
           body { margin:0; padding:0; color:#e5e7eb; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,'Noto Sans',sans-serif; line-height:1.6; }
-          .wrap { width:100%; padding:24px 0; }
-          .container { width:100%; max-width:600px; margin:0 auto; background:#0b1220; border:1px solid #1f2937; }
+          .wrap { width:100%; padding:24px 0; background:#030712; }
+          .container { width:100%; max-width:600px; margin:0 auto; background:#0b1220; border:1px solid #1f2937; border-radius:8px; }
           .header { padding:16px 20px; border-bottom:1px solid #1f2937; background:#0b1220; display:flex; align-items:center; gap:12px; }
           .logo { width:32px; height:32px; }
           .title { margin:0; font-size:16px; letter-spacing:0.02em; color:#e5e7eb; font-weight:600; text-transform:uppercase; }
           .content { padding:20px; }
           .lead { font-size:14px; color:#e5e7eb; margin:0 0 12px 0; }
           .note { font-size:12px; color:#9ca3af; margin:12px 0 0 0; }
-          .subject { font-size:14px; color:#e5e7eb; padding:10px 12px; border:1px solid #1f2937; }
+          .subject { font-size:14px; color:#e5e7eb; padding:10px 12px; border:1px solid #1f2937; border-radius:4px; background:#111827; }
           a { color:#60a5fa; text-decoration:none; }
           .footer { padding:14px 20px; border-top:1px solid #1f2937; font-size:12px; color:#9ca3af; }
         </style>
@@ -173,11 +130,10 @@ const sendUserConfirmation = async (contactData) => {
               <p class="lead">Thank you for contacting me. I have received your message about:</p>
               <div class="subject">${subject}</div>
               <p class="lead">I will review your note and reply as soon as possible, typically within 24–48 hours.</p>
-              <p class="note">If this is time‑sensitive, you can also reach me at <a href="mailto:${process.env.ADMIN_EMAIL}">${process.env.ADMIN_EMAIL}</a>.</p>
+              <p class="note">If this is time-sensitive, you can also reach me at <a href="mailto:${process.env.ADMIN_EMAIL}">${process.env.ADMIN_EMAIL}</a>.</p>
             </div>
             <div class="footer">
-              <span class="meta">${process.env.APP_NAME}</span>
-              <span class="meta">Sent: ${new Date().toLocaleString()}</span>
+              <span class="meta">${process.env.APP_NAME} • Sent: ${new Date().toLocaleString()}</span>
             </div>
           </div>
         </div>
@@ -192,23 +148,14 @@ I will review your note and reply as soon as possible (usually within 24–48 ho
 
 For urgent matters: ${process.env.ADMIN_EMAIL}
 
-${process.env.APP_NAME}
 Sent: ${new Date().toLocaleString()}
-    `
+    `,
   };
 
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log('✅ User confirmation sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
-  } catch (error) {
-    console.error('❌ Error sending user confirmation:', error);
-    throw error;
-  }
+  return transporter.sendMail(mailOptions);
 };
 
 module.exports = {
   sendAdminNotification,
   sendUserConfirmation,
-  transporter
 };

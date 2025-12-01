@@ -1,96 +1,89 @@
+require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
-const { connectDB } = require('./config/database');
 const cors = require('cors');
-const dotenv = require('dotenv');
-const path = require('path');
-
-// Load environment variables explicitly from server/.env
-dotenv.config({ path: path.join(__dirname, '.env') });
-
-// Import routes AFTER env is loaded (env needed by services)
-const contactRoutes = require('./routes/contactRoutes');
+const connectDB = require('./config/database');
+const contactRoutes = require('./routes/contact');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
+const PORT = process.env.PORT || 4000;
 
-// Serve static files from public directory
-app.use('/public', express.static(path.join(__dirname, 'public')));
+// Connect to MongoDB
+connectDB();
 
-// Middleware
+// Parse allowed origins from environment variable
+const allowedOrigins = process.env.FRONTEND_ORIGIN
+  ? process.env.FRONTEND_ORIGIN.split(',').map(origin => origin.trim())
+  : ['http://localhost:5173'];
+
+// CORS configuration
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (mobile apps, Postman, etc.)
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
+
+// Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS Configuration
-const frontendOriginEnv = process.env.FRONTEND_ORIGIN || 'http://localhost:5173,http://localhost:8080,https://arunoff774.vercel.app';
-const allowedOrigins = frontendOriginEnv.split(',').map(origin => origin.trim().replace(/\/$/, ''));
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Portfolio Backend API is running',
+    timestamp: new Date().toISOString(),
+  });
+});
 
-console.log('🌐 Allowed CORS origins:', allowedOrigins);
-console.log('🔑 Environment:', process.env.NODE_ENV);
-
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) {
-      console.log('✅ CORS: No origin header (mobile/curl)');
-      return callback(null, true);
-    }
-    
-    // Remove trailing slash from origin for comparison
-    const normalizedOrigin = origin.replace(/\/$/, '');
-    
-    if (allowedOrigins.indexOf(normalizedOrigin) === -1) {
-      console.log('❌ CORS blocked origin:', origin);
-      console.log('📋 Allowed origins:', allowedOrigins);
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    
-    console.log('✅ CORS allowed origin:', origin);
-    return callback(null, true);
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-
-// MongoDB Connection
-// Initiate (or reuse) connection early but allow cold start retry
-connectDB().catch(err => {
-  console.error('❌ Initial MongoDB connect attempt failed:', err.message);
+app.get('/api', (req, res) => {
+  res.json({
+    success: true,
+    message: 'API endpoint',
+    version: '1.0.0',
+  });
 });
 
 // Routes
 app.use('/api/contact', contactRoutes);
+app.use('/api/admin', adminRoutes);
 
-// Health check route
-app.get('/', (req, res) => {
-  res.json({ 
-    message: `${process.env.APP_NAME} - Backend API`,
-    status: 'Running',
-    timestamp: new Date().toISOString()
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
   });
 });
 
-// Error handling middleware
+// Global error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ 
-    success: false, 
-    message: 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+  console.error('Error:', err.message);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || 'Internal server error',
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
   });
 });
 
-// In traditional hosting we listen; in Vercel serverless we just export the app.
-const isServerless = !!process.env.VERCEL; // Vercel sets VERCEL=1
-const PORT = process.env.PORT || 4000;
-if (!isServerless) {
-  app.listen(PORT, () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-    console.log(`📧 Email notifications enabled for ${process.env.ADMIN_EMAIL}`);
-  });
-} else {
-  console.log('🌀 Running in serverless (Vercel) mode – no explicit listen.');
-}
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📧 Email service configured with ${process.env.EMAIL_USER}`);
+  console.log(`🌐 Allowed origins:`, allowedOrigins);
+});
 
+// Export for Vercel
 module.exports = app;
