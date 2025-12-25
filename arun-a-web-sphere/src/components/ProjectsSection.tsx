@@ -24,6 +24,8 @@ type Project = {
   liveLink?: string;
   githubLink: string;
   features?: string[];
+  period?: string;
+  tech?: string[];
   techSpecs?: {
     category: string;
     items: string[];
@@ -35,30 +37,33 @@ const progressVariants = {
   hidden: { width: 0 },
   visible: (i: number) => ({
     width: `${i}%`,
-    transition: { duration: 1.5, delay: 0.2, ease: "easeOut" }
+    transition: { duration: 1, delay: 0.1, ease: "easeOut" }
   })
 };
 
-// Enhanced smoother carousel animations
+// Optimized smooth carousel animations - GPU accelerated
 const carouselVariants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? '100%' : '-100%',
+    x: direction > 0 ? 300 : -300,
     opacity: 0,
+    scale: 0.95,
   }),
   center: {
     x: 0,
     opacity: 1,
+    scale: 1,
     transition: {
-      x: { type: "spring", stiffness: 250, damping: 35 },
-      opacity: { duration: 0.5 }
+      duration: 0.35,
+      ease: [0.25, 0.46, 0.45, 0.94], // Smooth easing
     }
   },
   exit: (direction: number) => ({
-    x: direction < 0 ? '100%' : '-100%',
+    x: direction < 0 ? 300 : -300,
     opacity: 0,
+    scale: 0.95,
     transition: {
-      x: { type: "spring", stiffness: 250, damping: 35 },
-      opacity: { duration: 0.3 }
+      duration: 0.25,
+      ease: [0.25, 0.46, 0.45, 0.94],
     }
   }),
 };
@@ -77,6 +82,7 @@ const mainProjects = [
     icon: '✈️',
     color: '#4285F4', // Google blue color
     image: travellaImg,
+    period: 'Apr 2025 – Jun 2025',
     tech: ['React', 'Tailwind CSS', 'Firebase', 'Google Places API', 'Gemini AI'],
     techIcons: [
       { Icon: FaReact, color: '#61DAFB', name: 'React', proficiency: 92 },
@@ -88,7 +94,7 @@ const mainProjects = [
       ), color: '#8E44AD', name: 'Gemini AI', proficiency: 75 }
     ],
     description: 'AI-powered travel platform generating personalized itineraries with Google Gemini AI. Includes trip planning, social sharing, and an interactive travel assistant.',
-    liveLink: 'https://travellai.me/',
+    liveLink: 'https://ai-travella-duag.vercel.app/',
     githubLink: 'https://github.com/Arunarivalagan743/AI_Travella_',
     features: [
       'AI-generated personalized travel itineraries',
@@ -139,6 +145,7 @@ const mainProjects = [
     icon: '🎬',
     color: '#FF69B4',
     image: ticketparkImg,
+    period: 'Oct 2024 – Dec 2024',
     tech: ['React', 'Tailwind CSS', 'Redux', 'Node.js', 'MongoDB'],
     techIcons: [
       { Icon: FaReact, color: '#61DAFB', name: 'React', proficiency: 85 },
@@ -148,7 +155,7 @@ const mainProjects = [
       { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 70 }
     ],
     description: 'Movie theatre booking platform with real-time seat selection, parking reservation, and secure payments. Includes admin dashboard and responsive design.',
-    liveLink: 'https://www.cinexp.app',
+    liveLink: 'https://cinimax.vercel.app',
     githubLink: 'https://github.com/Arunarivalagan743/Cinematic-popcorn-Theatre-Experience',
     features: [
       'Real-time seat selection with visual interface',
@@ -199,13 +206,14 @@ const mainProjects = [
     icon: '🏥',
     color: '#00C853',
     image: healqImg, // Replace with actual image when available
+    period: 'Jul 2025 – Sep 2025',
     tech: ['React Native', 'Node.js', 'MongoDB', 'Firebase', 'Express'],
     techIcons: [
       { Icon: FaReact, color: '#61DAFB', name: 'React Native', proficiency: 88 },
       { Icon: FaNodeJs, color: '#339933', name: 'Node.js', proficiency: 80 },
       { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 75 },
       { Icon: SiFirebase, color: '#FFCA28', name: 'Firebase', proficiency: 82 },
-      { Icon: SiExpress, color: '#ffffff', name: 'Express', proficiency: 78 }
+      { Icon: SiExpress, color: '#333333', name: 'Express', proficiency: 78 }
     ],
     description: 'Healthcare platform connecting patients and doctors via a token-based appointment system with secure medical records and role-based access.',
     githubLink: 'https://github.com/Arunarivalagan743/HealQ',
@@ -245,12 +253,13 @@ const mainProjects = [
 ];
 
 // Hackathon projects data
-const hackathonProjects = [
+const hackathonProjects: Project[] = [
   {
     title: 'Falo - AI Misinformation Shield',
     icon: '�️',
     color: '#4a6cf7',
     image: truthtellImg,
+    period: 'Dec 2024 – Apr 2025',
     tech: ['Flutter', 'Python', 'FastAPI', 'Machine Learning', 'NLP'],
     techIcons: [
       { Icon: SiFlutter, color: '#02569B', name: 'Flutter', proficiency: 85 },
@@ -367,8 +376,8 @@ const ProjectsSection = () => {
     const touchEnd = e.changedTouches[0].clientX;
     const diff = touchStart - touchEnd;
     
-    // If swipe distance is significant enough, change slide
-    if (Math.abs(diff) > 50) {
+    // Lower threshold for quicker response
+    if (Math.abs(diff) > 30) {
       if (diff > 0) {
         handleNext();
       } else {
@@ -387,8 +396,9 @@ const ProjectsSection = () => {
     setIsDragging(false);
     setIsAutoPlaying(true);
     
-    if (Math.abs(info.offset.x) > 50) {
-      if (info.offset.x > 0) {
+    // Lower threshold for quicker swipe detection
+    if (Math.abs(info.offset.x) > 30 || Math.abs(info.velocity.x) > 300) {
+      if (info.offset.x > 0 || info.velocity.x > 300) {
         handlePrev();
       } else {
         handleNext();
@@ -426,11 +436,11 @@ const ProjectsSection = () => {
         <div className="flex justify-between items-center mb-1">
           <div className="flex items-center">
             <skill.Icon className="mr-2" style={{ color: skill.color }} />
-            <span className="text-sm font-medium text-gray-300">{skill.name}</span>
+            <span className="text-sm font-medium text-gray-700">{skill.name}</span>
           </div>
-          <span className="text-xs font-semibold text-cyan-400">{skill.proficiency}%</span>
+          <span className="text-xs font-semibold text-cyan-600">{skill.proficiency}%</span>
         </div>
-        <div className="h-2 bg-zinc-800 rounded-full overflow-hidden" ref={progressRef}>
+        <div className="h-2 bg-gray-200 rounded-full overflow-hidden" ref={progressRef}>
           <motion.div
             className="h-full rounded-full"
             style={{ backgroundColor: skill.color }}
@@ -458,9 +468,9 @@ const ProjectsSection = () => {
         {/* Project Image */}
         <div className="w-full md:w-1/2">
           <div 
-            className="relative overflow-hidden rounded-lg sm:rounded-xl shadow-lg aspect-video mx-auto group cursor-pointer"
+            className="relative overflow-hidden rounded-lg sm:rounded-xl aspect-video mx-auto group cursor-pointer"
             style={{ 
-              boxShadow: `0 10px 25px -5px ${project.color}30, 0 8px 10px -6px ${project.color}20`
+              willChange: 'transform'
             }}
             onClick={() => {
               if (project.liveLink) {
@@ -471,11 +481,12 @@ const ProjectsSection = () => {
             <img 
               src={project.image} 
               alt={project.title} 
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              style={{ maxHeight: isMobile ? "200px" : "360px" }}
+              className="w-full h-full object-cover transition-transform duration-200 ease-out group-hover:scale-105"
+              style={{ maxHeight: isMobile ? "180px" : "360px", willChange: 'transform' }}
+              loading="eager"
             />
             {project.liveLink && (
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
                 <div className="text-center">
                   <FaExternalLinkAlt className="text-white text-2xl sm:text-3xl md:text-4xl mb-1 sm:mb-2 mx-auto" />
                   <p className="text-white font-semibold text-xs sm:text-sm md:text-base">Visit Live Demo</p>
@@ -488,22 +499,24 @@ const ProjectsSection = () => {
         {/* Project Details */}
         <div className="w-full md:w-1/2">
           <div 
-            className="bg-zinc-900/70 backdrop-blur-md rounded-lg sm:rounded-xl border p-3 sm:p-4 shadow-lg"
-            style={{ borderColor: project.color }}
+            className="bg-white backdrop-blur-md rounded-lg sm:rounded-xl p-3 sm:p-4"
           >
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2" style={{ color: project.color }}>
+            <h3 className="text-base sm:text-xl md:text-2xl font-bold mb-0.5 sm:mb-1" style={{ color: project.color }}>
               {project.title}
             </h3>
-            <p className="text-gray-300 mb-2 sm:mb-3 text-xs sm:text-sm md:text-base leading-relaxed">{project.description}</p>
+            {project.period && (
+              <p className="text-gray-500 text-[10px] sm:text-xs mb-1.5 sm:mb-2 font-medium">{project.period}</p>
+            )}
+            <p className="text-gray-600 mb-2 sm:mb-3 text-[11px] sm:text-sm md:text-base leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none">{project.description}</p>
             
             {project.features && project.features.length > 0 && (
-              <div className="mb-2 sm:mb-3">
-                <h4 className="text-xs sm:text-sm text-gray-400 uppercase mb-1 sm:mb-1.5 font-medium">Key Features</h4>
+              <div className="mb-2 sm:mb-3 hidden sm:block">
+                <h4 className="text-[10px] sm:text-sm text-gray-500 uppercase mb-1 sm:mb-1.5 font-medium">Key Features</h4>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-0.5 sm:gap-y-1 mb-2">
                   {project.features.slice(0, featuresCount).map((feature, i) => (
-                    <li key={i} className="text-gray-300 text-xs sm:text-sm flex items-start gap-1 sm:gap-1.5">
-                      <span style={{ color: project.color }} className="text-xs mt-0.5">■</span>
-                      <span className="leading-snug">{feature}</span>
+                    <li key={i} className="text-gray-600 text-[11px] sm:text-sm flex items-start gap-1 sm:gap-1.5">
+                      <span style={{ color: project.color }} className="text-[10px] sm:text-xs mt-0.5">■</span>
+                      <span className="leading-snug line-clamp-1">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -512,14 +525,14 @@ const ProjectsSection = () => {
             
             {showTechSpecs && project.techSpecs && project.techSpecs.length > 0 && (
               <div className="mb-2 sm:mb-3 hidden md:block">
-                <h4 className="text-xs md:text-sm text-gray-400 uppercase mb-1 sm:mb-1.5 font-medium">Tech Specs</h4>
+                <h4 className="text-xs md:text-sm text-gray-500 uppercase mb-1 sm:mb-1.5 font-medium">Tech Specs</h4>
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
                   {project.techSpecs.map((spec, i) => (
                     <div key={i} className="mb-1">
                       <h5 className="text-xs font-medium" style={{ color: project.color }}>
                         {spec.category}
                       </h5>
-                      <ul className="text-xs text-gray-400">
+                      <ul className="text-xs text-gray-500">
                         <li>{spec.items[0]}</li>
                         {!isMobile && <li>{spec.items[1]}</li>}
                       </ul>
@@ -529,16 +542,16 @@ const ProjectsSection = () => {
               </div>
             )}
             
-            <div className="mb-2 sm:mb-3">
-              <h4 className="text-xs sm:text-sm text-gray-400 uppercase mb-1 sm:mb-1.5 font-medium">Tech Stack</h4>
-              <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3">
-                {project.techIcons.map((tech, i) => (
+            <div className="mb-1.5 sm:mb-3">
+              <h4 className="text-[10px] sm:text-sm text-gray-500 uppercase mb-1 sm:mb-1.5 font-medium">Tech Stack</h4>
+              <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-1.5 sm:mb-3">
+                {project.techIcons.slice(0, isMobile ? 5 : project.techIcons.length).map((tech, i) => (
                   <span 
                     key={i}
-                    className="inline-flex items-center gap-0.5 sm:gap-1 bg-zinc-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs"
+                    className="inline-flex items-center gap-0.5 sm:gap-1 bg-gray-100 px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs"
                     style={{ color: tech.color }}
                   >
-                    <tech.Icon className="text-xs sm:text-sm" />
+                    <tech.Icon className="text-[10px] sm:text-sm" />
                     <span className="hidden sm:inline">{tech.name}</span>
                   </span>
                 ))}
@@ -562,7 +575,7 @@ const ProjectsSection = () => {
                 href={project.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-zinc-800 hover:bg-zinc-700 text-white px-2.5 sm:px-3 py-1.5 rounded-lg flex items-center transition-colors text-xs sm:text-sm font-medium"
+                className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-2.5 sm:px-3 py-1.5 rounded-lg flex items-center transition-colors text-xs sm:text-sm font-medium"
               >
                 <FaGithub className="mr-1 sm:mr-1.5" size={11} />
                 <span>View Code</span>
@@ -581,25 +594,25 @@ const ProjectsSection = () => {
   return (
     <section 
       id="projects" 
-      className="py-12 sm:py-16 md:py-20 text-white relative overflow-hidden"
+      className="py-8 sm:py-12 md:py-16 text-gray-900 relative overflow-hidden"
     >
-      {/* Background elements - enhanced for depth */}
-      <div className="absolute top-0 right-0 -mr-16 sm:-mr-20 -mt-16 sm:-mt-20 w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
-      <div className="absolute bottom-0 left-0 -ml-16 sm:-ml-20 -mb-16 sm:-mb-20 w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
+      {/* Background elements */}
+      <div className="absolute top-0 right-0 -mr-12 sm:-mr-16 -mt-12 sm:-mt-16 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
+      <div className="absolute bottom-0 left-0 -ml-12 sm:-ml-16 -mb-12 sm:-mb-16 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
+      <div className="container mx-auto px-3 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Section header */}
-        <div className="flex flex-col items-center mb-8 sm:mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-white px-4 text-center">
+        <div className="flex flex-col items-center mb-5 sm:mb-8 md:mb-10">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1.5 text-gray-900 px-2 text-center">
             <span className="bg-clip-text text-transparent" 
               style={{ backgroundImage: `linear-gradient(90deg, ${currentColor}, #66e0ff)` }}>
               Featured
             </span> Projects
           </h2>
-          <div className="w-16 sm:w-20 md:w-24 h-0.5 sm:h-1 rounded-full mt-2 sm:mt-3"
+          <div className="w-12 sm:w-16 md:w-20 h-0.5 rounded-full mt-1.5 sm:mt-2"
             style={{ background: `linear-gradient(90deg, ${currentColor}, #66e0ff)` }} />
-          <p className="text-gray-400 mt-3 sm:mt-4 text-center max-w-2xl text-xs sm:text-sm md:text-base px-4">
-            {isMobile ? "My latest projects showcasing key skills." : "A collection of my latest work showcasing my skills and experience in web development."}
+          <p className="text-gray-600 mt-2 sm:mt-3 text-center max-w-xl text-[11px] sm:text-xs md:text-sm px-2">
+            {isMobile ? "My latest projects." : "A collection of my latest work showcasing my skills."}
           </p>
         </div>
 
@@ -615,7 +628,7 @@ const ProjectsSection = () => {
         >
           {/* Swipe indicator - Only on mobile */}
           <div className="md:hidden mb-3 sm:mb-4 text-center">
-            <p className="text-xs text-gray-400 flex items-center justify-center gap-1.5">
+            <p className="text-xs text-gray-500 flex items-center justify-center gap-1.5">
               <span className="opacity-60">←</span>
               <span>Swipe to explore</span>
               <span className="opacity-60">→</span>
@@ -626,12 +639,14 @@ const ProjectsSection = () => {
             <motion.div
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.08} // More natural feeling
+              dragElastic={0.1}
+              dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
               onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
-              className="cursor-grab active:cursor-grabbing"
+              className="cursor-grab active:cursor-grabbing touch-pan-y"
+              style={{ willChange: 'transform' }}
             >
-              <AnimatePresence initial={false} custom={direction} mode="wait">
+              <AnimatePresence initial={false} custom={direction} mode="popLayout">
                 <motion.div
                   key={activeProjectIndex}
                   custom={direction}
@@ -639,7 +654,7 @@ const ProjectsSection = () => {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{ ease: "easeInOut" }}
+                  style={{ willChange: 'transform, opacity' }}
                 >
                   <ProjectCarouselItem project={mainProjects[visibleIndex]} />
                 </motion.div>
@@ -709,21 +724,21 @@ const ProjectsSection = () => {
         </div>
 
         {/* Hackathon section */}
-        <div className="mt-12 md:mt-16">
-          <div className="flex items-center justify-center gap-2 mb-6 md:mb-8">
-            <div className="h-px grow"
+        <div className="mt-8 sm:mt-12 md:mt-14">
+          <div className="flex items-center justify-center gap-1.5 mb-4 sm:mb-6">
+            <div className="h-px grow max-w-[60px] sm:max-w-none"
               style={{ background: `linear-gradient(to right, transparent, #4a6cf750, transparent)` }} />
-            <h3 className="text-xl md:text-2xl font-bold text-center text-white flex items-center gap-2 px-3">
-              <span style={{ color: "#4a6cf7" }} className="text-2xl md:text-3xl">
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-center text-gray-900 flex items-center gap-1.5 px-2">
+              <span style={{ color: "#4a6cf7" }} className="text-lg sm:text-xl md:text-2xl">
                 <SiHackerearth />
               </span>
-              <span>Hackathon Projects</span>
+              <span>Hackathon</span>
             </h3>
-            <div className="h-px grow"
+            <div className="h-px grow max-w-[60px] sm:max-w-none"
               style={{ background: `linear-gradient(to right, transparent, #4a6cf750, transparent)` }} />
           </div>
 
-          <div className="grid grid-cols-1 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 gap-4 sm:gap-5 max-w-7xl mx-auto">
             {hackathonProjects.map((project, index) => {
               const isMobile = useIsMobile();
               // Show fewer features on mobile
@@ -734,15 +749,16 @@ const ProjectsSection = () => {
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="bg-zinc-900/70 backdrop-blur-md rounded-xl border border-zinc-800 overflow-hidden hover:border-blue-500/50 transition-colors duration-300 shadow-xl"
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  className="bg-white rounded-lg overflow-hidden transition-colors duration-200"
+                  style={{ willChange: 'transform, opacity' }}
                 >
                   <div className="flex flex-col lg:flex-row">
                     <div 
-                      className="relative lg:w-2/5 cursor-pointer group"
+                      className="relative lg:w-2/5 cursor-pointer group overflow-hidden"
                       onClick={() => {
                         if (project.liveLink) {
                           window.open(project.liveLink, '_blank', 'noopener,noreferrer');
@@ -754,12 +770,13 @@ const ProjectsSection = () => {
                       <img 
                         src={project.image}
                         alt={project.title}
-                        className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        style={{ maxHeight: isMobile ? "200px" : "300px" }}
+                        className="w-full object-cover transition-transform duration-200 ease-out group-hover:scale-105"
+                        style={{ maxHeight: isMobile ? "120px" : "220px", willChange: 'transform' }}
+                        loading="lazy"
                       />
-                      <div className="absolute top-3 right-3" style={{ backgroundColor: `${project.color}CC` }}>
-                        <div className="text-white px-3 py-1 rounded-full font-medium flex items-center text-sm">
-                          <span className="mr-1.5 text-base">{project.icon}</span> Hackathon
+                      <div className="absolute top-2 right-2" style={{ backgroundColor: `${project.color}CC` }}>
+                        <div className="text-white px-2 py-0.5 rounded-full font-medium flex items-center text-[10px] sm:text-xs">
+                          <span className="mr-1 text-xs sm:text-sm">{project.icon}</span> Hackathon
                         </div>
                       </div>
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -779,22 +796,25 @@ const ProjectsSection = () => {
                       </div>
                     </div>
                     
-                    <div className="p-4 lg:p-6 lg:w-3/5">
-                      <h3 className="text-xl font-bold mb-2 flex items-center" style={{ color: project.color }}>
+                    <div className="p-3 sm:p-4 lg:p-6 lg:w-3/5">
+                      <h3 className="text-base sm:text-xl font-bold mb-0.5 sm:mb-1 flex items-center" style={{ color: project.color }}>
                         {project.title}
                       </h3>
-                      <p className="text-gray-300 mb-3 text-sm">{project.description}</p>
+                      {project.period && (
+                        <p className="text-gray-500 text-[10px] sm:text-xs mb-1.5 sm:mb-2 font-medium">{project.period}</p>
+                      )}
+                      <p className="text-gray-600 mb-2 sm:mb-3 text-xs sm:text-sm line-clamp-2 sm:line-clamp-none">{project.description}</p>
                     
                       {project.features && (
-                        <div className="mb-4">
-                          <h4 className="text-xs text-gray-300 uppercase mb-2 font-medium flex items-center">
+                        <div className="mb-2 sm:mb-4 hidden sm:block">
+                          <h4 className="text-xs text-gray-600 uppercase mb-1.5 sm:mb-2 font-medium flex items-center">
                             <span style={{ color: project.color }} className="mr-1.5">✨</span> Key Features
                           </h4>
-                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1">
+                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-0.5 sm:gap-y-1">
                             {project.features.slice(0, featuresCount).map((feature, i) => (
-                              <li key={i} className="text-gray-400 text-xs flex items-start">
+                              <li key={i} className="text-gray-500 text-[11px] sm:text-xs flex items-start">
                                 <span style={{ color: project.color }} className="mr-1">•</span>
-                                <span>{feature}</span>
+                                <span className="line-clamp-1">{feature}</span>
                               </li>
                             ))}
                           </ul>
@@ -803,7 +823,7 @@ const ProjectsSection = () => {
                       
                       {showTechSpecs && project.techSpecs && (
                         <div className="mb-4 hidden md:block">
-                          <h4 className="text-xs text-gray-300 uppercase mb-2 font-medium flex items-center">
+                          <h4 className="text-xs text-gray-600 uppercase mb-2 font-medium flex items-center">
                             <span style={{ color: project.color }} className="mr-1.5">⚙️</span> Tech Specs
                           </h4>
                           <div className="grid grid-cols-3 gap-2">
@@ -812,7 +832,7 @@ const ProjectsSection = () => {
                                 <h5 className="text-xs font-medium" style={{ color: project.color }}>
                                   {category.category}
                                 </h5>
-                                <ul className="text-gray-400 text-xs">
+                                <ul className="text-gray-500 text-xs">
                                   <li>{category.items[0]}</li>
                                   <li>{category.items[1]}</li>
                                 </ul>
@@ -822,19 +842,19 @@ const ProjectsSection = () => {
                         </div>
                       )}
                       
-                      <div className="mb-4">
-                        <h4 className="text-xs text-gray-300 uppercase mb-2 font-medium flex items-center">
-                          <span style={{ color: project.color }} className="mr-1.5">🔧</span> Tech Stack
+                      <div className="mb-2 sm:mb-4">
+                        <h4 className="text-[10px] sm:text-xs text-gray-600 uppercase mb-1 sm:mb-2 font-medium flex items-center">
+                          <span style={{ color: project.color }} className="mr-1">🔧</span> Tech Stack
                         </h4>
-                        <div className="flex flex-wrap gap-1.5 mb-2">
-                          {project.techIcons.map((tech, i) => (
+                        <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-1 sm:mb-2">
+                          {project.techIcons.slice(0, window.innerWidth < 640 ? 4 : project.techIcons.length).map((tech, i) => (
                             <span 
                               key={i}
-                              className="inline-flex items-center gap-1 bg-zinc-800 px-2 py-1 rounded-full text-xs"
+                              className="inline-flex items-center gap-0.5 sm:gap-1 bg-gray-100 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs"
                               style={{ color: tech.color }}
                             >
-                              <tech.Icon className="text-xs" style={{ color: tech.color }} />
-                              {tech.name}
+                              <tech.Icon className="text-[10px] sm:text-xs" style={{ color: tech.color }} />
+                              <span className="hidden sm:inline">{tech.name}</span>
                             </span>
                           ))}
                         </div>

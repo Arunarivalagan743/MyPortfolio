@@ -15,20 +15,13 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  // Initialize darkMode state with a fallback from localStorage or media query
-  const [darkMode, setDarkMode] = useState<boolean>(
-    localStorage.getItem('theme') === 'dark' ||
-    (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))
-  );
+  // Initialize darkMode state - default to light mode (false)
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    // Always ensure light mode
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
   }, [darkMode]);
 
   return (

@@ -69,12 +69,12 @@ const PublicationsSection = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   
   return (
-    <section id="publications" className="py-12 sm:py-16 md:py-20 relative overflow-hidden">
+    <section id="publications" className="py-8 sm:py-12 md:py-16 relative overflow-hidden">
      
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
-        {/* Section Header with a more academic/research aesthetic */}
-        <div className="flex flex-col items-center mb-8 sm:mb-12 md:mb-16">
+      <div className="container mx-auto px-3 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
+        {/* Section Header */}
+        <div className="flex flex-col items-center mb-6 sm:mb-8 md:mb-12">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -82,7 +82,7 @@ const PublicationsSection = () => {
             className="flex items-center justify-center mb-2 sm:mb-3"
           >
             <div className="h-[1px] w-6 sm:w-8 md:w-10 bg-gradient-to-r from-transparent to-cyan-500/50"></div>
-            <span className="mx-2 text-cyan-400 text-xs sm:text-sm font-medium tracking-wider uppercase">Academic Contributions</span>
+            <span className="mx-2 text-cyan-600 text-xs sm:text-sm font-medium tracking-wider uppercase">Academic Contributions</span>
             <div className="h-[1px] w-6 sm:w-8 md:w-10 bg-gradient-to-l from-transparent to-cyan-500/50"></div>
           </motion.div>
           
@@ -93,9 +93,9 @@ const PublicationsSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4">
-              <HiOutlineAcademicCap className="text-cyan-400 text-3xl sm:text-4xl md:text-5xl" />
-              <span>Research <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Publications</span></span>
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-2">
+              <HiOutlineAcademicCap className="text-cyan-500 text-2xl sm:text-3xl md:text-4xl" />
+              <span>Research <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">Publications</span></span>
             </h2>
             <motion.div 
               className="absolute -bottom-2 sm:-bottom-3 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
@@ -105,7 +105,7 @@ const PublicationsSection = () => {
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             />
           </motion.div>
-          <p className="text-zinc-400 mt-4 sm:mt-5 md:mt-6 text-center max-w-2xl text-sm sm:text-base px-4">
+          <p className="text-gray-600 mt-4 sm:mt-5 md:mt-6 text-center max-w-2xl text-sm sm:text-base px-4">
             Peer-reviewed publications contributing to the advancement of technology and computer science
           </p>
         </div>
@@ -119,7 +119,7 @@ const PublicationsSection = () => {
               placeholder="Search by title, keyword, author..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-zinc-900/80 border border-zinc-800 focus:border-cyan-500/50 rounded-lg py-2.5 sm:py-3 pl-9 sm:pl-11 pr-3 sm:pr-4 text-sm sm:text-base text-white placeholder:text-zinc-500 focus:ring-1 focus:ring-cyan-500/30 focus:outline-none transition-all"
+              className="w-full bg-gray-50 focus:border-cyan-500 rounded-lg py-2.5 sm:py-3 pl-9 sm:pl-11 pr-3 sm:pr-4 text-sm sm:text-base text-gray-900 placeholder:text-gray-400 focus:ring-1 focus:ring-cyan-500/30 focus:outline-none transition-all"
             />
             <FaSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-cyan-400/70 text-sm sm:text-base" />
           </div>
@@ -130,8 +130,8 @@ const PublicationsSection = () => {
                 key={category.id}
                 className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 relative ${
                   selectedCategory === category.id 
-                    ? 'text-white' 
-                    : 'text-gray-400 hover:text-white'
+                    ? 'text-gray-900' 
+                    : 'text-gray-500 hover:text-gray-900'
                 }`}
                 onClick={() => setSelectedCategory(category.id)}
                 whileHover={{ scale: 1.03 }}
@@ -139,7 +139,7 @@ const PublicationsSection = () => {
               >
                 {selectedCategory === category.id && (
                   <motion.div 
-                    className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg -z-10 border border-cyan-500/30"
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg -z-10"
                     layoutId="categoryBackgroundPub"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
@@ -161,49 +161,48 @@ const PublicationsSection = () => {
             {filteredPublications.map((publication, index) => (
               <motion.div
                 key={publication.id}
-                className="relative rounded-2xl overflow-hidden shadow-2xl group mb-16"
-                initial={{ opacity: 0, y: 30 }}
+                className="relative rounded-xl overflow-hidden group mb-8 sm:mb-12"
+                initial={{ opacity: 0, y: 15 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 {/* Journal information header */}
-                <div className="bg-gradient-to-r from-blue-900/70 to-cyan-900/70 backdrop-blur-md py-4 px-6 border-b border-cyan-500/20">
+                <div className="bg-gradient-to-r from-blue-900/70 to-cyan-900/70 backdrop-blur-md py-2 sm:py-4 px-3 sm:px-6">
                   <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-blue-500/10 rounded-lg border border-blue-500/30">
-                        <RiNewspaperLine className="text-2xl text-blue-400" />
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="p-1.5 sm:p-2 bg-blue-500/10 rounded-lg">
+                        <RiNewspaperLine className="text-lg sm:text-2xl text-blue-400" />
                       </div>
                       <div>
-                        <h4 className="text-white font-medium">{publication.journal}</h4>
-                        <div className="flex items-center gap-2 text-xs text-gray-300">
+                        <h4 className="text-gray-900 font-medium text-xs sm:text-base line-clamp-1">{publication.journal}</h4>
+                        <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-gray-600">
                           <span>Vol. {publication.volume}</span>
-                          <span>|</span>
-                          <span>Issue {publication.issue}</span>
-                          <span>|</span>
-                          <span>{publication.date}</span>
+                          <span className="hidden sm:inline">|</span>
+                          <span className="hidden sm:inline">Issue {publication.issue}</span>
+                          <span>| {publication.date}</span>
                         </div>
                       </div>
                     </div>
                     <div className="hidden md:flex gap-2">
-                      <div className="flex items-center gap-1.5 bg-zinc-800/60 px-2.5 py-1 rounded-full">
-                        <FaBarcode className="text-cyan-400" />
-                        <span className="text-xs text-gray-300">{publication.issn}</span>
+                      <div className="flex items-center gap-1.5 bg-gray-100 px-2.5 py-1 rounded-full">
+                        <FaBarcode className="text-cyan-500" />
+                        <span className="text-xs text-gray-600">{publication.issn}</span>
                       </div>
-                      <div className="flex items-center gap-1.5 bg-zinc-800/60 px-2.5 py-1 rounded-full">
-                        <FaAward className="text-amber-400" />
-                        <span className="text-xs text-gray-300">IF: {publication.impact}</span>
+                      <div className="flex items-center gap-1.5 bg-gray-100 px-2.5 py-1 rounded-full">
+                        <FaAward className="text-amber-500" />
+                        <span className="text-xs text-gray-600">IF: {publication.impact}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-x border-b border-zinc-800">
+                <div className="bg-white">
                   <div className="md:flex">
                     {/* Publication Content */}
-                    <div className="md:w-2/3 p-6 md:p-8">
+                    <div className="w-full md:w-2/3 p-3 sm:p-6 md:p-8">
                       {/* Mobile image - only visible on small screens */}
                       <div className="md:hidden mb-6 w-full">
-                        <div className="relative w-full h-48 overflow-hidden rounded-lg shadow-lg border border-zinc-700/50">
+                        <div className="relative w-full h-48 overflow-hidden rounded-lg">
                           <img 
                             src={publication.image || "/assets/default-publication.jpg"} 
                             alt={`${publication.title} publication`} 
@@ -213,14 +212,14 @@ const PublicationsSection = () => {
                               e.currentTarget.onerror = null;
                             }}
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/50 to-transparent opacity-40"></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent opacity-40"></div>
                         </div>
                       </div>
 
                       <div className="md:flex gap-6">
                         {/* Desktop image - only visible on medium screens and up */}
                         <div className="hidden md:block flex-shrink-0 mb-4 md:mb-0">
-                          <div className="relative w-40 h-56 overflow-hidden rounded-lg shadow-lg border border-zinc-700/50 group/image">
+                          <div className="relative w-40 h-56 overflow-hidden rounded-lg group/image">
                             <img 
                               src={publication.image || "/assets/default-publication.jpg"} 
                               alt={`${publication.title} publication`} 
@@ -230,26 +229,26 @@ const PublicationsSection = () => {
                                 e.currentTarget.onerror = null;
                               }}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/30 to-transparent opacity-40 group-hover/image:opacity-20 transition-opacity duration-700"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent opacity-40 group-hover/image:opacity-20 transition-opacity duration-700"></div>
                           </div>
                         </div>
                         
                         <div className="flex-grow">
-                          <h3 className="text-2xl font-bold text-white mb-3 leading-tight">
+                          <h3 className="text-base sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight line-clamp-2 sm:line-clamp-none">
                             {publication.title}
                           </h3>
                           
-                          {/* Authors with badges */}
-                          <div className="flex flex-wrap items-center gap-2 mb-5">
+                          {/* Authors - simplified on mobile */}
+                          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3 sm:mb-5">
                             {publication.authors.map((author, idx) => (
                               <div 
                                 key={idx}
-                                className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-3 py-1"
+                                className="flex items-center gap-1 sm:gap-2 bg-blue-500/10 rounded-full px-2 sm:px-3 py-0.5 sm:py-1"
                               >
-                                <FaUsers className="text-blue-400 text-xs" />
-                                <span className="text-sm text-zinc-200">{author}</span>
+                                <FaUsers className="text-blue-400 text-[10px] sm:text-xs" />
+                                <span className="text-xs sm:text-sm text-gray-700">{author}</span>
                                 {idx === 0 && (
-                                  <span className="text-[10px] bg-cyan-900/60 text-cyan-300 px-1.5 py-0.5 rounded-full">
+                                  <span className="hidden sm:inline text-[10px] bg-cyan-900/60 text-cyan-300 px-1.5 py-0.5 rounded-full">
                                     Primary Author
                                   </span>
                                 )}
@@ -257,22 +256,22 @@ const PublicationsSection = () => {
                             ))}
                           </div>
                           
-                          {/* Abstract with gradient cutoff */}
+                          {/* Abstract with gradient cutoff - shorter on mobile */}
                           <div className="relative">
-                            <p className="text-zinc-300 text-sm mb-6 line-clamp-3">
+                            <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-3">
                               {publication.abstract}
                             </p>
-                            <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-zinc-950 to-transparent"></div>
+                            <div className="absolute bottom-0 left-0 right-0 h-4 sm:h-6 bg-gradient-to-t from-white to-transparent"></div>
                           </div>
                           
-                          {/* Keywords with improved styling */}
-                          <div className="mb-6">
-                            <h5 className="text-xs font-semibold text-zinc-400 mb-2 uppercase tracking-wider">Keywords</h5>
-                            <div className="flex flex-wrap gap-2">
-                              {publication.keywords.map((keyword, idx) => (
+                          {/* Keywords - show fewer on mobile */}
+                          <div className="mb-3 sm:mb-6">
+                            <h5 className="text-[10px] sm:text-xs font-semibold text-gray-500 mb-1.5 sm:mb-2 uppercase tracking-wider">Keywords</h5>
+                            <div className="flex flex-wrap gap-1 sm:gap-2">
+                              {publication.keywords.slice(0, window.innerWidth < 640 ? 3 : publication.keywords.length).map((keyword, idx) => (
                                 <span 
                                   key={idx}
-                                  className="text-xs bg-gradient-to-r from-cyan-900/30 to-blue-900/30 text-cyan-300 px-2 py-1 rounded-md border border-cyan-700/20"
+                                  className="text-[10px] sm:text-xs bg-gradient-to-r from-cyan-100 to-blue-100 text-cyan-700 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md"
                                 >
                                   {keyword}
                                 </span>
@@ -283,17 +282,17 @@ const PublicationsSection = () => {
                       </div>
                       
                       {/* Citation and technical details */}
-                      <div className="flex flex-col gap-4 mt-6">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <div className="flex items-center gap-1.5 bg-zinc-800/60 px-2.5 py-1.5 rounded-lg">
-                              <MdOutlineScience className="text-cyan-400" />
-                              <span className="text-sm text-white font-medium">{publication.citationCount}</span>
-                              <span className="text-xs text-gray-400">citations</span>
+                      <div className="flex flex-col gap-2 sm:gap-4 mt-3 sm:mt-6">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                            <div className="flex items-center gap-1 sm:gap-1.5 bg-gray-100 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg">
+                              <MdOutlineScience className="text-cyan-500 text-xs sm:text-sm" />
+                              <span className="text-xs sm:text-sm text-gray-900 font-medium">{publication.citationCount}</span>
+                              <span className="text-[10px] sm:text-xs text-gray-500 hidden sm:inline">citations</span>
                             </div>
-                            <div className="flex items-center gap-1.5 bg-zinc-800/60 px-2.5 py-1.5 rounded-lg">
-                              <RiLinksFill className="text-cyan-400" />
-                              <span className="text-xs text-gray-300">DOI: {publication.doi}</span>
+                            <div className="hidden sm:flex items-center gap-1.5 bg-gray-100 px-2.5 py-1.5 rounded-lg">
+                              <RiLinksFill className="text-cyan-500" />
+                              <span className="text-xs text-gray-600">DOI: {publication.doi}</span>
                             </div>
                           </div>
                           
@@ -301,7 +300,7 @@ const PublicationsSection = () => {
                             <motion.button
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.97 }}
-                              className="bg-zinc-800 hover:bg-zinc-700 text-cyan-300 p-2 rounded-lg transition-colors flex items-center gap-2"
+                              className="bg-gray-100 hover:bg-gray-200 text-cyan-600 p-2 rounded-lg transition-colors flex items-center gap-2"
                               onClick={() => setShowTechnicalDetails(!showTechnicalDetails)}
                             >
                               <span className="text-xs">Details</span>
@@ -332,39 +331,39 @@ const PublicationsSection = () => {
                               transition={{ duration: 0.3 }}
                               className="overflow-hidden"
                             >
-                              <div className="border-t border-zinc-800 pt-4 mt-2">
-                                <h5 className="text-xs font-semibold text-zinc-400 mb-3 uppercase tracking-wider">Publication Details</h5>
+                              <div className="border-t border-gray-200 pt-4 mt-2">
+                                <h5 className="text-xs font-semibold text-gray-500 mb-3 uppercase tracking-wider">Publication Details</h5>
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                   <div className="flex flex-col gap-2">
-                                    <div className="flex items-center justify-between bg-zinc-800/30 px-3 py-1.5 rounded-md">
-                                      <span className="text-xs text-zinc-400">Publisher</span>
-                                      <span className="text-xs text-zinc-200">{publication.publisher}</span>
+                                    <div className="flex items-center justify-between bg-gray-100 px-3 py-1.5 rounded-md">
+                                      <span className="text-xs text-gray-500">Publisher</span>
+                                      <span className="text-xs text-gray-700">{publication.publisher}</span>
                                     </div>
-                                    <div className="flex items-center justify-between bg-zinc-800/30 px-3 py-1.5 rounded-md">
-                                      <span className="text-xs text-zinc-400">ISSN</span>
-                                      <span className="text-xs text-zinc-200">{publication.issn}</span>
+                                    <div className="flex items-center justify-between bg-gray-100 px-3 py-1.5 rounded-md">
+                                      <span className="text-xs text-gray-500">ISSN</span>
+                                      <span className="text-xs text-gray-700">{publication.issn}</span>
                                     </div>
                                   </div>
                                   
                                   <div className="flex flex-col gap-2">
-                                    <div className="flex items-center justify-between bg-zinc-800/30 px-3 py-1.5 rounded-md">
-                                      <span className="text-xs text-zinc-400">Impact Factor</span>
-                                      <span className="text-xs text-cyan-300">{publication.impact}</span>
+                                    <div className="flex items-center justify-between bg-gray-100 px-3 py-1.5 rounded-md">
+                                      <span className="text-xs text-gray-500">Impact Factor</span>
+                                      <span className="text-xs text-cyan-600">{publication.impact}</span>
                                     </div>
-                                    <div className="flex items-center justify-between bg-zinc-800/30 px-3 py-1.5 rounded-md">
-                                      <span className="text-xs text-zinc-400">Publication Date</span>
-                                      <span className="text-xs text-zinc-200">{publication.date}</span>
+                                    <div className="flex items-center justify-between bg-gray-100 px-3 py-1.5 rounded-md">
+                                      <span className="text-xs text-gray-500">Publication Date</span>
+                                      <span className="text-xs text-gray-700">{publication.date}</span>
                                     </div>
                                   </div>
                                 </div>
                                 
                                 {/* Citation format */}
                                 <div className="mt-4">
-                                  <h6 className="text-xs font-semibold text-zinc-400 mb-2">How to Cite</h6>
-                                  <div className="bg-zinc-900/80 border border-zinc-800 rounded-md p-3">
-                                    <p className="text-xs text-zinc-300 font-mono leading-relaxed">
-                                      <span className="text-cyan-400">{publication.authors.join(", ")}</span>. ({publication.date.split(" ")[1]}). 
+                                  <h6 className="text-xs font-semibold text-gray-500 mb-2">How to Cite</h6>
+                                  <div className="bg-gray-50 rounded-md p-3">
+                                    <p className="text-xs text-gray-700 font-mono leading-relaxed">
+                                      <span className="text-cyan-600">{publication.authors.join(", ")}</span>. ({publication.date.split(" ")[1]}). 
                                       "{publication.title}". <span className="italic">{publication.journal}</span>, 
                                       {publication.volume}({publication.issue}). DOI: {publication.doi}
                                     </p>
@@ -377,8 +376,8 @@ const PublicationsSection = () => {
                       </div>
                     </div>
                     
-                    {/* Publication Abstract and Details */}
-                    <div className="md:w-1/3 bg-gradient-to-br from-zinc-900 to-zinc-950 border-t md:border-t-0 md:border-l border-zinc-800 p-6 relative">
+                    {/* Publication Abstract and Details - hidden on mobile */}
+                    <div className="hidden md:block md:w-1/3 bg-gradient-to-br from-zinc-900 to-zinc-950 border-t md:border-t-0 md:border-l border-zinc-800 p-6 relative">
                       <div className="absolute top-0 left-0 right-0 h-[1px] md:h-full md:w-[1px] bg-gradient-to-r md:bg-gradient-to-b from-transparent via-cyan-800/20 to-transparent"></div>
                       
                       <div className="flex flex-col h-full">
@@ -396,7 +395,7 @@ const PublicationsSection = () => {
                             href={publication.pdfUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-6 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 hover:from-blue-500/30 hover:to-cyan-500/30 border border-cyan-500/30 text-white py-2 px-4 rounded-md transition-all"
+                            className="mt-6 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 hover:from-blue-500/30 hover:to-cyan-500/30 text-white py-2 px-4 rounded-md transition-all"
                           >
                             <FaDownload className="text-cyan-400" />
                             <span className="text-sm">Download Publication</span>

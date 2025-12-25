@@ -43,7 +43,7 @@ const SkillsSection = () => {
       color: "#339933",
       skills: [
         { name: "Node.js", icon: FaNodeJs, color: "#339933", proficiency: 88 },
-        { name: "Express.js", icon: SiExpress, color: "#ffffff", proficiency: 85 }
+        { name: "Express.js", icon: SiExpress, color: "#333333", proficiency: 85 }
       ]
     },
     {
@@ -60,7 +60,7 @@ const SkillsSection = () => {
       color: "#F05032",
       skills: [
         { name: "Git", icon: SiGit, color: "#F05032", proficiency: 90 },
-        { name: "GitHub", icon: FaGithub, color: "#FFFFFF", proficiency: 93 },
+        { name: "GitHub", icon: FaGithub, color: "#333333", proficiency: 93 },
         { name: "Postman", icon: SiPostman, color: "#FF6C37", proficiency: 85 },
         { name: "Figma", icon: SiFigma, color: "#F24E1E", proficiency: 77 },
         { name: "MS Office", icon: BsFillFileEarmarkWordFill, color: "#2B579A", proficiency: 80 }
@@ -76,11 +76,10 @@ const SkillsSection = () => {
     return (
       <motion.div 
         ref={ref}
-        className="flex flex-col items-center p-3 sm:p-4 rounded-xl sm:rounded-2xl backdrop-blur-sm bg-zinc-800/40 border border-zinc-700/30 transition-all shadow-lg"
+        className="flex flex-col items-center p-3 sm:p-4 rounded-xl sm:rounded-2xl backdrop-blur-sm bg-white transition-all"
         whileHover={{ 
           y: -3,
-          boxShadow: `0 15px 30px -10px rgba(0,0,0,0.3), 0 0 0 1px ${skill.color}30`,
-          backgroundColor: `rgba(40, 40, 45, 0.7)`,
+          backgroundColor: `rgba(255, 255, 255, 1)`,
           transition: { duration: 0.2 }
         }}
         initial={{ opacity: 0, scale: 0.9 }}
@@ -93,7 +92,7 @@ const SkillsSection = () => {
             <circle 
               cx="50" cy="50" r="42" 
               fill="none" 
-              stroke="rgba(255,255,255,0.1)" 
+              stroke="rgba(0,0,0,0.1)" 
               strokeWidth="8"
             />
             
@@ -114,7 +113,7 @@ const SkillsSection = () => {
             />
             
             {/* Inner circle with icon */}
-            <circle cx="50" cy="50" r="34" fill="rgba(30, 30, 35, 0.8)" />
+            <circle cx="50" cy="50" r="34" fill="rgba(248, 250, 252, 1)" />
             
             {/* Icon in center */}
             <foreignObject x="25" y="25" width="50" height="50">
@@ -126,9 +125,9 @@ const SkillsSection = () => {
         </div>
         
         {/* Skill name and percentage */}
-        <h4 className="text-xs sm:text-sm font-medium text-white mb-1 text-center">{skill.name}</h4>
+        <h4 className="text-xs sm:text-sm font-medium text-gray-900 mb-1 text-center">{skill.name}</h4>
         <div 
-          className="text-xs font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-zinc-700/50"
+          className="text-xs font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gray-100"
           style={{ color: skill.color }}
         >
           {skill.proficiency}%
@@ -154,11 +153,11 @@ const SkillsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 text-white px-4">
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Skills</span> & Technologies
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 text-gray-900 px-4">
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-500 text-transparent bg-clip-text">Skills</span> & Technologies
           </h2>
           <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mb-4 sm:mb-5 md:mb-6 mx-auto"></div>
-          <p className="text-center text-gray-400 max-w-2xl mx-auto text-sm sm:text-base px-4">
+          <p className="text-center text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
             My technical toolkit includes these technologies that I've mastered through hands-on experience in various projects.
           </p>
         </motion.div>
@@ -168,7 +167,7 @@ const SkillsSection = () => {
           {skillCategories.map((category, idx) => (
             <motion.div
               key={category.title}
-              className="p-4 sm:p-5 md:p-6 rounded-2xl sm:rounded-3xl border border-zinc-700/30 bg-zinc-900/50 backdrop-blur-lg shadow-xl"
+              className="p-4 sm:p-5 md:p-6 rounded-2xl sm:rounded-3xl bg-white backdrop-blur-lg"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -177,8 +176,8 @@ const SkillsSection = () => {
               {/* Category heading with colored accent */}
               <div className="flex items-center mb-4 sm:mb-5 md:mb-6">
                 <div className="w-1.5 sm:w-2 h-5 sm:h-6 rounded-full mr-2 sm:mr-3" style={{ backgroundColor: category.color }}></div>
-                <h3 className="text-base sm:text-lg font-bold text-white">{category.title}</h3>
-                <div className="h-px grow ml-3 sm:ml-4 bg-gradient-to-r from-zinc-700/80 to-transparent"></div>
+                <h3 className="text-base sm:text-lg font-bold text-gray-900">{category.title}</h3>
+                <div className="h-px grow ml-3 sm:ml-4 bg-gradient-to-r from-gray-300 to-transparent"></div>
               </div>
               
               {/* Skills grid with circular progress displays only */}

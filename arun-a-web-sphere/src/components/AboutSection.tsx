@@ -2,7 +2,7 @@
 
 
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { HiDocumentText } from "react-icons/hi2";
 import { 
   FaCode, 
@@ -10,7 +10,6 @@ import {
   FaServer, 
   FaDatabase
 } from 'react-icons/fa';
-import { FaFutbol, FaBook, FaPaintBrush, FaLightbulb } from 'react-icons/fa';
 
 import { SiLeetcode } from 'react-icons/si';
 
@@ -43,7 +42,6 @@ const AboutSection = () => {
   const [buttonEncrypted, setButtonEncrypted] = useState("");
   const [isButtonEncrypting, setIsButtonEncrypting] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [activeTab, setActiveTab] = useState('about');
 
   // Check if device is mobile
   useEffect(() => {
@@ -171,8 +169,8 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight px-4">
-              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Me</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight px-4">
+              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">Me</span>
             </h2>
             <motion.div 
               className="absolute -bottom-2 sm:-bottom-3 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
@@ -182,7 +180,7 @@ const AboutSection = () => {
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             />
           </motion.div>
-          <p className="text-zinc-400 mt-4 sm:mt-5 md:mt-6 text-center max-w-2xl text-sm sm:text-base px-4">
+          <p className="text-gray-600 mt-4 sm:mt-5 md:mt-6 text-center max-w-2xl text-sm sm:text-base px-4">
             Developer, innovator, and creative problem-solver. My journey in building the web.
           </p>
         </div>
@@ -222,7 +220,7 @@ const AboutSection = () => {
                 ))}
               </div>
 
-              <div className="w-full aspect-square max-h-[400px] bg-zinc-900 rounded-lg overflow-hidden relative">
+              <div className="w-full aspect-square max-h-[400px] bg-gray-100 rounded-lg overflow-hidden relative">
                 <img src={aboutImage} alt="About Me" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-blue-700/30 flex items-center justify-center" />
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 blue-gradient rounded-full opacity-60 blur-lg"></div>
@@ -255,24 +253,24 @@ const AboutSection = () => {
 
             {/* Coding Profiles */}
             <motion.div
-              className="bg-zinc-900/60 backdrop-blur-md rounded-xl p-4 sm:p-5 md:p-6 border border-zinc-800"
+              className="bg-white backdrop-blur-md rounded-xl p-4 sm:p-5 md:p-6"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <h3 className="text-xl font-bold mb-4 text-white flex items-center gap-2">
-                <span className="text-cyan-400">#</span> Coding Profile
+              <h3 className="text-xl font-bold mb-4 text-gray-900 flex items-center gap-2">
+                <span className="text-cyan-500">#</span> Coding Profile
               </h3>
               
               <motion.a 
                 href="https://codolio.com/profile/arun_743"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative group flex items-center justify-center p-4 bg-zinc-800/50 rounded-lg overflow-hidden w-full"
+                className="relative group flex items-center justify-center p-4  overflow-hidden w-full"
                 whileHover={{ 
                   scale: 1.02,
-                  backgroundColor: `rgba(30, 30, 35, 0.9)`,
+                  
                   transition: { duration: 0.2 }
                 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -307,109 +305,35 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {/* Tabs Navigation */}
-            <div className="flex space-x-1 mb-4 sm:mb-5 md:mb-6 bg-zinc-900/60 backdrop-blur-sm p-1 rounded-lg">
-              {['about', 'interests'].map((tab) => (
-                <motion.button
-                  key={tab}
-                  className={`px-4 py-2 rounded-md text-sm font-medium capitalize relative ${
-                    activeTab === tab 
-                      ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-white' 
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                  onClick={() => setActiveTab(tab)}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  {tab}
-                  {activeTab === tab && (
-                    <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500"
-                      layoutId="activeTab"
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                    />
-                  )}
-                </motion.button>
-              ))}
-            </div>
-            
             {/* Content Panel */}
-            <div className="bg-zinc-900/60 backdrop-blur-md rounded-xl p-6 md:p-8 border border-zinc-800">
-              <AnimatePresence mode="wait">
-                {activeTab === 'about' && (
-                  <motion.div 
-                    key="about"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-6"
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="h-12 w-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold text-xl">
-                        A
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-white">Arun A</h3>
-                        <p className="text-cyan-400 font-medium">MERN Stack Developer</p>
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-300 leading-relaxed text-lg">
-                      I'm a <span className="text-cyan-400 font-medium">MERN Stack Developer</span> and a B.E Computer Science Engineering student (2027 batch). 
-                      I'm a strong communicator, fast learner, and enthusiastic problem solver with interests in web design, 
-                      data structures, and networking.
-                    </p>
-                    
-                    <p className="text-gray-300 leading-relaxed text-lg">
-                      I thrive in team environments and also excel independently. My passion lies in creating 
-                      efficient, scalable web solutions with clean code practices.
-                    </p>
-
-                    {/* Professional skills bars with animation */}
-                  
-                  </motion.div>
-                )}
-                
-                {activeTab === 'interests' && (
-                <motion.div 
-                  key="interests"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-6"
-                >
-                  <h3 className="text-xl font-semibold text-white">Beyond Coding</h3>
-                  
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { title: "Problem Solving", desc: "I enjoy solving challenging algorithmic problems on LeetCode and CodeForces.", icon: FaCode },
-                      { title: "Web Design", desc: "Creating beautiful, responsive web interfaces with attention to UX.", icon: FaCode },
-                      { title: "Learning", desc: "Continuously exploring new technologies and programming paradigms.", icon: FaLightbulb },
-                      { title: "Sports", desc: "Staying active and competitive through cricket, badminton, or fitness routines.", icon: FaFutbol },
-                      { title: "Books", desc: "Reading tech, self-growth, and fiction books to expand knowledge and imagination.", icon: FaBook },
-                      { title: "Drawing", desc: "Expressing creativity through sketches and digital illustrations.", icon: FaPaintBrush }
-                    ].map((item, i) => (
-                      <motion.div
-                        key={i}
-                        className="bg-zinc-800/50 p-4 rounded-lg border border-zinc-700/50 hover:border-cyan-500/30 transition-colors"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        whileHover={{ scale: 1.02 }}
-                      >
-                        <div className="flex items-center gap-2 mb-2">
-                          <item.icon className="text-cyan-400" />
-                          <h4 className="text-lg font-medium text-cyan-400">{item.title}</h4>
-                        </div>
-                        <p className="text-gray-400">{item.desc}</p>
-                      </motion.div>
-                    ))}
+            <div className="bg-white backdrop-blur-md rounded-xl p-6 md:p-8">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="space-y-6"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold text-xl">
+                    A
                   </div>
-                </motion.div>
-                )}
-              </AnimatePresence>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900">Arun A</h3>
+                    <p className="text-cyan-600 font-medium">MERN Stack Developer</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-700 leading-relaxed text-lg">
+                  I'm a <span className="text-cyan-600 font-medium">MERN Stack Developer</span> and a B.E Computer Science Engineering student (2027 batch). 
+                  I'm a strong communicator, fast learner, and enthusiastic problem solver with interests in web design, 
+                  data structures, and networking.
+                </p>
+                
+                <p className="text-gray-700 leading-relaxed text-lg">
+                  I thrive in team environments and also excel independently. My passion lies in creating 
+                  efficient, scalable web solutions with clean code practices.
+                </p>
+              </motion.div>
             </div>
             
             {/* Resume Button */}
@@ -417,7 +341,7 @@ const AboutSection = () => {
               <div className="relative inline-block">
                 {/* Encryption animation border for button */}
                 <div className="absolute -inset-1 md:-inset-1 rounded-lg overflow-hidden">
-                  <div className="absolute inset-0 bg-zinc-900/80 backdrop-blur-sm z-0"></div>
+                  <div className="absolute inset-0 bg-gray-100 backdrop-blur-sm z-0"></div>
                   
                   {['top', 'bottom', 'left', 'right'].map((side) => (
                     <div 

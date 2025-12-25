@@ -12,6 +12,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [hideNavbar, setHideNavbar] = useState(false);
   const isNavigatingRef = useRef(false);
 
   useEffect(() => {
@@ -20,6 +21,15 @@ const Navbar = () => {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
+      }
+
+      // Hide navbar when near footer
+      const footer = document.querySelector('footer');
+      if (footer) {
+        const footerRect = footer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        // Hide when footer is visible (within 100px of viewport bottom)
+        setHideNavbar(footerRect.top < windowHeight - 50);
       }
 
       // Only update active section if we're not in the middle of a navigation
@@ -124,16 +134,16 @@ const Navbar = () => {
       </div>
     
       {/* Bottom centered navigation bar - Fixed with transform for perfect centering */}
-      <div className="fixed bottom-0 left-0 right-0 flex justify-center items-center w-full px-4 pb-6 pt-0 z-50 pointer-events-none">
+      <div className={`fixed bottom-0 left-0 right-0 flex justify-center items-center w-full px-4 pb-6 pt-0 z-50 pointer-events-none transition-all duration-300 ${hideNavbar ? 'opacity-0 translate-y-20' : 'opacity-100 translate-y-0'}`}>
         <motion.nav 
           className="pointer-events-auto"
           initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          animate={{ opacity: hideNavbar ? 0 : 1, y: hideNavbar ? 50 : 0 }}
+          transition={{ duration: 0.3 }}
         >
           <div className={cn(
             "flex items-center justify-center px-3 py-2 rounded-full transition-all duration-300",
-            "bg-black/60 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/30",
+            "bg-white/90 backdrop-blur-xl border border-gray-200 shadow-lg shadow-gray-200/50",
             isScrolled ? "shadow-cyan-500/10" : ""
           )}>
             {menuItems.map((item) => {
@@ -164,7 +174,7 @@ const Navbar = () => {
                   <motion.div 
                     className={cn(
                       "text-lg sm:text-xl",
-                      isActive ? "text-cyan-400" : "text-white/70"
+                      isActive ? "text-cyan-500" : "text-gray-500"
                     )}
                     animate={{ 
                       scale: isActive ? 1.1 : 1

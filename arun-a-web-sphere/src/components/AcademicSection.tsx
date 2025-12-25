@@ -7,7 +7,7 @@ const AcademicSection = () => {
     {
       degree: 'BE - Computer Science Engineering',
       institution: 'Sri Shakthi Institute of Engineering and Technology',
-      details: 'CGPA: 8.34',
+      details: 'CGPA: 8.29',
       year: '2027',
       icon: <HiAcademicCap className="w-7 h-7" />,
       color: 'from-blue-600 to-blue-400',
@@ -43,8 +43,8 @@ const AcademicSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-white flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4">
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Academic</span> Qualifications
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-gray-900 flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4">
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-500 text-transparent bg-clip-text">Academic</span> Qualifications
           </h2>
           <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
         </motion.div>
@@ -62,11 +62,9 @@ const AcademicSection = () => {
               >
                 {/* Education card */}
               <motion.div
-                className="group relative bg-zinc-900/80 backdrop-blur-lg rounded-xl p-4 sm:p-5 md:p-6 border border-zinc-800 shadow-lg h-full overflow-hidden"
+                className="group relative bg-white backdrop-blur-lg rounded-xl p-4 sm:p-5 md:p-6 h-full overflow-hidden"
                 whileHover={{ 
                   y: -3,
-                  boxShadow: '0 15px 30px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 191, 255, 0.1)',
-                  borderColor: 'rgba(0, 191, 255, 0.3)',
                 }}
                 transition={{ duration: 0.3 }}
               >
@@ -81,19 +79,19 @@ const AcademicSection = () => {
                 </div>
                 
                 {/* Year marker */}
-                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-md px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs font-medium text-cyan-300">
+                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-blue-100 to-cyan-100 backdrop-blur-md px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs font-medium text-cyan-600">
                   {item.year}
                 </div>
                 
                 {/* Content */}
                 <div className="space-y-1.5 sm:space-y-2">
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 group-hover:text-cyan-600 transition-colors">
                     {item.degree}
                   </h3>
-                  <p className="text-gray-400 text-xs sm:text-sm">{item.institution}</p>
+                  <p className="text-gray-600 text-xs sm:text-sm">{item.institution}</p>
                   {item.location && <p className="text-gray-500 text-xs">{item.location}</p>}
-                  <div className="pt-2 mt-2 border-t border-zinc-800/50">
-                    <p className="flex items-center text-cyan-400 font-medium text-xs sm:text-sm md:text-base">
+                  <div className="pt-2 mt-2 border-t border-gray-200">
+                    <p className="flex items-center text-cyan-600 font-medium text-xs sm:text-sm md:text-base">
                       {item.details}
                     </p>
                   </div>
@@ -106,7 +104,7 @@ const AcademicSection = () => {
               </motion.div>
               
               {/* Sequential numbering */}
-              <div className="absolute -top-3 sm:-top-4 -left-2 md:-left-4 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg shadow-blue-500/20 border-2 border-zinc-900">
+              <div className="absolute -top-3 sm:-top-4 -left-2 md:-left-4 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg shadow-blue-500/20 border-2 border-white">
                 {index + 1}
               </div>
             </motion.div>

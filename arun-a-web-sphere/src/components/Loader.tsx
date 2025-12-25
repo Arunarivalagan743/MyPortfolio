@@ -40,7 +40,7 @@ const Loader = () => {
   
   return (
     <motion.div 
-      className="fixed inset-0 bg-zinc-900 bg-opacity-95 backdrop-blur-md z-50 flex flex-col items-center justify-center"
+      className="fixed inset-0 bg-white bg-opacity-95 backdrop-blur-md z-50 flex flex-col items-center justify-center"
       animate={loading ? { opacity: 1 } : { opacity: 0, pointerEvents: "none" }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
     >
@@ -52,11 +52,11 @@ const Loader = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-4xl font-bold text-white tracking-tight">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+          <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">
               ARUN
             </span>
-            <span className="text-gray-300 ml-1">DEVS</span>
+            <span className="text-gray-500 ml-1">DEVS</span>
           </h1>
         </motion.div>
 
@@ -70,7 +70,7 @@ const Loader = () => {
           
       
           <motion.p
-            className="mt-6 text-gray-400 font-medium text-sm"
+            className="mt-6 text-gray-600 font-medium text-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -80,14 +80,14 @@ const Loader = () => {
           
     
           <div className="mt-8 w-64 sm:w-80">
-            <div className="h-1 bg-zinc-800 w-full rounded-full overflow-hidden">
+            <div className="h-1 bg-gray-200 w-full rounded-full overflow-hidden">
               <motion.div 
                 className="h-full bg-gradient-to-r from-cyan-500 to-blue-500"
                 initial={{ width: "0%" }}
                 style={{ width: progressValue }}
               />
             </div>
-            <div className="mt-3 flex justify-between items-center text-xs text-zinc-500">
+            <div className="mt-3 flex justify-between items-center text-xs text-gray-500">
               <span>Loading assets</span>
               <motion.span
                 className="tabular-nums"

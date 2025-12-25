@@ -19,6 +19,7 @@ import {
   FaHotel
 } from 'react-icons/fa';
 import { SiCoursera, SiUdemy, SiFreecodecamp, SiGoogle} from 'react-icons/si';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 import { SiNvidia } from 'react-icons/si'; // Using SiNvidia as a replacement for NPTEL
 
@@ -27,61 +28,60 @@ const workExperiences = [
  
   {
     id: 3,
-    role: "Frontend Developer – User Module Consultant",
-    company: "La Patisserie, Coimbatore (Remote – Freelance)",
+    role: "Full Stack Developer – Desserts Platform (User & Admin Consultant)",
+    company: "La Patisserie, Coimbatore",
     logo: "/assets/lapatisserie.png",
     period: "Sep 2025 – Nov 2025",
     location: "Remote",
     type: "Freelance",
-    website: "https://lapatisserie.shop",
-    description: "Developed a modern, responsive online bakery platform enabling seamless browsing and ordering of 30+ products. Implemented advanced cart, favorites, and recently viewed features with React Context and optimized state management. Integrated secure user authentication, payment gateways, and real-time order tracking. Enhanced frontend performance and accessibility, reducing page load times and improving mobile usability.",
+    website: "https://thelapatisserie.vercel.app",
+    description: "Designed and deployed a MERN-based e-commerce platform with clearly separated user and admin workflows. Implemented product listings, cart, wishlist, order management, and RESTful backend APIs.",
     achievements: [
-      "Built a bakery e-commerce platform with React.js and Tailwind CSS",
-      "Advanced cart, favorites, and recently viewed features using Context API",
-      "Integrated secure authentication and payment gateways",
-      "Enabled real-time order tracking for users",
-      "Improved accessibility and mobile performance",
-      "Live at: la-patisserie-nine.vercel.app"
+      "Built MERN-based e-commerce platform with user and admin workflows",
+      "Implemented product listings, cart, wishlist, and order management",
+      "Built admin-configurable delivery zone validation",
+      "Integrated Razorpay payment gateway",
+      "Deployed to production: thelapatisserie.vercel.app"
     ],
-    skills: ["React.js", "Tailwind CSS", "Context API", "Payment Integration", "Accessibility", "Performance Optimization"],
+    skills: ["React.js", "Node.js", "MongoDB", "Express.js", "Razorpay", "REST APIs"],
     color: "#F59E42"
   },
    {
     id: 1,
-    role: "Frontend Engineer",
-    company: "Luxor Holiday Homestays",
+    role: "Frontend Developer – Villa Booking Platform (User Modules Consultant)",
+    company: "Luxor Holiday Homestays, Chennai",
     logo: "/assets/luxor.png",
-    period: "Jun 2025 - Aug 2025",
+    period: "Jun 2025 – Aug 2025",
     location: "Chennai, India",
     type: "Full-time",
     website: "https://www.luxorholidayhomestays.com/",
-    description: "Leading the digital transformation of Luxor Holiday Homestays, an exclusive chain of premium vacation properties across Tamil Nadu's most scenic destinations.",
+    description: "Developed the React frontend including homepage, villa listings, detail pages, and contact modules. Created reusable UI components and managed state for smooth navigation and user experience.",
     achievements: [
-      "Developed and launched a responsive booking platform that increased direct bookings and reduced dependency on third-party platforms",
-      "Implemented an integrated property management system that streamlined operations across multiple properties",
-      "Designed an interactive virtual tour feature that increased website engagement",
-      "Created a customer loyalty program that resulted in repeat bookings"
+      "Developed React frontend with homepage and villa listings",
+      "Created reusable UI components for smooth navigation",
+      "Optimized image loading and search performance",
+      "Improved page load times significantly"
     ],
-    skills: ["React", "Node.js", "MongoDB", "AWS", "UI/UX Design", "Payment Gateway Integration"],
+    skills: ["React", "Tailwind CSS", "UI/UX Design", "Performance Optimization"],
     color: "#1E40AF"
   },
   {
     id: 2,
-    role: "Full Stack Engineer",
-    company: "Casual Clothings",
+    role: "Full Stack Developer – Clothing Platform (User & Admin Consultant)",
+    company: "Casual Clothings Fashion Pvt Ltd, Tirupur",
     logo: "/assets/clothing.png",
-    period: "Mar 2025 - May 2025",
+    period: "Jan 2025 – May 2025",
     location: "Tirupur, India",
     type: "Full-time",
     website: "https://www.casualclothings.shop/",
-    description: "Spearheaded the digital presence for Casual Clothings, a premium casual wear brand known for its exceptional quality and contemporary designs.",
+    description: "Built a MERN-based clothing and T-shirt ordering platform with role-based admin controls. Implemented inventory management, order lifecycle tracking, and product CRUD operations.",
     achievements: [
-      "Launched a fully responsive e-commerce platform with integrated inventory management system",
-      "Implemented personalized recommendation engine that increased average order value",
-      "Developed a virtual try-on feature using AR technology that reduced return rates",
-      "Optimized checkout process resulting in reduction in cart abandonment"
+      "Built MERN-based clothing platform with admin controls",
+      "Implemented inventory and order lifecycle tracking",
+      "Developed bulk and custom order workflows",
+      "Supported large-scale purchases at casualclothings.shop"
     ],
-    skills: ["React", "Node.js", "MongoDB", "AWS", "UI/UX Design", "Payment Gateway Integration"],
+    skills: ["React", "Node.js", "MongoDB", "Express.js", "REST APIs", "Admin Dashboard"],
     color: "#0D9488"
   },
 
@@ -143,73 +143,70 @@ const categories = [
 // Component for Work Experience Timeline
 const WorkExperienceSection = () => {
   return (
-    <section id="experience" className="py-12 sm:py-16 md:py-20 relative">
+    <section id="experience" className="py-8 sm:py-12 md:py-16 relative">
       {/* Background decorative elements */}
       <div className="absolute top-0 left-0 right-0 h-px "></div>
       <div className="absolute bottom-0 left-0 right-0 h-px "></div>
       
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-32 sm:-top-40 -right-32 sm:-right-40 w-64 h-64 sm:w-80 sm:h-80 "></div>
-        <div className="absolute -bottom-32 sm:-bottom-40 -left-32 sm:-left-40 w-64 h-64 sm:w-80 sm:h-80 "></div>
-      </div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
+      <div className="container mx-auto px-3 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.4 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center mb-8 sm:mb-12 md:mb-16"
+          className="flex flex-col items-center mb-5 sm:mb-8 md:mb-12"
         >
-          <div className="relative inline-block mb-3 sm:mb-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight flex items-center gap-2 sm:gap-3">
-              <FaBriefcase className="text-blue-400 text-xl sm:text-2xl md:text-3xl" />
-              <span className="text-center">Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">Experience</span></span>
+          <div className="relative inline-block mb-2 sm:mb-3">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight flex items-center gap-1.5 sm:gap-2">
+              <FaBriefcase className="text-blue-500 text-lg sm:text-xl md:text-2xl" />
+              <span className="text-center">Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-500">Experience</span></span>
             </h2>
             <motion.div 
-              className="absolute -bottom-2 sm:-bottom-3 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-blue-400 to-teal-400 rounded-full"
+              className="absolute -bottom-1.5 sm:-bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-teal-400 rounded-full"
               initial={{ width: 0, left: "50%" }}
               whileInView={{ width: "100%", left: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
             />
           </div>
-          <p className="text-zinc-400 text-center max-w-2xl text-sm sm:text-base px-4">
-            My professional journey working with premium brands and delivering exceptional digital experiences.
+          <p className="text-gray-600 text-center max-w-xl text-[11px] sm:text-xs md:text-sm px-2">
+            My professional journey delivering exceptional digital experiences.
           </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Timeline line - Hidden on mobile, visible on tablet+ */}
-          <div className="absolute left-3 sm:left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500/30 via-teal-500/30 to-blue-500/30 transform md:translate-x-px"></div>
+          <div className="absolute left-3 sm:left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500/30 via-teal-500/30 to-blue-500/30 md:-translate-x-px"></div>
           
           {/* Experience cards */}
-          <div className="space-y-6 sm:space-y-8 md:space-y-12 relative">
+          <div className="space-y-4 sm:space-y-6 md:space-y-10 relative">
             {workExperiences.map((exp, index) => (
               <motion.div
                 key={exp.id}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
                 className={`relative pl-8 sm:pl-10 md:w-1/2 md:pl-0 ${
                   index % 2 === 0 ? 'md:pr-8 lg:pr-12 md:ml-0' : 'md:pl-8 lg:pl-12 md:ml-auto'
                 }`}
               >
-                {/* Timeline dot */}
+                {/* Timeline dot - positioned correctly for all screen sizes */}
                 <div 
-                  className="absolute top-0 left-0 sm:left-1 md:left-auto w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 sm:border-4 border-gray-900 z-10"
-                  style={{ backgroundColor: exp.color, right: index % 2 === 0 ? 'auto' : 'auto', left: index % 2 === 0 ? '0.5rem' : 'auto', [index % 2 === 0 ? 'right' : 'left']: window.innerWidth >= 768 ? '-2.5px' : 'auto' }}
+                  className={`absolute top-4 w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-white z-10 shadow-md
+                    left-1.5 sm:left-2
+                    md:left-auto ${index % 2 === 0 ? 'md:-right-[7px]' : 'md:-left-[7px]'}`}
+                  style={{ backgroundColor: exp.color }}
                 ></div>
                 
                 {/* Card */}
-                <div className="bg-gray-800 bg-opacity-60 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-gray-700 hover:border-opacity-80 shadow-lg sm:shadow-xl hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 overflow-hidden group">
-                  {/* Product Image Header */}
+                <div className="bg-white rounded-xl overflow-hidden group">
+                  {/* Product Image Header - compact */}
                   {exp.logo && (
                     <div 
-                      className="relative h-40 sm:h-48 md:h-56 lg:h-64 w-full overflow-hidden cursor-pointer"
+                      className="relative h-28 sm:h-36 md:h-44 lg:h-52 w-full overflow-hidden cursor-pointer"
                       onClick={() => {
                         if (exp.website) {
                           window.open(exp.website, '_blank', 'noopener,noreferrer');
@@ -237,26 +234,26 @@ const WorkExperienceSection = () => {
                     </div>
                   )}
                   
-                  <div className="p-3 sm:p-4 md:p-5 lg:p-6">
-                    <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                  <div className="p-2.5 sm:p-3 md:p-4 lg:p-5">
+                    <div className="flex flex-row items-start gap-2 sm:gap-3 mb-2 sm:mb-3">
                       {/* Company logo/icon */}
                       <div 
-                        className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-lg sm:rounded-xl flex-shrink-0"
-                        style={{ backgroundColor: `${exp.color}25` }}
+                        className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg flex-shrink-0"
+                        style={{ backgroundColor: `${exp.color}20` }}
                       >
                         {exp.company === "Luxor Holiday Homestays" ? (
-                          <FaHotel className="text-xl sm:text-2xl" style={{ color: exp.color }} />
+                          <FaHotel className="text-base sm:text-lg md:text-xl" style={{ color: exp.color }} />
                         ) : exp.company === "Casual Clothings" ? (
-                          <FaTshirt className="text-xl sm:text-2xl" style={{ color: exp.color }} />
+                          <FaTshirt className="text-base sm:text-lg md:text-xl" style={{ color: exp.color }} />
                         ) : (
-                          <FaCode className="text-xl sm:text-2xl" style={{ color: exp.color }} />
+                          <FaCode className="text-base sm:text-lg md:text-xl" style={{ color: exp.color }} />
                         )}
                       </div>
                     
                     {/* Role and company */}
-                    <div className="flex-1">
-                      <h3 className="text-base sm:text-lg md:text-xl font-bold text-white leading-tight">{exp.role}</h3>
-                      <div className="text-sm sm:text-base md:text-lg font-medium flex flex-wrap items-center gap-2 mt-1" style={{ color: exp.color }}>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 leading-tight truncate">{exp.role}</h3>
+                      <div className="text-xs sm:text-sm md:text-base font-medium flex flex-wrap items-center gap-1.5 mt-0.5" style={{ color: exp.color }}>
                         <span>{exp.company}</span>
                         {exp.website && (
                           <a 
@@ -274,69 +271,57 @@ const WorkExperienceSection = () => {
                     </div>
                   </div>
                   
-                  {/* Details */}
-                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4 text-xs sm:text-sm">
-                    <div className="flex items-center gap-1 sm:gap-1.5 bg-gray-700/50 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full">
-                      <FaCalendarAlt className="text-blue-400 text-xs" />
-                      <span className="text-gray-300 text-xs sm:text-sm">{exp.period}</span>
+                  {/* Details - compact badges */}
+                  <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3">
+                    <div className="flex items-center gap-1 bg-gray-100 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">
+                      <FaCalendarAlt className="text-blue-500 text-[10px] sm:text-xs" />
+                      <span className="text-gray-600 text-[10px] sm:text-xs">{exp.period}</span>
                     </div>
-                    <div className="flex items-center gap-1 sm:gap-1.5 bg-gray-700/50 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full">
-                      <FaMapMarkerAlt className="text-teal-400 text-xs" />
-                      <span className="text-gray-300 text-xs sm:text-sm">{exp.location}</span>
+                    <div className="flex items-center gap-1 bg-gray-100 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">
+                      <FaMapMarkerAlt className="text-teal-500 text-[10px] sm:text-xs" />
+                      <span className="text-gray-600 text-[10px] sm:text-xs">{exp.location}</span>
                     </div>
-                    <div className="flex items-center gap-1 sm:gap-1.5 bg-gray-700/50 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full">
-                      <FaBuilding className="text-purple-400 text-xs" />
-                      <span className="text-gray-300 text-xs sm:text-sm">{exp.type}</span>
+                    <div className="hidden sm:flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-full">
+                      <FaBuilding className="text-purple-500 text-xs" />
+                      <span className="text-gray-600 text-xs">{exp.type}</span>
                     </div>
-                    {exp.website && (
-                      <a 
-                        href={exp.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 sm:gap-1.5 bg-gray-700/50 hover:bg-gray-600/50 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full transition-colors"
-                      >
-                        <FaExternalLinkAlt className="text-cyan-400 text-xs" />
-                        <span className="text-gray-300 text-xs sm:text-sm">Website</span>
-                      </a>
-                    )}
                   </div>
                   
-                  {/* Description */}
-                  <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base leading-relaxed">
+                  {/* Description - always compact */}
+                  <p className="text-gray-600 mb-2 sm:mb-3 text-[11px] sm:text-xs md:text-sm leading-snug line-clamp-2">
                     {exp.description}
                   </p>
                   
-                  {/* Key achievements */}
-                  <div className="mb-4 sm:mb-6">
-                    <h4 className="text-white font-semibold mb-2 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
-                      <FaLightbulb className="text-yellow-500 text-sm sm:text-base" />
+                  {/* Key achievements - always show 2 */}
+                  <div className="mb-2 sm:mb-3">
+                    <h4 className="text-gray-900 font-semibold mb-1 sm:mb-1.5 flex items-center gap-1 text-[11px] sm:text-xs md:text-sm">
+                      <FaLightbulb className="text-yellow-500 text-[10px] sm:text-xs" />
                       Key Achievements
                     </h4>
-                    <ul className="space-y-1.5 sm:space-y-2">
-                      {exp.achievements.map((achievement, idx) => (
-                        <li key={idx} className="flex gap-2 text-gray-300 text-xs sm:text-sm leading-relaxed">
-                          <span className="text-blue-400 mt-0.5 sm:mt-1 flex-shrink-0">•</span>
-                          <span>{achievement}</span>
+                    <ul className="space-y-0.5 sm:space-y-1">
+                      {exp.achievements.slice(0, 2).map((achievement, idx) => (
+                        <li key={idx} className="flex gap-1 text-gray-600 text-[10px] sm:text-xs leading-snug">
+                          <span className="text-blue-500 flex-shrink-0">•</span>
+                          <span className="line-clamp-1">{achievement}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   
-                  {/* Skills */}
+                  {/* Skills - compact, show 4 */}
                   <div>
-                    <h4 className="text-white font-semibold mb-2 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
-                      <FaTools className="text-teal-400 text-sm sm:text-base" />
-                      Technologies & Skills
+                    <h4 className="text-gray-900 font-semibold mb-1 flex items-center gap-1 text-[11px] sm:text-xs md:text-sm">
+                      <FaTools className="text-teal-500 text-[10px] sm:text-xs" />
+                      Tech Stack
                     </h4>
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                      {exp.skills.map((skill, idx) => (
+                    <div className="flex flex-wrap gap-1">
+                      {exp.skills.slice(0, 4).map((skill, idx) => (
                         <span 
                           key={idx} 
-                          className="text-xs sm:text-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md"
+                          className="text-[9px] sm:text-[10px] md:text-xs px-1.5 py-0.5 rounded"
                           style={{ 
-                            backgroundColor: `${exp.color}20`, 
+                            backgroundColor: `${exp.color}15`, 
                             color: exp.color,
-                            border: `1px solid ${exp.color}40`
                           }}
                         >
                           {skill}
@@ -418,9 +403,9 @@ const CertificatesSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight flex items-center gap-2 sm:gap-3 px-4">
-              <FaAward className="text-cyan-400 text-xl sm:text-2xl md:text-3xl" />
-              <span className="text-center">My <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Certificates</span></span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight flex items-center gap-2 sm:gap-3 px-4">
+              <FaAward className="text-cyan-500 text-xl sm:text-2xl md:text-3xl" />
+              <span className="text-center">My <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">Certificates</span></span>
             </h2>
             <motion.div 
               className="absolute -bottom-2 sm:-bottom-3 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
@@ -430,7 +415,7 @@ const CertificatesSection = () => {
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             />
           </motion.div>
-          <p className="text-zinc-400 mt-4 sm:mt-6 text-center max-w-2xl text-sm sm:text-base px-4">
+          <p className="text-gray-600 mt-4 sm:mt-6 text-center max-w-2xl text-sm sm:text-base px-4">
             Professional certifications and achievements that showcase my expertise and continuous learning journey.
           </p>
         </div>
@@ -442,8 +427,8 @@ const CertificatesSection = () => {
               key={category.id}
               className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 relative ${
                 selectedCategory === category.id 
-                  ? 'text-white' 
-                  : 'text-gray-400 hover:text-white'
+                  ? 'text-gray-900' 
+                  : 'text-gray-500 hover:text-gray-900'
               }`}
               onClick={() => {
                 setSelectedCategory(category.id);
@@ -470,14 +455,14 @@ const CertificatesSection = () => {
             <>
               <button 
                 onClick={prevSlide}
-                className="absolute left-0 sm:-left-2 md:-left-4 top-1/2 -translate-y-1/2 z-10 bg-zinc-900/80 hover:bg-zinc-800 text-white p-2 sm:p-3 rounded-full shadow-lg backdrop-blur-sm transition-all"
+                className="absolute left-0 sm:-left-2 md:-left-4 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-gray-100 text-gray-700 p-2 sm:p-3 rounded-full shadow-lg backdrop-blur-sm transition-all border border-gray-200"
                 aria-label="Previous certificate"
               >
                 <FaChevronLeft className="text-sm sm:text-base" />
               </button>
               <button 
                 onClick={nextSlide}
-                className="absolute right-0 sm:-right-2 md:-right-4 top-1/2 -translate-y-1/2 z-10 bg-zinc-900/80 hover:bg-zinc-800 text-white p-2 sm:p-3 rounded-full shadow-lg backdrop-blur-sm transition-all"
+                className="absolute right-0 sm:-right-2 md:-right-4 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-gray-100 text-gray-700 p-2 sm:p-3 rounded-full shadow-lg backdrop-blur-sm transition-all border border-gray-200"
                 aria-label="Next certificate"
               >
                 <FaChevronRight className="text-sm sm:text-base" />
@@ -498,7 +483,7 @@ const CertificatesSection = () => {
               {filteredCertificates.map(certificate => (
                 <motion.div
                   key={certificate.id}
-                  className="min-w-full md:min-w-[calc(33.33%-1rem)] bg-zinc-900/80 rounded-xl sm:rounded-2xl overflow-hidden border border-zinc-800 backdrop-blur-sm hover:border-cyan-500/30 transition-colors duration-300 shadow-lg group cursor-pointer"
+                  className="min-w-full md:min-w-[calc(33.33%-1rem)] bg-white rounded-xl sm:rounded-2xl overflow-hidden backdrop-blur-sm transition-colors duration-300 group cursor-pointer"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
@@ -508,7 +493,7 @@ const CertificatesSection = () => {
                 >
                   {/* Certificate Image with Overlay */}
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent opacity-60 z-10"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60 z-10"></div>
                     <img 
                       src={certificate.image} 
                       alt={certificate.title}
@@ -521,12 +506,12 @@ const CertificatesSection = () => {
                           className="text-base sm:text-lg md:text-xl" 
                         />
                       </div>
-                      <span className="text-xs font-medium bg-zinc-800/70 backdrop-blur-sm text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md">
+                      <span className="text-xs font-medium bg-white/90 backdrop-blur-sm text-gray-900 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md">
                         {certificate.organization}
                       </span>
                     </div>
                     <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 right-2 sm:right-3 md:right-4 z-20">
-                      <span className="text-xs bg-zinc-800/70 backdrop-blur-sm text-gray-300 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md">
+                      <span className="text-xs bg-white/90 backdrop-blur-sm text-gray-700 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md">
                         {certificate.date}
                       </span>
                     </div>
@@ -534,26 +519,26 @@ const CertificatesSection = () => {
                   
                   {/* Certificate Info */}
                   <div className="p-3 sm:p-4 md:p-5">
-                    <h3 className="text-base sm:text-lg font-semibold text-white mb-2 line-clamp-1">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 line-clamp-1">
                       {certificate.title}
                     </h3>
                     <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-2 sm:mt-3">
                       {certificate.skills.slice(0, 3).map((skill, index) => (
                         <span 
                           key={index}
-                          className="text-xs bg-zinc-800 text-cyan-300 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md"
+                          className="text-xs bg-cyan-50 text-cyan-600 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md"
                         >
                           {skill}
                         </span>
                       ))}
                       {certificate.skills.length > 3 && (
-                        <span className="text-xs bg-zinc-800 text-gray-400 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md">
+                        <span className="text-xs bg-gray-100 text-gray-600 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md">
                           +{certificate.skills.length - 3} more
                         </span>
                       )}
                     </div>
-                    <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-zinc-800 flex justify-between items-center">
-                      <span className="text-xs text-gray-400">Click to view details</span>
+                    <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-200 flex justify-between items-center">
+                      <span className="text-xs text-gray-500">Click to view details</span>
                       <FaExternalLinkAlt className="text-cyan-400 text-xs sm:text-sm opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                   </div>
@@ -598,7 +583,7 @@ const CertificatesSection = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="bg-zinc-900 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Certificate Header */}
@@ -608,9 +593,9 @@ const CertificatesSection = () => {
                     alt={selectedCertificate.title} 
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/50 to-transparent">
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent">
                     <button 
-                      className="absolute top-4 right-4 bg-zinc-800/80 hover:bg-zinc-700 text-white p-2 rounded-full backdrop-blur-sm"
+                      className="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-700 p-2 rounded-full backdrop-blur-sm"
                       onClick={closeModal}
                       aria-label="Close"
                     >
@@ -632,25 +617,25 @@ const CertificatesSection = () => {
                       </div>
                       <div>
                         <div className="text-sm font-medium text-cyan-400">{selectedCertificate.organization}</div>
-                        <h2 className="text-2xl font-bold text-white">{selectedCertificate.title}</h2>
+                        <h2 className="text-2xl font-bold text-gray-900">{selectedCertificate.title}</h2>
                       </div>
                     </div>
                     <div className="flex flex-col items-end">
                       <div className="flex items-center gap-1.5">
-                        <FaGraduationCap className="text-cyan-400" />
-                        <span className="text-gray-300 text-sm">{selectedCertificate.date}</span>
+                        <FaGraduationCap className="text-cyan-500" />
+                        <span className="text-gray-600 text-sm">{selectedCertificate.date}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="mt-6 space-y-4">
                     <div>
-                      <h3 className="text-lg text-white font-medium mb-2">Skills Acquired</h3>
+                      <h3 className="text-lg text-gray-900 font-medium mb-2">Skills Acquired</h3>
                       <div className="flex flex-wrap gap-2">
                         {selectedCertificate.skills.map((skill, index) => (
                           <span 
                             key={index}
-                            className="text-sm bg-zinc-800 text-cyan-300 px-3 py-1.5 rounded-md"
+                            className="text-sm bg-cyan-50 text-cyan-600 px-3 py-1.5 rounded-md"
                           >
                             {skill}
                           </span>
@@ -658,10 +643,10 @@ const CertificatesSection = () => {
                       </div>
                     </div>
                     
-                    <div className="h-px bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-800 my-6"></div>
+                    <div className="h-px bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 my-6"></div>
                     
                     <div className="flex items-center justify-between">
-                      <div className="text-sm text-gray-400">
+                      <div className="text-sm text-gray-500">
                         Certificate ID: CERT-{selectedCertificate.id.toString().padStart(4, '0')}
                       </div>
                       

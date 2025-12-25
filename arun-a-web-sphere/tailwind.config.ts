@@ -59,6 +59,10 @@ export default {
           foreground: 'hsl(var(--card-foreground))'
         },
       },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',

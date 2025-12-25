@@ -106,7 +106,7 @@ const HeroSection: React.FC = () => {
 
   // Social links data
   const socialLinks = [
-    { icon: <FaGithub />, href: "https://github.com/Arunarivalagan743", color: "white" },
+    { icon: <FaGithub />, href: "https://github.com/Arunarivalagan743", color: "#171515" },
     { icon: <SiLinkedin />, href: "https://www.linkedin.com/in/arun-a-25b6a5289", color: "#0077B5" },
     { icon: <SiLeetcode />, href: "https://codolio.com/profile/arun_743", color: "#FFA116" }
   ];
@@ -117,7 +117,7 @@ const HeroSection: React.FC = () => {
       
       {/* Navigation Header */}
       <header className="w-full fixed top-0 left-0 z-50">
-        <nav className="w-full px-4 md:px-8 py-4 backdrop-blur-md bg-black/30 border-b border-white/10">
+        <nav className="w-full px-4 md:px-8 py-4 backdrop-blur-md bg-white/80 border-b border-gray-200 shadow-sm">
           <div className="container mx-auto flex items-center justify-between">
             {/* Logo/Name */}
           <motion.a 
@@ -165,7 +165,7 @@ const HeroSection: React.FC = () => {
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 bg-black/30 border border-white/10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors relative backdrop-blur-sm"
+            className="p-2.5 bg-white/80 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors relative backdrop-blur-sm shadow-sm"
             whileHover={{ 
               scale: 1.15,
               boxShadow: `0 0 15px rgba(0, 191, 255, 0.2)`,
@@ -216,7 +216,7 @@ const HeroSection: React.FC = () => {
               ></motion.div>
             )}
 
-            <div className={`relative ${isMobile ? 'bg-transparent' : 'bg-gradient-to-b from-transparent to-[#070024]'} w-60 h-60 sm:w-72 sm:h-72 md:w-[340px] md:h-[340px] rounded-full overflow-hidden border border-white/10 backdrop-blur-sm shadow-xl`}>
+            <div className={`relative ${isMobile ? 'bg-transparent' : 'bg-gradient-to-b from-transparent to-gray-100'} w-60 h-60 sm:w-72 sm:h-72 md:w-[340px] md:h-[340px] rounded-full overflow-hidden border border-gray-200 backdrop-blur-sm shadow-xl`}>
               <img
                 src={myImage}
                 alt="Profile"
@@ -248,7 +248,7 @@ const HeroSection: React.FC = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-black/30 border border-white/10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
+                  className="p-3 bg-white/80 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors shadow-sm"
                   style={{ color: social.color }}
                   whileTap={{ scale: 0.95 }}
                   whileHover={{ borderColor: "rgba(0, 191, 255, 0.3)" }}
@@ -266,7 +266,7 @@ const HeroSection: React.FC = () => {
           >
             {/* Greeting chip */}
             <motion.div 
-              className="px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-sm text-cyan-400 flex items-center space-x-2"
+              className="px-4 py-2 rounded-full text-cyan-600 flex items-center space-x-2"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
@@ -276,7 +276,7 @@ const HeroSection: React.FC = () => {
             </motion.div>
 
             {/* Main heading */}
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight text-gray-900">
               Hi, I'm{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">
                 Arun A
@@ -294,12 +294,12 @@ const HeroSection: React.FC = () => {
                 wrapper="h2"
                 cursor={true}
                 repeat={Infinity}
-                className="text-xl md:text-3xl font-medium text-cyan-400"
+                className="text-xl md:text-3xl font-medium text-cyan-600"
               />
             </div>
 
             {/* Description with better typography */}
-            <p className="text-base md:text-lg text-gray-300/90 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
               Computer Science student passionate about efficient development.
             </p>
 
@@ -341,11 +341,11 @@ const HeroSection: React.FC = () => {
         whileHover={{ scale: 1.1 }}
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-xs font-light text-cyan-400/80 mb-1">
+          <span className="text-xs font-light text-cyan-600 mb-1">
             Scroll
           </span>
-          <div className="w-9 h-9 rounded-full border border-cyan-400/40 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-            <FaChevronDown className="text-cyan-400 animate-bounce" />
+          <div className="w-9 h-9 rounded-full border border-cyan-400 flex items-center justify-center bg-white/80 backdrop-blur-sm shadow-sm">
+            <FaChevronDown className="text-cyan-600 animate-bounce" />
           </div>
         </div>
       </motion.div>

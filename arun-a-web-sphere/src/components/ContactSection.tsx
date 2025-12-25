@@ -115,7 +115,7 @@ const ContactSection: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 bg-gradient-to-r from-blue-400 via-cyan-500 to-blue-600 bg-clip-text text-transparent px-4">
             Let's Connect
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
             Have a project in mind or just want to chat? I'd love to hear from you. 
             Let's create something amazing together!
           </p>
@@ -128,19 +128,19 @@ const ContactSection: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="bg-gray-800/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-gray-700/50 shadow-2xl lg:order-2"
+            className="bg-white backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:order-2"
           >
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-indigo-400">Send Message</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-cyan-500">Send Message</h3>
             
             {/* Status Messages */}
             {submitStatus === 'success' && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg bg-blue-500/20 border border-blue-500/50 flex items-start sm:items-center space-x-2"
+                className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg bg-blue-100 border border-blue-300 flex items-start sm:items-center space-x-2"
               >
-                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0 mt-0.5 sm:mt-0" />
-                <span className="text-blue-300 text-xs sm:text-sm md:text-base">Message sent successfully! I'll get back to you soon.</span>
+                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 flex-shrink-0 mt-0.5 sm:mt-0" />
+                <span className="text-blue-700 text-xs sm:text-sm md:text-base">Message sent successfully! I'll get back to you soon.</span>
               </motion.div>
             )}
             
@@ -148,17 +148,17 @@ const ContactSection: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg bg-red-500/20 border border-red-500/50 flex items-start sm:items-center space-x-2"
+                className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg bg-red-100 border border-red-300 flex items-start sm:items-center space-x-2"
               >
-                <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-400 flex-shrink-0 mt-0.5 sm:mt-0" />
-                <span className="text-red-300 text-xs sm:text-sm md:text-base">Failed to send message. Please try again.</span>
+                <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 flex-shrink-0 mt-0.5 sm:mt-0" />
+                <span className="text-red-700 text-xs sm:text-sm md:text-base">Failed to send message. Please try again.</span>
               </motion.div>
             )}
 
             <form ref={form} onSubmit={sendEmail} className="space-y-4 sm:space-y-5 md:space-y-6">
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5 sm:mb-2">
+                  <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
                     Your Name
                   </label>
                   <input
@@ -168,12 +168,12 @@ const ContactSection: React.FC = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 py-2 sm:px-4 sm:py-2.5 md:py-3 text-sm sm:text-base rounded-lg bg-gray-700/50 border border-gray-600 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 text-white placeholder-gray-400"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-2.5 md:py-3 text-sm sm:text-base rounded-lg bg-gray-50 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 text-gray-900 placeholder-gray-400"
                     placeholder="Enter your name"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5 sm:mb-2">
+                  <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
                     Your Email
                   </label>
                   <input
@@ -183,14 +183,14 @@ const ContactSection: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 py-2 sm:px-4 sm:py-2.5 md:py-3 text-sm sm:text-base rounded-lg bg-gray-700/50 border border-gray-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 text-white placeholder-gray-400"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-2.5 md:py-3 text-sm sm:text-base rounded-lg bg-gray-50 border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 text-gray-900 placeholder-gray-400"
                     placeholder="Enter your email"
                   />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5 sm:mb-2">
+                <label htmlFor="subject" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
                   Subject
                 </label>
                 <input
@@ -200,13 +200,13 @@ const ContactSection: React.FC = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 sm:px-4 sm:py-2.5 md:py-3 text-sm sm:text-base rounded-lg bg-gray-700/50 border border-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20 transition-all duration-300 text-white placeholder-gray-400"
+                  className="w-full px-3 py-2 sm:px-4 sm:py-2.5 md:py-3 text-sm sm:text-base rounded-lg bg-gray-50 border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400/20 transition-all duration-300 text-gray-900 placeholder-gray-400"
                   placeholder="What's this about?"
                 />
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5 sm:mb-2">
+                <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
                   Message
                 </label>
                 <textarea
@@ -216,7 +216,7 @@ const ContactSection: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   rows={5}
-                  className="w-full px-3 py-2 sm:px-4 sm:py-2.5 md:py-3 text-sm sm:text-base rounded-lg bg-gray-700/50 border border-gray-600 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 text-white placeholder-gray-400 resize-none"
+                  className="w-full px-3 py-2 sm:px-4 sm:py-2.5 md:py-3 text-sm sm:text-base rounded-lg bg-gray-50 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 text-gray-900 placeholder-gray-400 resize-none"
                   placeholder="Tell me about your project or just say hi!"
                 />
               </div>
@@ -251,8 +251,8 @@ const ContactSection: React.FC = () => {
             viewport={{ once: true }}
             className="space-y-4 sm:space-y-6 md:space-y-8 lg:order-1"
           >
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-gray-700/50 shadow-2xl">
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-blue-400">Get in Touch</h3>
+            <div className="bg-white backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-cyan-500">Get in Touch</h3>
               <div className="space-y-3 sm:space-y-4 md:space-y-6">
                 {contactInfo.map((item, index) => (
                   <motion.a
@@ -260,18 +260,18 @@ const ContactSection: React.FC = () => {
                     href={item.link}
                     whileHover={{ scale: 1.02, x: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gray-700/30 hover:bg-gray-600/30 transition-all duration-300 group cursor-pointer"
+                    className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-300 group cursor-pointer"
                   >
-                    <div className="text-blue-400 group-hover:text-blue-300 transition-colors flex-shrink-0">
+                    <div className="text-blue-500 group-hover:text-blue-600 transition-colors flex-shrink-0">
                       {React.cloneElement(item.icon as React.ReactElement, { 
                         className: "w-5 h-5 sm:w-6 sm:h-6" 
                       })}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h4 className="font-semibold text-white group-hover:text-blue-300 transition-colors text-sm sm:text-base">
+                      <h4 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors text-sm sm:text-base">
                         {item.title}
                       </h4>
-                      <p className="text-gray-300 text-xs sm:text-sm md:text-base truncate">{item.info}</p>
+                      <p className="text-gray-600 text-xs sm:text-sm md:text-base truncate">{item.info}</p>
                     </div>
                   </motion.a>
                 ))}
@@ -279,8 +279,8 @@ const ContactSection: React.FC = () => {
             </div>
 
             {/* Social Links */}
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-gray-700/50 shadow-2xl">
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-cyan-400">Follow Me</h3>
+            <div className="bg-white backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-cyan-600">Follow Me</h3>
               <div className="flex flex-wrap gap-3 sm:gap-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -290,7 +290,7 @@ const ContactSection: React.FC = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
-                    className={`p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-gray-700/50 hover:bg-gray-600/50 transition-all duration-300 ${social.color} text-white`}
+                    className={`p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-gray-100 hover:bg-gray-200 transition-all duration-300 ${social.color} text-gray-700`}
                   >
                     {React.cloneElement(social.icon as React.ReactElement, { 
                       className: "w-5 h-5 sm:w-6 sm:h-6" 

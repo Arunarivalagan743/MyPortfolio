@@ -65,7 +65,7 @@ const Index: React.FC = () => {
   animate={{ opacity: 1 }}
   exit={{ opacity: 0 }}
   transition={{ duration: 0.5 }}
-  className="bg-black text-white w-full min-h-screen overflow-x-hidden" // <-- add overflow-x-hidden here
+  className="bg-white text-gray-900 w-full min-h-screen overflow-x-hidden" // <-- add overflow-x-hidden here
 >
         {/* <AnimatedEffects /> */}
         <Navbar />
@@ -86,7 +86,7 @@ const Index: React.FC = () => {
         <Footer />
         
         {/* Hide this on mobile to save space */}
-        <div className="hidden md:block p-4 text-center text-green-400">
+        <div className="hidden md:block p-4 text-center text-green-600">
           {(data as FetchDataResult | undefined)?.message}
         </div>
       </motion.div>
