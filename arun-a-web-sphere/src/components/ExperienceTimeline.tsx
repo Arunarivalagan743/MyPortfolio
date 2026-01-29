@@ -694,12 +694,11 @@ const CertificatesSection = () => {
   );
 };
 
-// Combined component that exports both sections
+// Export only WorkExperienceSection (Certifications moved to AcademicSection)
 const ExperienceTimeline = () => {
   return (
     <>
       <WorkExperienceSection />
-      <CertificatesSection />
     </>
   );
 };

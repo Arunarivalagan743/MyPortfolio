@@ -35,6 +35,25 @@ const publications = [
     issn: "2583-6129",
     volume: "04",
     issue: "05"
+  },
+  {
+    id: 2,
+    title: "HONEYNET WITH ML",
+    authors: ["Arun A"],
+    journal: "International Journal of Progressive Research in Engineering Management and Science (IJPREMS)",
+    date: "November 2026",
+    abstract: "This research paper explores the integration of Machine Learning techniques with Honeynet systems for enhanced cybersecurity threat detection and analysis. The proposed framework leverages ML algorithms to improve the detection accuracy and response time of honeypot networks, providing a more robust defense mechanism against sophisticated cyber attacks.",
+    keywords: ["Honeynet", "Machine Learning", "Cybersecurity", "Threat Detection", "Network Security"],
+    doi: "10.58257/IJPREMS49908",
+    pdfUrl: "https://www.doi.org/10.58257/IJPREMS49908",
+    citationCount: 0,
+    image: "/assets/Honeynet-isprems_page-0001.jpg",
+    category: "machine-learning",
+    publisher: "IJPREMS",
+    impact: 7.001,
+    issn: "2583-1062",
+    volume: "05",
+    issue: "11"
   }
 ];
 
@@ -42,6 +61,7 @@ const publications = [
 const categories = [
   { id: "all", name: "All Publications" },
   { id: "iot", name: "IoT & Smart Systems" },
+  { id: "machine-learning", name: "Machine Learning & Security" },
   { id: "web-development", name: "Web Development" },
   { id: "distributed-systems", name: "Distributed Systems" }
 ];
