@@ -250,13 +250,126 @@ const mainProjects = [
       }
     ]
   },
+  {
+    title: 'Signora CMS — Contract Lifecycle & Workflow Management',
+    icon: '📝',
+    color: '#4F46E5',
+    image: 'https://raw.githubusercontent.com/Arunarivalagan743/cms/main/docs/screenshots/dashboard.png',
+    period: 'Feb 2026 – Jun 2026',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Tailwind CSS'],
+    techIcons: [
+      { Icon: FaReact, color: '#61DAFB', name: 'React', proficiency: 90 },
+      { Icon: FaNodeJs, color: '#339933', name: 'Node.js', proficiency: 88 },
+      { Icon: SiExpress, color: '#000000', name: 'Express', proficiency: 85 },
+      { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 85 },
+      { Icon: SiTailwindcss, color: '#06B6D4', name: 'Tailwind CSS', proficiency: 88 },
+      { Icon: ({ className, style }) => (
+        <span className={className} style={style} role="img" aria-label="Socket.io">🔌</span>
+      ), color: '#010101', name: 'Socket.io', proficiency: 80 }
+    ],
+    description: 'An enterprise-grade, secure Contract Lifecycle Management (CLM) system designed to automate, streamline, and govern contract preparation, dynamic approvals, audit tracking, and role-based notifications.',
+    githubLink: 'https://github.com/Arunarivalagan743/cms',
+    liveLink: 'https://cms-three-red.vercel.app',
+    features: [
+      'Authentication: Token-based authentication using JWT with secure password hashing (bcryptjs).',
+      'Dynamic Workflow Routing: Route contracts automatically through custom multi-stage approval lists.',
+      'Real-time Notifications: Notify users instantly of submissions or approval requests via Socket.io.',
+      'Audit Trail: Every action is logged to an immutable append-only log collection.',
+      'Dynamic Permission Matrix: Fine-tune specific abilities on a per-role basis dynamically.',
+      'Secure Invite System: Admin-only user generation via secure, time-limited token links.'
+    ],
+    techSpecs: [
+      {
+        category: 'Frontend',
+        items: [
+          'React 19 (ES Modules)',
+          'Vite build system',
+          'Tailwind CSS styling',
+          'Framer Motion animations'
+        ]
+      },
+      {
+        category: 'Backend & Database',
+        items: [
+          'Node.js & Express 5.x',
+          'MongoDB with Mongoose 9.x',
+          'JWT & Bcryptjs',
+          'express-validator checking'
+        ]
+      },
+      {
+        category: 'Integrations',
+        items: [
+          'Socket.io WebSockets',
+          'Nodemailer SMTP email'
+        ]
+      }
+    ]
+  },
+  {
+    title: 'Lynko — Premium Retro-Brutalist URL Shortener & Analytics',
+    icon: '⚡',
+    color: '#00322d',
+    image: 'https://raw.githubusercontent.com/Arunarivalagan743/Lynko/main/frontend/src/assets/Output/Screenshot%202026-06-03%20220729.png',
+    period: 'May 2026 – Jun 2026',
+    tech: ['React', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'Zod'],
+    techIcons: [
+      { Icon: FaReact, color: '#61DAFB', name: 'React', proficiency: 92 },
+      { Icon: SiTailwindcss, color: '#06B6D4', name: 'Tailwind CSS', proficiency: 92 },
+      { Icon: FaNodeJs, color: '#339933', name: 'Node.js', proficiency: 86 },
+      { Icon: SiExpress, color: '#000000', name: 'Express', proficiency: 85 },
+      { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 88 },
+      { Icon: ({ className, style }) => (
+        <span className={className} style={style} role="img" aria-label="Zod">🛡️</span>
+      ), color: '#3178C6', name: 'Zod', proficiency: 82 }
+    ],
+    description: 'An enterprise-grade, full-stack URL shortening and traffic intelligence platform merging a modern retro-brutalist aesthetic with advanced security controls and rich analytic breakdowns.',
+    githubLink: 'https://github.com/Arunarivalagan743/Lynko',
+    liveLink: 'https://lynko-three.vercel.app',
+    features: [
+      'User Signup & Login with Bcrypt (12 Rounds) hashing.',
+      'Refresh Token Rotation (RTR) to protect against refresh token theft.',
+      'URL Shortening & Expiry with Zod input sanitization and custom aliases.',
+      'Interactive Analytics: Breakdown graphs showing visitor browser, OS, and device types via Recharts.',
+      'Bulk CSV Upload: PapaParse-assisted multi-link CSV import widget.',
+      'Traffic Quality Classifier: Categorizes hits into Human, Bot, or Suspicious.'
+    ],
+    techSpecs: [
+      {
+        category: 'Frontend',
+        items: [
+          'React 18+, Vite-powered SPA',
+          'Vanilla CSS + Tailwind CSS',
+          'Recharts vector graphics',
+          'Framer Motion animations'
+        ]
+      },
+      {
+        category: 'Backend & Database',
+        items: [
+          'Node.js & Express API',
+          'Zod input validation schemas',
+          'JWT Auth & Bcrypt',
+          'UAParser.js client parser'
+        ]
+      },
+      {
+        category: 'Security & Telemetry',
+        items: [
+          'Refresh Token Rotation (RTR)',
+          'Express Rate Limit',
+          'MongoDB TTL auto-purges'
+        ]
+      }
+    ]
+  }
 ];
 
 // Hackathon projects data
 const hackathonProjects: Project[] = [
   {
     title: 'Falo - AI Misinformation Shield',
-    icon: '�️',
+    icon: '🛡️',
     color: '#4a6cf7',
     image: truthtellImg,
     period: 'Dec 2024 – Apr 2025',
@@ -269,7 +382,7 @@ const hackathonProjects: Project[] = [
         <span className={className} style={style} role="img" aria-label="ML">🧠</span>
       ), color: '#FF6B6B', name: 'Machine Learning', proficiency: 78 },
       { Icon: ({ className, style }) => (
-        <span className={className} style={style} role="img" aria-label="NLP">�</span>
+        <span className={className} style={style} role="img" aria-label="NLP">💬</span>
       ), color: '#4ECDC4', name: 'NLP', proficiency: 72 }
     ],
     description: 'AI-powered misinformation detection tool. Awarded 12th place in HackerEarth Hackathon (April 2025).',
@@ -317,6 +430,7 @@ const hackathonProjects: Project[] = [
     ]
   }
 ];
+
 
 const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);

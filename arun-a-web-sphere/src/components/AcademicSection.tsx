@@ -91,7 +91,7 @@ const AcademicSection = () => {
     {
       degree: 'BE - Computer Science Engineering',
       institution: 'Sri Shakthi Institute of Engineering and Technology',
-      details: 'CGPA: 8.29',
+      details: 'CGPA: 8.24',
       year: '2027',
       icon: <HiAcademicCap className="w-7 h-7" />,
       color: 'from-blue-600 to-blue-400',
