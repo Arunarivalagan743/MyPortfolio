@@ -72,8 +72,9 @@ const carouselVariants = {
 const ticketparkImg = "/assets/cinipop.jpg";
 const darkcartImg = "/assets/ecommrece.jpg";
 const truthtellImg = "/assets/falo.png";
-const travellaImg = "/assets/travella.png"; 
+const travellaImg = "/assets/travella.png";
 const healqImg = "/assets/HealQImg.png"; // Will need to be updated with actual image
+const signoraImg = "/assets/signoraImg.png"; // Will need to be updated with actual image
 
 // Main projects data
 const mainProjects = [
@@ -89,9 +90,11 @@ const mainProjects = [
       { Icon: SiTailwindcss, color: '#06B6D4', name: 'Tailwind CSS', proficiency: 90 },
       { Icon: SiFirebase, color: '#FFCA28', name: 'Firebase', proficiency: 85 },
       { Icon: SiGooglecloud, color: '#4285F4', name: 'Google Places', proficiency: 80 },
-      { Icon: ({ className, style }) => (
-        <span className={className} style={style} role="img" aria-label="Gemini AI">🤖</span>
-      ), color: '#8E44AD', name: 'Gemini AI', proficiency: 75 }
+      {
+        Icon: ({ className, style }) => (
+          <span className={className} style={style} role="img" aria-label="Gemini AI">🤖</span>
+        ), color: '#8E44AD', name: 'Gemini AI', proficiency: 75
+      }
     ],
     description: 'AI-powered travel platform generating personalized itineraries with Google Gemini AI. Includes trip planning, social sharing, and an interactive travel assistant.',
     liveLink: 'https://ai-travella-duag.vercel.app/',
@@ -254,7 +257,7 @@ const mainProjects = [
     title: 'Signora CMS — Contract Lifecycle & Workflow Management',
     icon: '📝',
     color: '#4F46E5',
-    image: 'https://raw.githubusercontent.com/Arunarivalagan743/cms/main/docs/screenshots/dashboard.png',
+    image: signoraImg,
     period: 'Feb 2026 – Jun 2026',
     tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Tailwind CSS'],
     techIcons: [
@@ -263,9 +266,11 @@ const mainProjects = [
       { Icon: SiExpress, color: '#000000', name: 'Express', proficiency: 85 },
       { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 85 },
       { Icon: SiTailwindcss, color: '#06B6D4', name: 'Tailwind CSS', proficiency: 88 },
-      { Icon: ({ className, style }) => (
-        <span className={className} style={style} role="img" aria-label="Socket.io">🔌</span>
-      ), color: '#010101', name: 'Socket.io', proficiency: 80 }
+      {
+        Icon: ({ className, style }) => (
+          <span className={className} style={style} role="img" aria-label="Socket.io">🔌</span>
+        ), color: '#010101', name: 'Socket.io', proficiency: 80
+      }
     ],
     description: 'An enterprise-grade, secure Contract Lifecycle Management (CLM) system designed to automate, streamline, and govern contract preparation, dynamic approvals, audit tracking, and role-based notifications.',
     githubLink: 'https://github.com/Arunarivalagan743/cms',
@@ -319,9 +324,11 @@ const mainProjects = [
       { Icon: FaNodeJs, color: '#339933', name: 'Node.js', proficiency: 86 },
       { Icon: SiExpress, color: '#000000', name: 'Express', proficiency: 85 },
       { Icon: SiMongodb, color: '#47A248', name: 'MongoDB', proficiency: 88 },
-      { Icon: ({ className, style }) => (
-        <span className={className} style={style} role="img" aria-label="Zod">🛡️</span>
-      ), color: '#3178C6', name: 'Zod', proficiency: 82 }
+      {
+        Icon: ({ className, style }) => (
+          <span className={className} style={style} role="img" aria-label="Zod">🛡️</span>
+        ), color: '#3178C6', name: 'Zod', proficiency: 82
+      }
     ],
     description: 'An enterprise-grade, full-stack URL shortening and traffic intelligence platform merging a modern retro-brutalist aesthetic with advanced security controls and rich analytic breakdowns.',
     githubLink: 'https://github.com/Arunarivalagan743/Lynko',
@@ -378,12 +385,16 @@ const hackathonProjects: Project[] = [
       { Icon: SiFlutter, color: '#02569B', name: 'Flutter', proficiency: 85 },
       { Icon: SiPython, color: '#3776AB', name: 'Python', proficiency: 80 },
       { Icon: SiFastapi, color: '#009688', name: 'FastAPI', proficiency: 75 },
-      { Icon: ({ className, style }) => (
-        <span className={className} style={style} role="img" aria-label="ML">🧠</span>
-      ), color: '#FF6B6B', name: 'Machine Learning', proficiency: 78 },
-      { Icon: ({ className, style }) => (
-        <span className={className} style={style} role="img" aria-label="NLP">💬</span>
-      ), color: '#4ECDC4', name: 'NLP', proficiency: 72 }
+      {
+        Icon: ({ className, style }) => (
+          <span className={className} style={style} role="img" aria-label="ML">🧠</span>
+        ), color: '#FF6B6B', name: 'Machine Learning', proficiency: 78
+      },
+      {
+        Icon: ({ className, style }) => (
+          <span className={className} style={style} role="img" aria-label="NLP">💬</span>
+        ), color: '#4ECDC4', name: 'NLP', proficiency: 72
+      }
     ],
     description: 'AI-powered misinformation detection tool. Awarded 12th place in HackerEarth Hackathon (April 2025).',
     githubLink: 'https://github.com/GokulanV7/Falo-app',
@@ -444,7 +455,7 @@ const ProjectsSection = () => {
 
   // Get current color for theme
   const currentColor = mainProjects[activeProjectIndex].color;
-  
+
   // Initialize visibility
   useEffect(() => {
     setIsVisible(true);
@@ -486,10 +497,10 @@ const ProjectsSection = () => {
   const handleTouchEnd = (e: React.TouchEvent) => {
     setIsDragging(false);
     setIsAutoPlaying(true);
-    
+
     const touchEnd = e.changedTouches[0].clientX;
     const diff = touchStart - touchEnd;
-    
+
     // Lower threshold for quicker response
     if (Math.abs(diff) > 30) {
       if (diff > 0) {
@@ -509,7 +520,7 @@ const ProjectsSection = () => {
   const handleDragEnd = (e: any, info: any) => {
     setIsDragging(false);
     setIsAutoPlaying(true);
-    
+
     // Lower threshold for quicker swipe detection
     if (Math.abs(info.offset.x) > 30 || Math.abs(info.velocity.x) > 300) {
       if (info.offset.x > 0 || info.velocity.x > 300) {
@@ -523,14 +534,14 @@ const ProjectsSection = () => {
   // Navigation handlers
   const handleNext = () => {
     setDirection(1);
-    setActiveProjectIndex((prev) => 
+    setActiveProjectIndex((prev) =>
       prev === mainProjects.length - 1 ? 0 : prev + 1
     );
   };
 
   const handlePrev = () => {
     setDirection(-1);
-    setActiveProjectIndex((prev) => 
+    setActiveProjectIndex((prev) =>
       prev === 0 ? mainProjects.length - 1 : prev - 1
     );
   };
@@ -544,7 +555,7 @@ const ProjectsSection = () => {
   const SkillProgressBar = ({ skill }: { skill: TechIcon }) => {
     const progressRef = useRef(null);
     const isInView = useInView(progressRef, { once: true, margin: "-100px" });
-    
+
     return (
       <div className="mb-4">
         <div className="flex justify-between items-center mb-1">
@@ -571,19 +582,19 @@ const ProjectsSection = () => {
   // Project carousel item component - more concise for better mobile experience
   const ProjectCarouselItem = ({ project }: { project: Project }) => {
     const isMobile = useIsMobile();
-    
+
     // Show fewer features on mobile
     const featuresCount = isMobile ? 3 : 6;
     // Show fewer tech specs on mobile
     const showTechSpecs = !isMobile;
-    
+
     return (
       <div className="flex flex-col md:flex-row gap-4 sm:gap-5 items-center">
         {/* Project Image */}
         <div className="w-full md:w-1/2">
-          <div 
+          <div
             className="relative overflow-hidden rounded-lg sm:rounded-xl aspect-video mx-auto group cursor-pointer"
-            style={{ 
+            style={{
               willChange: 'transform'
             }}
             onClick={() => {
@@ -592,9 +603,9 @@ const ProjectsSection = () => {
               }
             }}
           >
-            <img 
-              src={project.image} 
-              alt={project.title} 
+            <img
+              src={project.image}
+              alt={project.title}
               className="w-full h-full object-cover transition-transform duration-200 ease-out group-hover:scale-105"
               style={{ maxHeight: isMobile ? "180px" : "360px", willChange: 'transform' }}
               loading="eager"
@@ -612,7 +623,7 @@ const ProjectsSection = () => {
 
         {/* Project Details */}
         <div className="w-full md:w-1/2">
-          <div 
+          <div
             className="bg-white backdrop-blur-md rounded-lg sm:rounded-xl p-3 sm:p-4"
           >
             <h3 className="text-base sm:text-xl md:text-2xl font-bold mb-0.5 sm:mb-1" style={{ color: project.color }}>
@@ -622,7 +633,7 @@ const ProjectsSection = () => {
               <p className="text-gray-500 text-[10px] sm:text-xs mb-1.5 sm:mb-2 font-medium">{project.period}</p>
             )}
             <p className="text-gray-600 mb-2 sm:mb-3 text-[11px] sm:text-sm md:text-base leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none">{project.description}</p>
-            
+
             {project.features && project.features.length > 0 && (
               <div className="mb-2 sm:mb-3 hidden sm:block">
                 <h4 className="text-[10px] sm:text-sm text-gray-500 uppercase mb-1 sm:mb-1.5 font-medium">Key Features</h4>
@@ -636,7 +647,7 @@ const ProjectsSection = () => {
                 </ul>
               </div>
             )}
-            
+
             {showTechSpecs && project.techSpecs && project.techSpecs.length > 0 && (
               <div className="mb-2 sm:mb-3 hidden md:block">
                 <h4 className="text-xs md:text-sm text-gray-500 uppercase mb-1 sm:mb-1.5 font-medium">Tech Specs</h4>
@@ -655,12 +666,12 @@ const ProjectsSection = () => {
                 </div>
               </div>
             )}
-            
+
             <div className="mb-1.5 sm:mb-3">
               <h4 className="text-[10px] sm:text-sm text-gray-500 uppercase mb-1 sm:mb-1.5 font-medium">Tech Stack</h4>
               <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-1.5 sm:mb-3">
                 {project.techIcons.slice(0, isMobile ? 5 : project.techIcons.length).map((tech, i) => (
-                  <span 
+                  <span
                     key={i}
                     className="inline-flex items-center gap-0.5 sm:gap-1 bg-gray-100 px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs"
                     style={{ color: tech.color }}
@@ -671,10 +682,10 @@ const ProjectsSection = () => {
                 ))}
               </div>
             </div>
-            
+
             <div className="flex flex-wrap gap-2 justify-start">
               {project.liveLink && (
-                <a 
+                <a
                   href={project.liveLink}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -685,7 +696,7 @@ const ProjectsSection = () => {
                   <span>Live Demo</span>
                 </a>
               )}
-              <a 
+              <a
                 href={project.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -704,21 +715,21 @@ const ProjectsSection = () => {
   const visibleIndex = activeProjectIndex % mainProjects.length;
 
   const isMobile = useIsMobile();
-  
+
   return (
-    <section 
-      id="projects" 
+    <section
+      id="projects"
       className="py-8 sm:py-12 md:py-16 text-gray-900 relative overflow-hidden"
     >
       {/* Background elements */}
       <div className="absolute top-0 right-0 -mr-12 sm:-mr-16 -mt-12 sm:-mt-16 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
       <div className="absolute bottom-0 left-0 -ml-12 sm:-ml-16 -mb-12 sm:-mb-16 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: currentColor }} />
-      
+
       <div className="container mx-auto px-3 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Section header */}
         <div className="flex flex-col items-center mb-5 sm:mb-8 md:mb-10">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1.5 text-gray-900 px-2 text-center">
-            <span className="bg-clip-text text-transparent" 
+            <span className="bg-clip-text text-transparent"
               style={{ backgroundImage: `linear-gradient(90deg, ${currentColor}, #66e0ff)` }}>
               Featured
             </span> Projects
@@ -731,8 +742,8 @@ const ProjectsSection = () => {
         </div>
 
         {/* Project Carousel - enhanced mobile experience */}
-        <div 
-          className="mb-8 sm:mb-12 md:mb-16 relative" 
+        <div
+          className="mb-8 sm:mb-12 md:mb-16 relative"
           ref={carouselRef}
           onMouseEnter={() => handleCarouselHover(true)}
           onMouseLeave={() => handleCarouselHover(false)}
@@ -748,7 +759,7 @@ const ProjectsSection = () => {
               <span className="opacity-60">→</span>
             </p>
           </div>
-          
+
           <div className="overflow-hidden">
             <motion.div
               drag="x"
@@ -786,17 +797,16 @@ const ProjectsSection = () => {
                 <span className="opacity-60">→</span>
               </p>
             </div>
-            
+
             {/* Dot indicators */}
             <div className="flex items-center space-x-2 md:space-x-3">
               {mainProjects.map((project, index) => (
                 <button
                   key={index}
                   onClick={() => handleDotClick(index)}
-                  className={`h-2 md:h-3 rounded-full transition-all duration-300 ${
-                    index === visibleIndex ? 'w-8 md:w-10' : 'w-2 md:w-3 opacity-60 hover:opacity-100'
-                  }`}
-                  style={{ 
+                  className={`h-2 md:h-3 rounded-full transition-all duration-300 ${index === visibleIndex ? 'w-8 md:w-10' : 'w-2 md:w-3 opacity-60 hover:opacity-100'
+                    }`}
+                  style={{
                     backgroundColor: index === visibleIndex ? project.color : '#4b5563'
                   }}
                   aria-label={`Go to project ${index + 1}`}
@@ -813,21 +823,21 @@ const ProjectsSection = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="backdrop-blur-sm rounded-full text-white p-3 pointer-events-auto shadow-lg"
-              style={{ 
+              style={{
                 backgroundColor: `${currentColor}90`,
               }}
               aria-label="Previous project"
             >
               <FaChevronLeft size={16} />
             </motion.button>
-            
+
             {/* Right Arrow */}
             <motion.button
               onClick={handleNext}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="backdrop-blur-sm rounded-full text-white p-3 pointer-events-auto shadow-lg"
-              style={{ 
+              style={{
                 backgroundColor: `${currentColor}90`,
               }}
               aria-label="Next project"
@@ -859,7 +869,7 @@ const ProjectsSection = () => {
               const featuresCount = isMobile ? 3 : 5;
               // Don't show tech specs on mobile
               const showTechSpecs = !isMobile;
-              
+
               return (
                 <motion.div
                   key={index}
@@ -871,7 +881,7 @@ const ProjectsSection = () => {
                   style={{ willChange: 'transform, opacity' }}
                 >
                   <div className="flex flex-col lg:flex-row">
-                    <div 
+                    <div
                       className="relative lg:w-2/5 cursor-pointer group overflow-hidden"
                       onClick={() => {
                         if (project.liveLink) {
@@ -881,7 +891,7 @@ const ProjectsSection = () => {
                         }
                       }}
                     >
-                      <img 
+                      <img
                         src={project.image}
                         alt={project.title}
                         className="w-full object-cover transition-transform duration-200 ease-out group-hover:scale-105"
@@ -909,7 +919,7 @@ const ProjectsSection = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="p-3 sm:p-4 lg:p-6 lg:w-3/5">
                       <h3 className="text-base sm:text-xl font-bold mb-0.5 sm:mb-1 flex items-center" style={{ color: project.color }}>
                         {project.title}
@@ -918,7 +928,7 @@ const ProjectsSection = () => {
                         <p className="text-gray-500 text-[10px] sm:text-xs mb-1.5 sm:mb-2 font-medium">{project.period}</p>
                       )}
                       <p className="text-gray-600 mb-2 sm:mb-3 text-xs sm:text-sm line-clamp-2 sm:line-clamp-none">{project.description}</p>
-                    
+
                       {project.features && (
                         <div className="mb-2 sm:mb-4 hidden sm:block">
                           <h4 className="text-xs text-gray-600 uppercase mb-1.5 sm:mb-2 font-medium flex items-center">
@@ -934,7 +944,7 @@ const ProjectsSection = () => {
                           </ul>
                         </div>
                       )}
-                      
+
                       {showTechSpecs && project.techSpecs && (
                         <div className="mb-4 hidden md:block">
                           <h4 className="text-xs text-gray-600 uppercase mb-2 font-medium flex items-center">
@@ -955,14 +965,14 @@ const ProjectsSection = () => {
                           </div>
                         </div>
                       )}
-                      
+
                       <div className="mb-2 sm:mb-4">
                         <h4 className="text-[10px] sm:text-xs text-gray-600 uppercase mb-1 sm:mb-2 font-medium flex items-center">
                           <span style={{ color: project.color }} className="mr-1">🔧</span> Tech Stack
                         </h4>
                         <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-1 sm:mb-2">
                           {project.techIcons.slice(0, window.innerWidth < 640 ? 4 : project.techIcons.length).map((tech, i) => (
-                            <span 
+                            <span
                               key={i}
                               className="inline-flex items-center gap-0.5 sm:gap-1 bg-gray-100 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs"
                               style={{ color: tech.color }}
@@ -973,9 +983,9 @@ const ProjectsSection = () => {
                           ))}
                         </div>
                       </div>
-                      
+
                       <div className="flex justify-end">
-                        <a 
+                        <a
                           href={project.githubLink}
                           target="_blank"
                           rel="noopener noreferrer"
